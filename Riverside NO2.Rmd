@@ -1,0 +1,139 @@
+---
+title: "5/28/2020"
+author: "Anna Madison Burns"
+date: "5/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+require(mosaic)
+require(lubridate)
+require(MASS)
+```
+
+```{r}
+NO2_R <- NO2_CA[ which(NO2_CA$`County Name`=='Riverside'), ]
+```
+
+```{r}
+NO2_R <- NO2_R[c(-1,-2, -3, -4, -5, -6, -7, -8, -12, -13, -15, -16, -17, -18, -19, -20, -21, -22, -23, -24)]
+```
+
+```{r}
+colnames(NO2_R) <- c("type","date","time","sample")
+```
+
+```{r}
+NO2_R$type[NO2_R$type=="Nitrogen dioxide (NO2)"] <- "NO2"
+```
+
+```{r}
+NO2_R$light <- "Day"
+NO2_R$light[NO2_R$time<hms("08:00:00")|NO2_R$time>hms("19:00:00")] <- "Night"
+```
+
+```{r}
+ggplot(data=NO2_R, mapping=aes(time, sample))+geom_point()
+```
+
+```{r}
+NO2_R$traffic <- "Minimal"
+NO2_R$traffic[NO2_R$time>hms("06:59:00") & NO2_R$time<hms("09:01:00")|NO2_R$time>hms("15:59:00")&NO2_R$time<hms("18:01:00")] <- "Heavy"
+```
+
+```{r}
+fit1 <- lm(sample~light+time+date+traffic, data=NO2_R)
+summary(fit1)
+plot(fit1)
+```
+
+Standardized residuals are not great... need to transform.  Sqrt is much better... would like to test out log/look at a boxcox but it won't let me.  Why?  (Says response variables need to be positive... do I have any zero measurements?)
+
+-> issues NA.rm=true, OR add very very small number to everything
+
+Transforming data to make everything positive (adjusting for errors in data -> can't be a negative amount of NO2 measured! but left in as part of QAQC)
+
+```{r}
+NO2_R$sample <- (NO2_R$sample+0.15)
+```
+
+```{r}
+boxcox(fit1)
+```
+
+Log appears to be an appropriate transformation for "sample".
+
+```{r}
+fit2 <- lm(log(sample)~light+time+date+traffic, data=NO2_R)
+summary(fit2)
+plot(fit2)
+```
+
+Way better! Awesome!
+
+```{r}
+NO2_R$sample <- log(NO2_R$sample)
+```
+
+Now beginning AIC...
+
+```{r}
+fit2 <- lm(sample~date, data=NO2_R)
+summary(fit2)
+```
+
+This is clearly pretty good, and explains most of the correlation in our full model... keep it.  -> also indicates that we should look some more at daily variances... temperature, rain, etc.
+
+```{r}
+fit3 <- lm(sample~date+time, data=NO2_R)
+summary(fit3)
+anova(fit2,fit3)
+```
+
+Time explains variance that isn't explained by date, so both are significant - maybe specify "light" more -> peaks seem to be at 8am/5pm (heavy traffic!) -> specify traffic variable.  "Heavy traffic" from 7 am - 9 am, 4 am - 6 pm.
+
+```{r}
+fit4 <- lm(sample~traffic+time+date, data=NO2_R)
+summary(fit4)
+anova(fit3, fit4)
+```
+
+This is good! Do time and traffic levels interact?
+
+```{r}
+fit5 <- lm(sample~time+traffic+date+traffic*time, data=NO2_R)
+anova(fit4,fit5)
+```
+
+Nope, no real interaction.  That makes sense, because we parsed "traffic" from "time".  
+
+Let's look at one last thing related to time, and then move on to breaking down daily changes (temperature, rainfall, etc.)
+
+```{r}
+fit6 <- lm(sample~time+traffic+date+light, data=NO2_R)
+summary(fit6)
+anova(fit4,fit6)
+```
+
+Looks like we should keep it! And awesome news, we have half the variability explained.
+
+Temperature, rainfall, cloudcover -> deeper level is wind, spatial modeling
+
+Merging with data from the Weather Channel (weather) and UC Riverside (temperature, rainfall) ->
+
+
+
+-> -> I need to somehow make each date's weather report repeat 24 times so that the rows line up with NO2_R, and it's able to bind.
+
+```{r}
+#nrow(Weather_R) == nrow(Weather_R) * 24
+#Weather_R <- data.frame(a = 1:31, b = letters[1:31]) Weather_R[rep(seq_len(nrow(Weather_R)), each = 24), ]
+#nrow(NO2_R) == nrow(Weather_R) * 24
+#rep(Weather_R, 24)
+Weather_R <- rep(Weather_R, each=24)
+```
+
+```{r}
+NO2_R2 <- rbind(NO2_R, Weather_R, date)
+```
+
