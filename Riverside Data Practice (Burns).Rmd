@@ -1,5 +1,5 @@
 ---
-title: "5/26/2020"
+title: "Riverside Air Quality Analysis"
 author: "Anna Madison Burns"
 date: "5/26/2020"
 output: pdf_document
@@ -9,12 +9,27 @@ output: pdf_document
 require(mosaic)
 ```
 
-Work plan:
+
+# Work plan:
 - establish hypothesis
 - subset data (whole dataset is too large)
 - visualize subset (need still smaller - a few plots of time vs. pollutant level)
 - specify model to test hypothesis (pollution is a function of time of the day -> day vs. night lots of pollutants are UV specific -> figure out how long the sun is out by day, merge a different dataset/create categorical variable that assigns 8 pm - 7am of night, but can have more potential for analyzing data)
 - run model and diagnostics (look at assumptions, compare models w/ AIC)
+
+# Introduction
+
+## Background
+
+## Objectives
+
+# Methods
+
+## Data Processing
+
+Source of data?
+
+need to read the data for the Rmd file to work...
 
 ## Subsetting the data
 
