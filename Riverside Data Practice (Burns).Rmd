@@ -1,0 +1,75 @@
+---
+title: "5/26/2020"
+author: "Anna Madison Burns"
+date: "5/26/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+require(mosaic)
+```
+
+Work plan:
+- establish hypothesis
+- subset data (whole dataset is too large)
+- visualize subset (need still smaller - a few plots of time vs. pollutant level)
+- specify model to test hypothesis (pollution is a function of time of the day -> day vs. night lots of pollutants are UV specific -> figure out how long the sun is out by day, merge a different dataset/create categorical variable that assigns 8 pm - 7am of night, but can have more potential for analyzing data)
+- run model and diagnostics (look at assumptions, compare models w/ AIC)
+
+## Subsetting the data
+
+```{r}
+Riverside_NO2 <- NO2_Daily_CA[ which(NO2_Daily_CA$`County Name`=='Riverside'), ]
+```
+
+```{r}
+Riverside_PM10 <- PM10_Hourly_CA[ which(PM10_Hourly_CA$`County Name` == 'Riverside'),]
+```
+
+```{r}
+Riverside <- rbind(Riverside_PM10, Riverside_NO2)
+```
+
+```{r}
+Riverside <- Riverside[c(-1,-2, -3, -4, -5, -6, -7, -8, -12, -13, -15, -16, -17, -18, -19, -20, -21, -22, -23, -24)]
+```
+
+
+```{r}
+Riverside$Light <- "Day"
+  #format(Riverside$`Time Local`, format="%H%M%S")
+Riverside$Light[Riverside$"Time Local"<hms("08:00:00")|Riverside$`Time Local`>hms("19:00:00")] <- "Night"
+  # Riverside$`Light` = with(Riverside, if(`Time Local`< "08:00:00" & `Time Local` > "20:00:00")"Night")
+# str(Riverside)
+```
+
+Other Options:
+
+flights_dt <- flights_dt %>% 
+  mutate(
+    overnight = arr_time < dep_time,
+    arr_time = arr_time + days(overnight * 1),
+    sched_arr_time = sched_arr_time + days(overnight * 1)
+  )
+
+
+x$daynight = with(x, ifelse(TOD > "053000" & TOD < "200000", "Day", "Night")) 
+
+OR Light Function
+
+Specify Model:
+
+```{r}
+interaction.plot(Riverside$`Light`, Riverside$`Parameter Name`, Riverside$`Sample Measurement`)
+```
+
+```{r}
+ggplot(data=Riverside, mapping=aes(`Time Local`,`Sample Measurement`)) + geom_point(mapping=aes(color=`Parameter Name`))
+```
+
+```{r}
+fit1 <- lm("Sample Measurement"~Light, data=Riverside[Riverside$"Sample Measurement" == "PM10 Total 0-10um STP",])
+```
+
+- rename variables names and variables
+- run back with Riverside NO2 -> already separated
