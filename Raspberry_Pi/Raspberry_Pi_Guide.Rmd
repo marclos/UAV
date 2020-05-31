@@ -1,5 +1,5 @@
 ---
-title: "Rasberry Pi 4"
+title: "Raspberry Pi and Environmental Monitoring"
 author: "Marc Los Huertos and Anna Burns"
 date: "5/29/2020"
 output: html_document
@@ -9,15 +9,27 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Introduction
+# Introduction
 
-### What is Rasberry Pi?
+## What is Rasberry Pi?
 
-### Why use Raspberry Pi?
+The Raspberry Pi is an tiny computer, that includes a tiny processor, a bit of memory, a slot for an SD card, and some input/output jacks, e.g. HDMI, USB, headphone, camera, and pin header for various sensors.
 
-The Raspberry Pi is an tiny computer. Thus, it has a lot of functionality and flexibility for develop monitoring of environmental parameters. 
+## Why use Raspberry Pi?
 
-### Uses in Environmental Science
+The Pi has a lot of functionality and flexibility for develop monitoring of environmental parameters. 
+
+## Uses in Environmental Science
+
+### Air Pollution Monitoring
+
+### Soil Water Monitoring and Irrigation Control
+
+### Conservation 
+
+Conservation biologists use a wide range of instruments to track and monitor wildlife (camera traps, active (radio) and passive (RIF) transmitters). In addition the use of cameras are used to evaluate plant health and diversity (spectral analysis). 
+
+
 
 ## Resources
 
@@ -29,6 +41,15 @@ The Raspberry Pi is an tiny computer. Thus, it has a lot of functionality and fl
 
 [Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses](https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r)
 
-## Programming Examples
+## Hardware and Programming Examples
+
+### Air Quality
 
 
+
+### Soil Moisture
+
+[Raspberry 3 and Capacitance Sensors](https://www.switchdoc.com/2018/11/tutorial-capacitive-moisture-sensor-grove/)
+
+
+### Wildlife
