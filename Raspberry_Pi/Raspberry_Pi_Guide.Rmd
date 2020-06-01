@@ -21,9 +21,15 @@ The Pi has a lot of functionality and flexibility for develop monitoring of envi
 
 ## Uses in Environmental Science
 
+### Climate Change
+
+https://www.omega.com/en-us/resources/thermocouples
+
 ### Air Pollution Monitoring
 
 ### Soil Water Monitoring and Irrigation Control
+
+https://fyi.extension.wisc.edu/cropirrigation/files/2015/03/Methods.to_.Monitor.Soil_.Moisture.pdf
 
 ### Conservation 
 
@@ -41,7 +47,7 @@ Conservation biologists use a wide range of instruments to track and monitor wil
 
 [Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses](https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r)
 
-## Hardware and Programming Examples
+## Projects General-purpose input/output Examples
 
 ### Air Quality
 
@@ -49,7 +55,13 @@ Conservation biologists use a wide range of instruments to track and monitor wil
 
 ### Soil Moisture
 
+[cheap version](https://tutorials-raspberrypi.com/measuring-soil-moisture-with-raspberry-pi/)
+
 [Raspberry 3 and Capacitance Sensors](https://www.switchdoc.com/2018/11/tutorial-capacitive-moisture-sensor-grove/)
+
+[moisture-sensor-dfrobot](https://tutorials-raspberrypi.com/raspberry-pi-capacitive-spoil-moisture-sensor-dfrobot-gravity/)
 
 
 ### Wildlife
+
+Poacher Cam v7, Chris Kline, panthera.org
