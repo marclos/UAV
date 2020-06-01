@@ -21,9 +21,9 @@ The Pi has a lot of functionality and flexibility for develop monitoring of envi
 
 ## Uses in Environmental Science
 
-### Climate Change
+### Weather and Climate Change
 
-https://www.omega.com/en-us/resources/thermocouples
+
 
 ### Air Pollution Monitoring
 
@@ -39,9 +39,11 @@ Conservation biologists use a wide range of instruments to track and monitor wil
 
 ## Resources
 
-### Rasberry Pi 
+### Raspberry Pi 
 
-[RasberryPi.org](https://www.raspberrypi.org/)
+The Raspberry was created to help non-technical youth to learn computer and robotics. The Raspberry Pi was an unexpected success and now the Pi is one of the most important minaturized computers for a wide range of projects.  
+
+The [RaspberryPi.org](https://www.raspberrypi.org/) has tutorials, software updates, and example projects. 
 
 ### Video Tutorials
 
@@ -49,9 +51,23 @@ Conservation biologists use a wide range of instruments to track and monitor wil
 
 ## Projects General-purpose input/output Examples
 
+### Weather and Climate
+
+[Thermocouples Sensors](https://www.omega.com/en-us/resources/thermocouples])
+
 ### Air Quality
 
+#### Sensors
 
+- Particulate Matter
+- NOx
+- O3
+- CO
+- Temperature/Humidity
+
+#### Software
+
+- Python Script
 
 ### Soil Moisture
 
