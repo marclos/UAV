@@ -141,5 +141,5 @@ Problem that we have the same measurement for every time during the day... screw
 What might be good: find paper that has done research on this (modeling air quality with weather data), and find out how they got their data.  
 
 ```{r}
-isd(usaf=722869,wban=03171,year=2020)
+#isd(usaf=722869,wban=03171,year=2020)
 ```
