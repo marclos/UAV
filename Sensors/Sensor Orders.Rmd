@@ -2,7 +2,9 @@
 title: "Sensor Orders"
 author: "Anna Madison Burns"
 date: "6/2/2020"
-output: pdf_document
+output:
+  html_document:
+    df_print: paged
 ---
 
 ## NO2 Sensors
