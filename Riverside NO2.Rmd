@@ -9,6 +9,7 @@ output: html_document
 require(mosaic)
 require(lubridate)
 require(MASS)
+require(rnoaa)
 ```
 
 ```{r}
@@ -133,7 +134,12 @@ Merging with data from the Weather Channel (weather) and UC Riverside (temperatu
 Weather_R <- rep(Weather_R, each=24)
 ```
 
-```{r}
-NO2_R2 <- rbind(NO2_R, Weather_R, date)
-```
+rbind is just pasting rows together, but merge... merges, based on a common variable.  (Look at dpylr cheatsheet... which of these patterns do we want?).
 
+Problem that we have the same measurement for every time during the day... screws with the errors (all have same mean for the dataset).  Hint: using mixed effects model.  
+
+What might be good: find paper that has done research on this (modeling air quality with weather data), and find out how they got their data.  
+
+```{r}
+isd(usaf=722869,wban=03171,year=2020)
+```
