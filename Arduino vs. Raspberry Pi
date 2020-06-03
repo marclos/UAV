@@ -1,0 +1,16 @@
+---
+title: "Arduino vs. Raspberry Pi"
+author: "Anna Madison Burns"
+date: "6/2/2020"
+output: html_document
+---
+
+### Youtube Videos
+
+https://www.youtube.com/watch?v=7vhvnaWUZjE - Key info is that Arduino is a microCONTROLLER, while Raspberry Pi is a microPROCESSOR.  It suggests that Arduino is better for projects with sensors, motors, or character LCDs; Raspberry Pi is better for videos/cameras, complex math, or graphic interfaces.
+
+https://www.youtube.com/watch?v=v6mJUqtkXUM - Again, this video emphasizes that it's very important to consider what you're using it for; if you want to use it to communicate with computers, etc. then Raspberry Pi is your friend, but if you want to use it for barebones hardware work then Arduino is a better option.
+
+## Thoughts
+
+Do we want to the drone to interact with the monitor/sensors?  Because if that's the case, it looks like Raspberry Pi will be the best to set up that sort of communication.  If we only want to use the processor to control the payloads, and have the drone simply carry it, then Arduino looks like the better option.
