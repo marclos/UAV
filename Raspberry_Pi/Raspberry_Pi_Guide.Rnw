@@ -1,51 +1,42 @@
----
-title: "Raspberry Pi and Environmental Monitoring"
-author: "Marc Los Huertos and Anna Burns"
-date: "5/29/2020"
-output: html_document
----
+\documentclass{article}
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+\begin{document}
 
-# Introduction
+\section{Introduction}
 
-## What is Rasberry Pi?
+\subsection{What is Rasberry Pi?}
 
 The Raspberry Pi is an tiny computer, that includes a tiny processor, a bit of memory, a slot for an SD card, and some input/output jacks, e.g. HDMI, USB, headphone, camera, and pin header for various sensors.
 
-## Why use Raspberry Pi?
+\subsection{Why use Raspberry Pi?}
 
 The Pi has a lot of functionality and flexibility for develop monitoring of environmental parameters. 
 
-## Uses in Environmental Science
+\subsection{Uses in Environmental Science}
 
-### Weather and Climate Change
+\subsubsection{Weather and Climate Change}
 
+\subsubsection{Air Pollution Monitoring}
 
+\subsubsection{Soil Water Monitoring and Irrigation Control}
 
-### Air Pollution Monitoring
+%https://fyi.extension.wisc.edu/cropirrigation/files/2015/03/Methods.to_.Monitor.Soil_.Moisture.pdf
 
-### Soil Water Monitoring and Irrigation Control
-
-https://fyi.extension.wisc.edu/cropirrigation/files/2015/03/Methods.to_.Monitor.Soil_.Moisture.pdf
-
-### Conservation 
+\subsubsection{Conservation} 
 
 Conservation biologists use a wide range of instruments to track and monitor wildlife (camera traps, active (radio) and passive (RIF) transmitters). In addition the use of cameras are used to evaluate plant health and diversity (spectral analysis). 
 
 
 
-## Resources
+\subsection{Resources}
 
-### Raspberry Pi 
+\subsection{Raspberry Pi}
 
 The Raspberry was created to help non-technical youth to learn computer and robotics. The Raspberry Pi was an unexpected success and now the Pi is one of the most important minaturized computers for a wide range of projects.  
 
-The [RaspberryPi.org](https://www.raspberrypi.org/) has tutorials, software updates, and example projects.
+The %[RaspberryPi.org](https://www.raspberrypi.org/) has tutorials, software updates, and example projects.
 
-#### Unpacking the Raspberry Pi
+\subsubsection{Unpacking the Raspberry Pi}
 
 When you recieve your Pi, plan on spending about 1-2 hours setting it up which include the following steps:
 
@@ -66,31 +57,35 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 
 
 
-### Video Tutorials
+\subsubsection{Video Tutorials}
 
-[Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses](https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r)
+%[Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses](https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r)
 
-## Projects General-purpose input/output Examples
+\subsection{Projects General-purpose input-output Examples}
 
-### Weather and Climate
+\subsubsection{Weather and Climate}
 
-[Thermocouples Sensors](https://www.omega.com/en-us/resources/thermocouples])
+%\href{Thermocouples Sensors}{https://www.omega.com/en-us/resources/thermocouples]}
 
-### Air Quality
+\subsubsection{Air Quality}
 
-#### Sensors
+\subsubsection{Sensors}
 
-- Particulate Matter
-- NOx
-- O3
-- CO
-- Temperature/Humidity
+Particulate Matter
 
-#### Software
+NOx
+
+O3
+
+CO
+
+Temperature and Humidity
+
+\subsubsection{Software}
 
 - Python Script
 
-### Soil Moisture
+\subsubsection{Soil Moisture}
 
 [cheap version](https://tutorials-raspberrypi.com/measuring-soil-moisture-with-raspberry-pi/)
 
@@ -99,6 +94,8 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 [moisture-sensor-dfrobot](https://tutorials-raspberrypi.com/raspberry-pi-capacitive-spoil-moisture-sensor-dfrobot-gravity/)
 
 
-### Wildlife
+\subsubsection{Wildlife}
 
 Poacher Cam v7, Chris Kline, panthera.org
+
+\end{document}
