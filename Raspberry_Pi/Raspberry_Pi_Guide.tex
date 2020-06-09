@@ -105,6 +105,16 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 
 \end{enumerate}
 
+\subsubsection{Video Tutorials}
+
+%[Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses](https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r)
+
+\subsubsection{Troubleshooting}
+
+\subsubsubsection{Screensaver}
+
+To keep the screen from going blank after ten minutes of inaction, use "$sudo apt-get install xscreensaver".  If this doesn't work, make sure your sudo is up to date with "$sudo apt-get update".  More information/different methods are available at: %[Pi Forum:  Disable Screensaver is Raspbian](https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=57552)
+
 \subsection{Remote Access}
 
 ** NOTE: I ADDED LOTS OF INFORMATION BELOW (AND A FEW POINTS ABOVE) BUT I'VE NEVER WORKED IN LATEX BEFORE.  I TRIED TO MIMIC YOUR SYNTAX AS MUCH AS POSSIBLE BUT IT WON'T LET ME KNIT, SO I CLEARLY DID SOMETHING INCORRECTLY.  MAYBE WE CAN TROUBLESHOOT DURING OUR MEETING TOMORROW **
@@ -121,10 +131,6 @@ It doesn't take too long (~10 minutes once you get the hang of it) to be able to
 \item Connecting to Windows OS: this is a bit more involved; you will need to download an SSH client.  The Microsoft "Remote Desktop Connection" app is available for free, and is pretty intuitive to use.  Download this, and follow the instructions to set it up.  Once it is installed, all you will need to do is enter the inet address you found above into the text box, and it will open a page for you to add your username and password (which at this point should still be "pi" and "raspberry").  Then your console will open.
 \subitem If it won't connect: make sure your microprocessor and the computer you are attempting to accesss it from are on the same wifi; make sure your microprocessor is connected and hasn't gone to sleep; make sure you've properly enabled all of the packages (I had to try to run xrdp twice to get it to work the first time).  
 \item Still working on: remotely accessing w/o HDMI connection, mirroring between microprocessor console and remote access console (more information to come).
-
-\subsubsection{Video Tutorials}
-
-%[Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses](https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r)
 
 \subsection{Projects General-purpose input-output Examples}
 
