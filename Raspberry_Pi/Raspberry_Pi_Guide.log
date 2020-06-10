@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.4.2)  9 JUN 2020 11:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.4.2)  10 JUN 2020 11:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -112,262 +112,31 @@ e
 )) [1
 
 {c:/Users/annam/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
-x.map}]
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 104.
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 104.
-
-! Missing $ inserted.
+x.map}] [2] [3])
+Runaway argument?
+{Troubleshooting Remote Access] \par \begin {enumerate} \par \item Yo\ETC.
+! File ended while scanning use of \@xdblarg.
 <inserted text> 
-                $
-l.105 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+                \par 
+<*> Raspberry_Pi_Guide.tex
+                          
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
 
-! Missing } inserted.
-<inserted text> 
-                }
-l.105 
-      
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
+! Emergency stop.
+<*> Raspberry_Pi_Guide.tex
+                          
+*** (job aborted, no legal \end found)
 
-
-Overfull \hbox (198.10646pt too wide) in paragraph at lines 104--105
-\OT1/cmr/m/n/10 you can type "$\OML/cmm/m/it/10 sudoshutdown \OMS/cmsy/m/n/10 ^
-^@ \OML/cmm/m/it/10 hnow\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 intheconsole:Onceyouh
-avedonethisyoucanremoveyourpifrompower=disconnect:[]$ 
- []
-
-! Extra }, or forgotten \endgroup.
-\par ...m \@noitemerr {\@@par }\fi \else {\@@par }
-                                                  \fi 
-l.105 
-      
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-
-! LaTeX Error: Command \item invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.116 \item
-            Install the packages necessary to remotely access your screen: "...
-
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.116 \item I
-             nstall the packages necessary to remotely access your screen: "...
-
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.116 \item I
-             nstall the packages necessary to remotely access your screen: "...
-
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (915.65869pt too wide) in paragraph at lines 115--117
-[]\OT1/cmr/m/n/10 Enable the SSH server by typ-ing "$\OML/cmm/m/it/10 ifconfig\
-OT1/cmr/m/n/10 "\OML/cmm/m/it/10 intotheconsole:Thiswillleadyoutoascreenwithsev
-eraloptions\OT1/cmr/m/n/10 ; \OML/cmm/m/it/10 selectoptionfive; \OT1/cmr/m/n/10
- "\OML/cmm/m/it/10 interfacingoptions; \OT1/cmr/m/n/10 "\OML/cmm/m/it/10 andthe
-nselectoptiontwofor\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 SSH:\OT1/cmr/m/n/10 "\OML/
-cmm/m/it/10 Enabletheserver; andthenexitthisscreen:Installthepackagesnecessaryt
-oremotelyaccessyourscreen \OT1/cmr/m/n/10 :
- []
-
-
-Overfull \hbox (153.88148pt too wide) in paragraph at lines 115--117
-\OT1/cmr/m/n/10 "$sudo apt-get re-move xrdp vnc4server tightvnc-server", "$\OML
-/cmm/m/it/10 sudoapt \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 getinstalltightvncse
-rver\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 ; andfinally\OT1/cmr/m/n/10 "$sudo
- []
-
-
-! LaTeX Error: Command \item invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.118 \item
-            Connecting to Mac or Linux OS: open the terminal and add "ssh pi...
-
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.118 \item C
-             onnecting to Mac or Linux OS: open the terminal and add "ssh pi...
-
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: Something's wrong--perhaps a missing \item.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.118 \item C
-             onnecting to Mac or Linux OS: open the terminal and add "ssh pi...
-
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-! LaTeX Error: Command \item invalid in math mode.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.119 \item
-            Connecting to Windows OS: this is a bit more involved; you will ...
-
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.119 \item C
-             onnecting to Windows OS: this is a bit more involved; you will ...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.119 \item C
-             onnecting to Windows OS: this is a bit more involved; you will ...
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-Overfull \hbox (852.18361pt too wide) in paragraph at lines 117--119
-[]\OT1/cmr/m/n/10 Type "$\OML/cmm/m/it/10 ifconfig\OT1/cmr/m/n/10 "\OML/cmm/m/i
-t/10 intoyourconsoletofindyourRaspberryPi[]sinetaddressunderthe\OT1/cmr/m/n/10 
-"\OML/cmm/m/it/10 wlan\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 subcategory:Thisshouldb
-eastringofnumbersthatlookssomethinglike\OT1/cmr/m/n/10 "192\OML/cmm/m/it/10 :\O
-T1/cmr/m/n/10 168\OML/cmm/m/it/10 :XXX:X:XXX:\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 
-YouwillneedthistoaccessyourRaspberryPiremotely:ConnectingtoMacorLinuxOS \OT1/cm
-r/m/n/10 :
- []
-
-
-Overfull \hbox (1.96227pt too wide) in paragraph at lines 117--119
-\OML/cmm/m/it/10 opentheterminalandadd\OT1/cmr/m/n/10 "\OML/cmm/m/it/10 sshpi\O
-T1/cmr/m/n/10 @[\OML/cmm/m/it/10 YOURPI[]sINETADDRESS\OT1/cmr/m/n/10 ]"\OML/cmm
-/m/it/10 :\OT1/cmr/m/n/10 [\OML/cmm/m/it/10 Note \OT1/cmr/m/n/10 :
- []
-
-! Extra }, or forgotten \endgroup.
-\par ...m \@noitemerr {\@@par }\fi \else {\@@par }
-                                                  \fi 
-l.119 \item C
-             onnecting to Windows OS: this is a bit more involved; you will ...
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-[2]
-Overfull \hbox (2.80626pt too wide) in paragraph at lines 153--154
-\OT1/cmr/m/n/10 [cheap version](https://tutorials-raspberrypi.com/measuring-soi
-l-moisture-with-
- []
-
-
-Overfull \hbox (29.6952pt too wide) in paragraph at lines 155--156
-[]\OT1/cmr/m/n/10 [Raspberry 3 and Ca-pac-i-tance Sensors](https://www.switchdo
-c.com/2018/11/tutorial-
- []
-
-
-Overfull \hbox (22.6119pt too wide) in paragraph at lines 157--158
-[]\OT1/cmr/m/n/10 [moisture-sensor-dfrobot](https://tutorials-raspberrypi.com/r
-aspberry-pi-capacitive-
- []
-
-
-! LaTeX Error: \begin{enumerate} on input line 112 ended by \end{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.164 \end{document}
-                    
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[3] [4] (./Raspberry_Pi_Guide.aux) )
-(\end occurred inside a group at level 1)
-
-### semi simple group (level 1) entered at line 112 (\begingroup)
-### bottom level 
+ 
 Here is how much of TeX's memory you used:
- 986 strings out of 482913
- 15776 string characters out of 5957673
- 249297 words of memory out of 5000000
- 16294 multiletter control sequences out of 15000+600000
- 533856 words of font info for 29 fonts, out of 8000000 for 9000
+ 984 strings out of 482913
+ 15724 string characters out of 5957673
+ 248297 words of memory out of 5000000
+ 16293 multiletter control sequences out of 15000+600000
+ 534191 words of font info for 30 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 30i,5n,25p,607b,190s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/Users/annam/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmbx10.pfb><c:/Users/annam/AppData/Roaming/TinyTeX/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/annam/AppData/Roaming/Tin
-yTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/Users/annam/AppDa
-ta/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/User
-s/annam/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy1
-0.pfb><c:/Users/annam/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/ams
-fonts/cm/cmsy7.pfb>
-Output written on Raspberry_Pi_Guide.pdf (4 pages, 93131 bytes).
-PDF statistics:
- 41 PDF objects out of 1000 (max. 8388607)
- 28 compressed objects within 1 object stream
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 30i,5n,25p,609b,178s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!
