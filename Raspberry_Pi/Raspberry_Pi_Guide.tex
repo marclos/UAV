@@ -83,7 +83,13 @@ The Pi has a lot of functionality and flexibility for develop monitoring of envi
 
 \subsubsection{Soil Water Monitoring and Irrigation Control}
 
-\href{https://fyi.extension.wisc.edu/cropirrigation/files/2015/03/Methods.to_.Monitor.Soil_.Moisture.pdf}{Using Pi to Monitor Soil Moisture}
+The automatation of irrigation is ubiquitous, however, in many cases systems don't have feedbacks that control the system. The first step relies on sensors to monitor soil moisture and temperature and then use plant growth models to control an irrigation system. 
+
+Here are some resources that describe how these can be done:
+
+\begin{itemize}
+\item \href{https://fyi.extension.wisc.edu/cropirrigation/files/2015/03/Methods.to_.Monitor.Soil_.Moisture.pdf}{Soil Soil Moisture Sensors and Loggers}
+\end{itemize}
 
 \subsubsection{Conservation} 
 
@@ -114,7 +120,7 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 \item Once the Rasbian OS starts, you'll see four raspberries at the top and then you'd get some prompts to set up the OS. 
 \item I suggest you keep the password as default for now, select the langauge, keyboard type, and time zone. 
 \item Next you'll need to get connected to the internet. Select your modem and enter password to connect.
-\item Then you'll get a prompt to check for updates. Yes, there will be updates. This will take another 10 minutes. About 1/2 way the screen goes completely blank. I am not sure why, but it's rather disconcerting. 
+\item Then you'll get a prompt to check for updates. Yes, there will be updates. This will take another 10 minutes. About 1/2 way the screen goes completely blank. This is because, by default, the Pi goes into screen saver mode without mouse or keyboard inputs. Move the mouse or type something and the screen should wake up.  
 
 \end{enumerate}
 
@@ -150,12 +156,17 @@ Temperature and Humidity
 
 \subsubsection{Soil Moisture}
 
-[cheap version](https://tutorials-raspberrypi.com/measuring-soil-moisture-with-raspberry-pi/)
 
-[Raspberry 3 and Capacitance Sensors](https://www.switchdoc.com/2018/11/tutorial-capacitive-moisture-sensor-grove/)
+Tutorials in using a Pi to monistor soil mosture:
 
-[moisture-sensor-dfrobot](https://tutorials-raspberrypi.com/raspberry-pi-capacitive-spoil-moisture-sensor-dfrobot-gravity/)
+\begin{itemize}
 
+\item \href{https://tutorials-raspberrypi.com/measuring-soil-moisture-with-raspberry-pi/}{Simple and Inexpensive Method}
+
+\item \href{moisture-sensor-dfrobothttps://www.switchdoc.com/2018/11/tutorial-capacitive-moisture-sensor-grove/}{Raspberry 3 and Capacitance Sensors -- More Accurate, limited corrosion}
+
+\item \href{https://tutorials-raspberrypi.com/raspberry-pi-capacitive-spoil-moisture-sensor-dfrobot-gravity/}{moisture-sensor-dfrobot?}
+\end{itemize}
 
 \subsubsection{Wildlife}
 
