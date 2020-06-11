@@ -49,8 +49,21 @@
 \newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
 
 \usepackage{alltt}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+
+\author{Anna Burns \& Marc Los Huertos}
+\title{Introduction to Raspberry Pi in Environmental Science}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
+\maketitle
 
 \section{Introduction}
 
@@ -70,7 +83,7 @@ The Pi has a lot of functionality and flexibility for develop monitoring of envi
 
 \subsubsection{Soil Water Monitoring and Irrigation Control}
 
-%https://fyi.extension.wisc.edu/cropirrigation/files/2015/03/Methods.to_.Monitor.Soil_.Moisture.pdf
+\href{https://fyi.extension.wisc.edu/cropirrigation/files/2015/03/Methods.to_.Monitor.Soil_.Moisture.pdf}{Using Pi to Monitor Soil Moisture}
 
 \subsubsection{Conservation} 
 
@@ -84,7 +97,7 @@ Conservation biologists use a wide range of instruments to track and monitor wil
 
 The Raspberry was created to help non-technical youth to learn computer and robotics. The Raspberry Pi was an unexpected success and now the Pi is one of the most important minaturized computers for a wide range of projects.  
 
-The %[RaspberryPi.org](https://www.raspberrypi.org/) has tutorials, software updates, and example projects.
+The \href{https://www.raspberrypi.org/}{RaspberryPi.org} has tutorials, software updates, and example projects.
 
 \subsubsection{Unpacking the Raspberry Pi}
 
