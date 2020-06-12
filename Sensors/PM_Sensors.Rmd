@@ -3,6 +3,7 @@ title: "PM Sensors"
 author: "Anna Madison Burns"
 date: "6/10/2020"
 output:
+  pdf_document: default
   html_document:
     df_print: paged
 ---
@@ -55,6 +56,7 @@ I did this entire step within the Raspberry Pi terminal interface.
 
 2.  Within the text document, enter the following code:
 
+```{python, eval=FALSE, python.reticulate=FALSE}
 import serial
 from collections import OrderedDict
 class Sensor():
@@ -98,7 +100,8 @@ if __name__ == '__main__':
   data = sensor.read()
   sensor.close()
   print(data)
-  
+```
+
 3.  Save the text document with ctrl O (it will ask it what you want to name it, you can leave it as pms5003.py), and then exit it with ctrl X.
 
 4.  Now within the main shell, type "python3 pms5003.py".  It should release a reading of the different measurements specified.
@@ -112,5 +115,7 @@ if __name__ == '__main__':
 - Checking for accuracy (why divide the temperature/humidity by ten?)
 
 - Spacing on code is weird... how to fix? Maybe within Latex?
+
+- Getting it to read onto a Box CSE file ?
 
 
