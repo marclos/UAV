@@ -1,0 +1,25 @@
+---
+title: "Azure IOT"
+author: "Anna Madison Burns"
+date: "6/12/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Future Resources
+
+While Azure IOT is not at the top of the list, if at some point building an interface for the data would be handy here are some resources:
+
+https://www.youtube.com/watch?v=y1KMYcbyX38
+
+https://docs.microsoft.com/en-us/azure/iot-central/core/tutorial-connect-device-python
+
+https://uav.azureiotcentral.com/devices/details/RaspberryPiPMS5003/urn:gyw3fveh_:modelDefinition:epaeymkil
+
+https://github.com/gloveboxes/Raspberry-Pi-Python-Environment-Monitor-with-the-Pimoroni-Enviro-Air-Quality-PMS5003-Sensor
+
+https://github.com/Azure/azure-iot-sdk-python/tree/master/azure-iot-device/samples
+
