@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.4.2)  11 JUN 2020 10:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.4.2)  12 JUN 2020 12:28
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -292,37 +292,31 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 [1
 
 {c:/Users/annam/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdfte
-x.map}] [2]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 176.
- [3]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 176.
- (./Raspberry_Pi_Guide.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 176.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 176.
-Package rerunfilecheck Info: File `Raspberry_Pi_Guide.out' has not changed.
-(rerunfilecheck)             Checksum: 0CD7C8A546EFC2326CA7E99A8CC7FE8F;1409.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 176.
- ) 
+x.map}] [2] [3])
+Runaway argument?
+{Troubleshooting Remote Access] \begin {enumerate} \item Your micropr\ETC.
+! File ended while scanning use of \@xdblarg.
+<inserted text> 
+                \par 
+<*> Raspberry_Pi_Guide.tex
+                          
+I suspect you have forgotten a `}', causing me
+to read past where you wanted me to stop.
+I'll try to recover; but if the error is serious,
+you'd better type `E' or `X' now and fix your file.
+
+! Emergency stop.
+<*> Raspberry_Pi_Guide.tex
+                          
+*** (job aborted, no legal \end found)
+
+ 
 Here is how much of TeX's memory you used:
- 5075 strings out of 482913
- 81482 string characters out of 5957673
+ 5076 strings out of 482913
+ 81353 string characters out of 5957673
  336303 words of memory out of 5000000
- 20235 multiletter control sequences out of 15000+600000
+ 20231 multiletter control sequences out of 15000+600000
  536928 words of font info for 39 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 34i,6n,29p,368b,310s stack positions out of 5000i,500n,10000p,200000b,80000s
- <c:/Users/annam/Documents/.TinyTeX/texmf-var/fonts/pk/ljfour/jknappen/ec/tcr
-m1000.600pk><c:/Users/annam/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmbx10.pfb><c:/Users/annam/AppData/Roaming/TinyTeX/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmbx12.pfb><c:/Users/annam/AppData/Roaming/TinyTeX
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/Users/annam/AppData/Ro
-aming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/Users/ann
-am/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-
-Output written on Raspberry_Pi_Guide.pdf (3 pages, 83759 bytes).
-PDF statistics:
- 146 PDF objects out of 1000 (max. 8388607)
- 133 compressed objects within 2 object streams
- 34 named destinations out of 1000 (max. 500000)
- 153 words of extra memory for PDF output out of 10000 (max. 10000000)
-
+ 34i,6n,29p,368b,399s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!

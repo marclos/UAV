@@ -71,6 +71,7 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 \item I suggest you keep the password as default for now, select the langauge, keyboard type, and time zone. 
 \item Next you'll need to get connected to the internet. Select your modem and enter password to connect.
 \item Then you'll get a prompt to check for updates. Yes, there will be updates. This will take another 10 minutes. About 1/2 way the screen goes completely blank. This is because, by default, the Pi goes into screen saver mode without mouse or keyboard inputs. Move the mouse or type something and the screen should wake up.  
+\item Be sure to shut down your Raspberry Pi before unplugging it; do this with the code "sudo shutdown -h now".  Note that once you've shut it down, you will need to unplug it and plug it back in to get successful readings or use remote access.
 
 \end{enumerate}
 
@@ -78,7 +79,71 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 
 \subsubsection{Video Tutorials}
 
-%[Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses](https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r)
+%[Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses](https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r])
+
+\subsubsection{Screensaver}
+
+\begin{enumerate}
+
+\item To keep the screen from going blank after ten minutes of inaction, use "\$sudo apt-get install xscreensaver".  If this doesn't work, make sure your sudo is up to date with "\$sudo apt-get update".  
+\item Once you've done this, go to the Raspberry icon in the upper-left corner and select "preferences" from the drop down menu.  Under "preferences" there is an option for "screensaver".  
+\item Once in screensaver, under the "Mode" dropdown you can select "disable screensaver".  
+\item Now your screen should stay active even if you aren't actively using it.
+\item More information/different methods are available at: %\href{Pi Forum:  Disable Screensaver is Raspbian}{https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=57552]}
+
+\end{enumerate}
+
+\subsection{Remote Access}
+
+It doesn't take too long (10 minutes once you get the hang of it) to be able to work remotely on your microprocessor via a tablet or laptop.  More information at %\href{Remote Access with Raspberry Pi Tutorial}{https://pythonprogramming.net/remote-access-raspberry-pi-tutorials/]} 
+
+\begin{enumerate}
+
+\item Begin by making sure all of your packages are up-to-date (even if you updated while setting up your OS, you will still need to do this).  Do this with the code "\$sudo apt-get update" and then "\$sudo apt-get upgrade".  This will take several minutes.
+\item Enable the SSH server by typing "\$if config" into the console.  This will lead you to a screen with several options; select option five, "interfacing options," and then select option two for "SSH."  Enable the server, and then exit this screen.
+\item Note that Raspberry Pi updated in November 2016 so that SSH is disabled automatically.  You will need to turn it on in order to progress.
+\item Type "\$ifconfig" into your console to find your Raspberry Pi's inet address under the "wlan" subcategory.  This should be a string of numbers that looks something like "192.168.XXX.X.XXX."  You will need this to access your Raspberry Pi remotely.
+
+\end{enumerate}
+
+\subsubsection{Option 1: Access to the Raspberry Pi GUI}
+
+\begin{enumerate}
+
+\item Install the package necessary to remotely access your screen: "\$sudo apt-get install xrdp".
+\item Connecting to Mac or Linux OS: open the terminal and add "ssh pi(at) (inet)".
+\item Connecting to Windows OS: this is a bit more involved; you will need to download an SSH client.  
+\item The Microsoft "Remote Desktop Connection" app is available for free, and is pretty intuitive to use.  Download this, and follow the instructions to set it up.  
+\item Once it is installed, all you will need to do is enter the inet address you found above into the text box
+\item A page will open for you to add your username and password (which at this point should still be "pi" and "raspberry").  Then your console will open.
+\item If it won't connect: make sure your microprocessor and the computer you are attempting to accesss it from are on the same wifi;
+\item make sure your microprocessor is connected and hasn't gone to sleep; 
+\item make sure you've properly enabled all of the packages (I had to try to run xrdp twice to get it to work the first time).  
+
+\end{enumerate}
+
+\subsubsection{Access to Raspberry Pi via SSH}
+
+Note that for this option, your Raspberry Pi processor only needs to be connected to a power source (no external display is necessary).  However, it is the raw code - not exactly a visually-friendly experience, but much more convenient if you can only hook up your processor to, say, a TV.
+
+\begin{enumerate}
+
+\item For Windows: (if you have Mac OS or Linux, skip this step!) First, make sure you have OpenSSH Client installed.  Go to settings, Apps, Apps and Features, Optional Features, Add a Feature, and then add the client.
+\item Open your Powershell (which acts sort of like an app, you can access it in the search bar) as an administrator, and then type "Ssh [username]@[identifier] (the IP address that you found above).  
+\item Once you press enter, it will ask if you trust it (say yes, you will only need to do this once). 
+\item Next it will ask you for your password.  Note: As you type, no characters will appear on the terminal (for privacy).  This is ok, once you have typed your password just press enter.
+\item The terminal should now look like the Raspberry Pi terminal that you get via HDMI, with "pi@raspberry pi: \$" as the beginning of your lines.  Hooray!
+
+\end{enumerate}
+
+\subsubsection{Troubleshooting Remote Access]
+\begin {enumerate}
+\item Your microprocessor needs to be connected to a powersource in order to remotely access it.
+\item Both the GUI and main terminal options can be rather glitchy; if the program quits, wait a moment and then log back in.  It may not work on the first try, but do it again and it should connect.
+\item Make sure that your computer is connected to Wifi, and that it is connected to the same Wifi network your microprocessor is on.
+
+\end{enumerate}
+
 
 \subsection{Projects General-purpose input-output Examples}
 
