@@ -8,6 +8,29 @@
     urlcolor=cyan,
 }
 
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
 
 \author{Anna Burns \& Marc Los Huertos}
 \title{Introduction to Raspberry Pi in Environmental Science}
@@ -66,12 +89,25 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 \item Connect to keyboard, mouse and monitor. Make sure the HDMI plug is in the correct mini-HDMI socket and the monitor is configured to get a signal from the port being used. 
 \item Insert pre-loaded SD card
 \item Plug-in Pi, you'll see a rainbow screen for a minute and then a installation menu. 
-\item Install the Rasbian operating system only. This will take 10 minutes. Read the little windows so you know some of the resources associated with the operating system. The installations stalls at the end, where it says 100\%. Be patient, it will finish on it's own and reboot. 
+\item Install the Rasbian operating system only. This will take 10 minutes. Read the little windows so you know some of the resources associated with the operating system. The installations stalls at the end, where it says 100\%. Be patient, it will finish on it's own and reboot.
+
 \item Once the Rasbian OS starts, you'll see four raspberries at the top and then you'd get some prompts to set up the OS. 
+
 \item I suggest you keep the password as default for now, select the langauge, keyboard type, and time zone. 
+
 \item Next you'll need to get connected to the internet. Select your modem and enter password to connect.
-\item Then you'll get a prompt to check for updates. Yes, there will be updates. This will take another 10 minutes. About 1/2 way the screen goes completely blank. This is because, by default, the Pi goes into screen saver mode without mouse or keyboard inputs. Move the mouse or type something and the screen should wake up.  
-\item Be sure to shut down your Raspberry Pi before unplugging it; do this with the code "sudo shutdown -h now".  Note that once you've shut it down, you will need to unplug it and plug it back in to get successful readings or use remote access.
+
+\item Then you'll get a prompt to check for updates. Yes, there will be updates. This will take another 20 minutes. About 1/2 way the screen goes completely blank. This is because, by default, the Pi goes into screen saver mode without mouse or keyboard inputs. Move the mouse or type something and the screen should wake up. 
+
+\item Be sure to shut down your Raspberry Pi before unplugging it; you can use the keyboard and "Cntl-Alt-Delete" sequence to get a pop-up window to shut the Pi down or open the terminal window and type:
+
+\begin{lstlisting}
+sudo shutdown -h now
+\end{lstlisting}
+
+\item Unplug the Pi.
+
+Note: To restart the Pi, simply plug it in, unless you have a switch. 
 
 \end{enumerate}
 
@@ -85,16 +121,32 @@ One good way to start is to watch the following video series that introduced the
 
 \subsubsection{Screensaver}
 
+The screen goes blacn after 10 minutes of inaction. This is a bit annoying since we are often doing things that take some time to sort out, i.e. more than 10 minutes. 
+
+To turn this off you can a terminal window that allows you to type commands following the \$ prompt. 
+
+Type the following command to turn off the screen saver using the following steps: 
+
 \begin{enumerate}
 
-\item To keep the screen from going blank after ten minutes of inaction, use "\$sudo apt-get install xscreensaver".  If this doesn't work, make sure your sudo is up to date with "\$sudo apt-get update".  
+\item Type: 
+
+\begin{lstlisting}
+sudo apt-get install xscreensaver
+\end{lstlisting}
+
+\item If this doesn't work, make sure your sudo is up to date with 
+\begin{lstlisting}
+sudo apt-get update
+\end{lstlisting}
+
 \item Once you've done this, go to the Raspberry icon in the upper-left corner and select "preferences" from the drop down menu.  Under "preferences" there is an option for "screensaver".
 
 \item Once in screensaver, under the "Mode" dropdown you can select "disable screensaver".
 
 \item Now your screen should stay active even if you aren't actively using it.
 
-\item More information/different methods are available at: %\href{Pi Forum:  Disable Screensaver is Raspbian}{https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=57552]}
+\item More information/different methods are available at: \href{https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=57552}{Pi Forum:  Disable Screensaver is Raspbian}
 
 \end{enumerate}
 
