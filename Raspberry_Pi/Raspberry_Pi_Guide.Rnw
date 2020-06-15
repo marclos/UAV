@@ -61,7 +61,7 @@ The automatation of irrigation is ubiquitous, however, in many cases systems don
 Here are some resources that describe how these can be done:
 
 \begin{itemize}
-\item \href{https://fyi.extension.wisc.edu/cropirrigation/files/2015/03/Methods.to_.Monitor.Soil_.Moisture.pdf}{Soil Soil Moisture Sensors and Loggers}
+\item \href{https://fyi.extension.wisc.edu/cropirrigation/files/2015/03/Methods.to_.Monitor.Soil_.Moisture.pdf}{Soil Moisture Sensors and Loggers}
 \end{itemize}
 
 \subsubsection{Conservation} 
@@ -181,7 +181,7 @@ It doesn't take too long (10 minutes once you get the hang of it) to be able to 
 
 \subsubsection{Access to Raspberry Pi via SSH}
 
-Note that for this option, your Raspberry Pi processor only needs to be connected to a power source (no external display is necessary).  However, it is the raw code - not exactly a visually-friendly experience, but much more convenient if you can only hook up your processor to, say, a TV.
+Note that for this option, the display is raw code - not exactly a visually-friendly experience, but potentially easier to navigate.
 
 \begin{enumerate}
 
@@ -190,10 +190,13 @@ Note that for this option, your Raspberry Pi processor only needs to be connecte
 \item Once you press enter, it will ask if you trust it (say yes, you will only need to do this once). 
 \item Next it will ask you for your password.  Note: As you type, no characters will appear on the terminal (for privacy).  This is ok, once you have typed your password just press enter.
 \item The terminal should now look like the Raspberry Pi terminal that you get via HDMI, with "pi@raspberry pi: \$" as the beginning of your lines.  Hooray!
+\item For further guidance, see the troubleshooting section.
 
 \end{enumerate}
 
-\subsubsection{Troubleshooting Remote Access}
+\subsection{Troubleshooting}
+
+\subsubsection{Remote Access}
 
 \begin {enumerate}
 \item Your microprocessor needs to be connected to a powersource in order to remotely access it.
@@ -202,6 +205,22 @@ Note that for this option, your Raspberry Pi processor only needs to be connecte
 
 \end{enumerate}
 
+\subsubsection{Recovering Commits from Github}
+
+If there is a conflict between commits and some information that was previously added to a file on R is lost, follow these steps to recover the information within previous commits.
+
+\begin{enumerate}
+
+\item Go to the project's Github page over the internet and open the page for the document you wish to recover code from.
+\item On the bar before the file itself begins, select "history" on the right side of the screen.
+\item Within the history tab, there should be a list of previous commits; select a commit that will have the code you are hoping to recover within it (i.e. if you were working on the code the previous Friday, select a commit from that day).
+\item On the appropriate commit, select the "<>" option on the right of the screen to open up a historic version of the repository from that day.  Note that this will direct you to the full repository from the time of the commit you select, and not just the document you are hoping to recover.
+\item Go back to the document you need to recover code from, and open it.  It will have the historic code that was there at the time of the commit you selected; if you chose correctly, it should have the code you were looking to recover.
+\item Copy the deleted lines of code out of the historic file, and into the document on R.  
+\item Save the R document, commit, and push the information.  
+\item The Github will remain on the historic commit until you leave the project; exit the entire project (for example, by going to the home screen on Github) and then re-enter the project to enter the up-to-date portal.
+
+\end{enumerate}
 
 \subsection{Projects General-purpose input-output Examples}
 
