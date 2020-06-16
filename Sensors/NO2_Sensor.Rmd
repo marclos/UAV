@@ -1,0 +1,38 @@
+---
+title: "NO2_Sensors"
+author: "Anna Madison Burns"
+date: "6/16/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Our Sensor
+
+We are using a MiCS-2714 from SGX Sensortech, which costs 8.75 USD.  In addition to the sensor, we also purchased the accompanying MiCS Quickstart Evaluation Board from SGX Sensortech for 38.75 USD.  Furthermore, we have the corresponding HTU21D humidity and temperature sensor, which was purchaed from SGX Sensortech for 2.60 USD.  
+
+## Helpful Resources for Setting Up Sensor
+
+**Note: AB has not yet figured out how to set up this sensor; these are the sources that looked like they could be useful.**
+
+https://www.instructables.com/id/Smart-Sensor/ - contains link to downlaod pdf on MiCS-2714 (**this was probably the most helpful source I found**) 
+
+https://download.mikroe.com/documents/datasheets/MiCS-2714%20Datasheet.pdf - Datasheet for the sensor
+
+https://sgx.cdistore.com/datasheets/sgx/load-resistance-for-mics-sensors-measurements.pdf - "How to set up load resistance for MiCS sensors measurements"
+
+https://www.sgxsensortech.com/content/uploads/2014/08/AN2-%e2%80%93-Frequently-Asked-Questions-for-MiCS-Gas-Sensors.pdf - "Frequently asked questions for MiCS gas sensors"
+
+https://www.sgxsensortech.com/content/uploads/2014/08/AN-0172-SGX-Metal-Oxide-Gas-Sensors-V1.pdf - "SGX metal oxide sensors (how to use them and how they perform)"
+
+## Scientific Papers that Use a Similar Setup
+
+http://ijiet.com/wp-content/uploads/2018/01/3.pdf - "IOT based indoor air pollution monitor using Raspberry Pi" (paper that uses this sensor with Raspberry Pi)
+
+https://www.mdpi.com/1424-8220/10/6/5469/htm - "Metal oxide semi-conductor gas sensors in environmental monitoring"
+
+https://iopscience.iop.org/article/10.1088/1757-899X/536/1/012050/pdf - "Monitoring system for organic fertilizer plant controller using solar energy" (paper that uses this sensor with Raspberry Pi)
+
+
