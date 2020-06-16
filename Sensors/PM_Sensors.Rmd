@@ -82,7 +82,7 @@ class Sensor():
     data = self.serial.read(32)
     data = ["{:02X}".format(d) for d in data]
     
-    if data[0] != '42' or data[1] != '4D'
+    if data[0] != '42' or data[1] != '4D' # Maybe lowercase d?
       return None
       
     res = OrderedDict()
@@ -95,7 +95,7 @@ class Sensor():
     
     res['temperature'] = self.read_bytes(data, 24) / 10
     res['humidity'] = self.read_bytes(data, 26) / 10
-    return res
+    return res # Indentation issues
     
 if __name__ == '__main__':
   '''
@@ -106,6 +106,8 @@ if __name__ == '__main__':
   data = sensor.read()
   sensor.close()
   print(data)
+  
+#Give information that tabs are super sensitive
 ```
 
 3.  Save the text document with ctrl O (it will ask it what you want to name it, you can leave it as pms5003.py), and then exit it with ctrl X.
