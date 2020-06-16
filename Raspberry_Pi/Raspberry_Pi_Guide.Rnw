@@ -156,7 +156,7 @@ It doesn't take too long (10 minutes once you get the hang of it) to be able to 
 \item Connecting to Mac or Linux OS: open the terminal and add "ssh pi(at) (inet)".
 \item Connecting to Windows OS: this is a bit more involved; you will need to download an SSH client.  
 \item The Microsoft "Remote Desktop Connection" app is available for free, and is pretty intuitive to use.  Download this, and follow the instructions to set it up.  
-\item Once it is installed, all you will need to do is enter the inet address you found above into the text box
+\item Once it is installed, all you will need to do is enter the address you found above into the text box (it should look something like 192.168.XXX.X.XXX).
 \item A page will open for you to add your username and password (which at this point should still be "pi" and "raspberry").  Then your console will open.
 \item If it won't connect: make sure your microprocessor and the computer you are attempting to accesss it from are on the same wifi;
 \item make sure your microprocessor is connected and hasn't gone to sleep; 
@@ -171,9 +171,9 @@ Note that for this option, the display is raw code - not exactly a visually-frie
 \begin{enumerate}
 
 \item For Windows: (if you have Mac OS or Linux, skip this step!) First, make sure you have OpenSSH Client installed.  Go to settings, Apps, Apps and Features, Optional Features, Add a Feature, and then add the client.
-\item Open your Powershell (which acts sort of like an app, you can access it in the search bar) as an administrator, and then type "Ssh [username]@[identifier] (the IP address that you found above).  
+\item Open your Powershell (which acts sort of like an app, you can access it in the search bar) as an administrator, and then type "Ssh [username]@[identifier]" (the address that you found above, it should look something like 192.168.X.XXX). Username will be "pi" unless you have changed it during setup.
 \item Once you press enter, it will ask if you trust it (say yes, you will only need to do this once). 
-\item Next it will ask you for your password.  Note: As you type, no characters will appear on the terminal (for privacy).  This is ok, once you have typed your password just press enter.
+\item Next it will ask you for your password.  Note: As you type, no characters will appear on the terminal (for privacy).  This is ok, once you have typed your password just press enter.  If you didn't change your password during setup, it will be "raspberry".
 \item The terminal should now look like the Raspberry Pi terminal that you get via HDMI, with "pi@raspberry pi: \$" as the beginning of your lines.  Hooray!
 \item For further guidance, see the troubleshooting section.
 
