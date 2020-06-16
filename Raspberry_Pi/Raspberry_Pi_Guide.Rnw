@@ -79,14 +79,29 @@ The Raspberry was created to help non-technical youth to learn computer and robo
 
 The \href{https://www.raspberrypi.org/}{RaspberryPi.org} has tutorials, software updates, and example projects.
 
+\subsubsection{Video Tutorials}
+
+One good way to start is to watch the following video series that introduced the Raspberry Pi. 
+
+%\href{https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r}{Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses}
+
 \subsubsection{Unpacking the Raspberry Pi}
 
-When you recieve your Pi, plan on spending about 1-2 hours setting it up which include the following steps:
+When you recieve your Pi, plan on spending about 1-2 hours setting it up which include unpacking and putting the Pi together: 
 
 \begin{enumerate}
 
 \item Unpack Kit Contents
 \item Put Pi in case and add heat sinks
+
+\end{enumerate}
+
+\subsubsection{Option 1: Communicating with the Pi Using a Monitor, Keyboard, and Mouse}
+
+If you have a spare monitor, keyboard, and mouse, follow the following steps to set up the Raspberry Pi. If you don't have these, then you'll need a ethernet cable and follow the steps in Option 2: Communicating with the Pi using SSH. 
+
+\begin{enumerate}
+
 \item Connect to keyboard, mouse and monitor. Make sure the HDMI plug is in the correct mini-HDMI socket and the monitor is configured to get a signal from the port being used. 
 \item Insert pre-loaded SD card
 \item Plug-in Pi, you'll see a rainbow screen for a minute and then a installation menu. 
@@ -106,6 +121,8 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 $ sudo shutdown -h now
 \end{lstlisting}
 
+\item You have successfully communicated with the Pi!  
+
 \item Unplug the Pi.
 
 Note: To restart the Pi, simply plug it in, unless you have a switch. 
@@ -114,42 +131,9 @@ Note: To restart the Pi, simply plug it in, unless you have a switch.
 
 
 
-\subsubsection{Video Tutorials}
 
-One good way to start is to watch the following video series that introduced the Raspberry Pi. 
 
-%\href{https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r}{Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses}
 
-\subsubsection{Screensaver}
-
-The screen goes blacn after 10 minutes of inaction. This is a bit annoying since we are often doing things that take some time to sort out, i.e. more than 10 minutes. 
-
-To turn this off you can a terminal window that allows you to type commands following the \$ prompt. 
-
-Type the following command to turn off the screen saver using the following steps: 
-
-\begin{enumerate}
-
-\item Type: 
-
-\begin{lstlisting}
-sudo apt-get install xscreensaver
-\end{lstlisting}
-
-\item If this doesn't work, make sure your sudo is up to date with 
-\begin{lstlisting}
-sudo apt-get update
-\end{lstlisting}
-
-\item Once you've done this, go to the Raspberry icon in the upper-left corner and select "preferences" from the drop down menu.  Under "preferences" there is an option for "screensaver".
-
-\item Once in screensaver, under the "Mode" dropdown you can select "disable screensaver".
-
-\item Now your screen should stay active even if you aren't actively using it.
-
-\item More information/different methods are available at: \href{https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=57552}{Pi Forum:  Disable Screensaver is Raspbian}
-
-\end{enumerate}
 
 \subsection{Remote Access}
 
@@ -205,6 +189,38 @@ Note that for this option, the display is raw code - not exactly a visually-frie
 \item Make sure that your computer is connected to Wifi, and that it is connected to the same Wifi network your microprocessor is on.
 
 \end{enumerate}
+
+\subsubsection{Screensaver}
+
+The screen goes black after 10 minutes of inaction. This is a bit annoying since we are often doing things that take some time to sort out, i.e. more than 10 minutes. 
+
+To turn this off you can a terminal window that allows you to type commands following the \$ prompt. 
+
+Type the following command to turn off the screen saver using the following steps: 
+
+\begin{enumerate}
+
+\item Type: 
+
+\begin{lstlisting}
+sudo apt-get install xscreensaver
+\end{lstlisting}
+
+\item If this doesn't work, make sure your sudo is up to date with 
+\begin{lstlisting}
+sudo apt-get update
+\end{lstlisting}
+
+\item Once you've done this, go to the Raspberry icon in the upper-left corner and select "preferences" from the drop down menu.  Under "preferences" there is an option for "screensaver".
+
+\item Once in screensaver, under the "Mode" dropdown you can select "disable screensaver".
+
+\item Now your screen should stay active even if you aren't actively using it.
+
+\item More information/different methods are available at: \href{https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=57552}{Pi Forum:  Disable Screensaver is Raspbian}
+
+\end{enumerate}
+
 
 \subsubsection{Recovering Commits from Github}
 

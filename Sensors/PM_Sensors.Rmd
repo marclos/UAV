@@ -46,9 +46,15 @@ I did this entire step within the Raspberry Pi terminal interface.
 
 2.  Select option 5 ("Interfacing Options").
 
-3.  A window will pop up asking, "would you like a login shell to be accessible over serial?", and the answer is NO.
+3. Enable ARM I2C by selecting it in this menu and then pressing Yes.
+
+4. Then to enable Serial, choose Serial on the menu. 
+
+5. A window will pop up asking, "would you like a login shell to be accessible over serial?", and the answer is NO.
 
 3.  Next, a window will pop up asking, "Would you like the serial port hardware to be enabled?", this time say YES, and exit the window.
+
+5. Click Finish, you may be prompted to reboot, and select YES. 
 
 ## Code
 
