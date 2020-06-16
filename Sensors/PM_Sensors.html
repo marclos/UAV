@@ -1670,37 +1670,71 @@ summary {
 <ol style="list-style-type: decimal">
 <li><p>Enter “sudo raspi-config”.</p></li>
 <li><p>Select option 5 (“Interfacing Options”).</p></li>
+<li><p>Enable ARM I2C by selecting it in this menu and then pressing Yes.</p></li>
+<li><p>Then to enable Serial, choose Serial on the menu.</p></li>
 <li><p>A window will pop up asking, “would you like a login shell to be accessible over serial?”, and the answer is NO.</p></li>
 <li><p>Next, a window will pop up asking, “Would you like the serial port hardware to be enabled?”, this time say YES, and exit the window.</p></li>
+<li><p>Click Finish, you may be prompted to reboot, and select YES.</p></li>
 </ol>
 </div>
 <div id="code" class="section level2">
 <h2>Code</h2>
 <ol style="list-style-type: decimal">
 <li><p>Open up a text document in nano by typing “nano pms5003.py” into the bar in the terminal (pms5003.py will be our document name).</p></li>
-<li><p>Within the text document, enter the following code:</p></li>
+<li><p>Copy the following code to your computer’s clipboard using Ctrl C:</p></li>
 </ol>
-<p>import serial from collections import OrderedDict class Sensor(): def <strong>init</strong>(self, tty = ‘/dev/ttyS0’): self.tty = tty</p>
-<p>def open(self): self.serial = serial.Serial(self.tty, baudrate = 9600)</p>
-<p>def close(self): self.serial.close()</p>
-<p>def read_bytes(self, data, idx, size = 2): return int(&quot;&quot;.join(data[idx : idx + size]), 16)</p>
-<p>def read(self): data = self.serial.read(32) data = [“{:02X}”.format(d) for d in data]</p>
-<pre><code>if data[0] != &#39;42&#39; or data[1] != &#39;4D&#39;
-  return None
+<pre class="python"><code>import serial
+from collections import OrderedDict
+class Sensor():
+  def __init__(self, tty = &#39;/dev/ttyS0&#39;):
+    self.tty = tty
   
-res = OrderedDict()
-res[&#39;pm1_cf&#39;] = self.read_bytes(data, 4)
-res[&#39;pm25_cf&#39;] = self.read_bytes(data, 6)
-res[&#39;pm10_cf&#39;] = self.read_bytes(data, 8)
-res[&#39;pm1&#39;] = self.read_bytes(data, 10)
-res[&#39;pm25&#39;] = self.read_bytes(data, 12)
-res[&#39;pm10&#39;] = self.read_bytes(data, 14)
-
-res[&#39;temperature&#39;] = self.read_bytes(data, 24) / 10
-res[&#39;humidity&#39;] = self.read_bytes(data, 26) / 10
-return res</code></pre>
-<p>if <strong>name</strong> == ‘<strong>main</strong>’: ’’’ Test code ’’’ sensor = Sensor() sensor.open() data = sensor.read() sensor.close() print(data)</p>
+  def open(self):
+    self.serial = serial.Serial(self.tty, baudrate = 9600)
+  
+  def close(self):
+    self.serial.close()
+    
+  def read_bytes(self, data, idx, size = 2):
+    return int(&quot;&quot;.join(data[idx : idx + size]), 16)
+    
+  def read(self):
+    data = self.serial.read(32)
+    data = [&quot;{:02X}&quot;.format(d) for d in data]
+    
+    if data[0] != &#39;42&#39; or data[1] != &#39;4D&#39;:
+      return None
+      
+    res = OrderedDict()
+    res[&#39;pm1_cf&#39;] = self.read_bytes(data, 4)
+    res[&#39;pm25_cf&#39;] = self.read_bytes(data, 6)
+    res[&#39;pm10_cf&#39;] = self.read_bytes(data, 8)
+    res[&#39;pm1&#39;] = self.read_bytes(data, 10)
+    res[&#39;pm25&#39;] = self.read_bytes(data, 12)
+    res[&#39;pm10&#39;] = self.read_bytes(data, 14)
+    
+    res[&#39;temperature&#39;] = self.read_bytes(data, 24) / 10
+    res[&#39;humidity&#39;] = self.read_bytes(data, 26) / 10
+    return res
+    
+if __name__ == &#39;__main__&#39;:
+  &#39;&#39;&#39;
+  Test code
+  &#39;&#39;&#39;
+  sensor = Sensor()
+  sensor.open()
+  data = sensor.read()
+  sensor.close()
+  print(data)
+  </code></pre>
+<p>A few notes on this Python code:</p>
+<ul>
+<li>Originally was an error in line 85, the colon was left out of the code; added 6/16.</li>
+<li>Double check spacing with line 98… make sure the res line is inside of the def read(self) paragraph.</li>
+<li>Pay very close attention to spacing and indentations! This is very, very important in Python. The code will not run if the indentations are at all off.</li>
+</ul>
 <ol start="3" style="list-style-type: decimal">
+<li><p>Re-enter the nano file you created above, and right click anywhere within the file to bring up a menu; select the “paste” option. This should place the code above into the file without altering the spacing or indentations.</p></li>
 <li><p>Save the text document with ctrl O (it will ask it what you want to name it, you can leave it as pms5003.py), and then exit it with ctrl X.</p></li>
 <li><p>Now within the main shell, type “python3 pms5003.py”. It should release a reading of the different measurements specified.</p></li>
 </ol>
@@ -1711,7 +1745,7 @@ return res</code></pre>
 <li><p>Storing the data somewhere that we can see variability (perhaps Adafruit IO? Info (for a different PM sensor): <a href="https://www.raspberrypi.org/blog/monitor-air-quality-with-a-raspberry-pi/" class="uri">https://www.raspberrypi.org/blog/monitor-air-quality-with-a-raspberry-pi/</a> )</p></li>
 <li><p>Getting the Pi to automatically read data when it is on, rather than with a code (might also be information in the above resource)</p></li>
 <li><p>Checking for accuracy (why divide the temperature/humidity by ten?)</p></li>
-<li><p>Spacing on code is weird… how to fix? Maybe within Latex?</p></li>
+<li><p>Getting it to read onto a Box CSE file ?</p></li>
 </ul>
 </div>
 </div>

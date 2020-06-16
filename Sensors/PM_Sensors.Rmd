@@ -3,9 +3,9 @@ title: "PM Sensors"
 author: "Anna Madison Burns"
 date: "6/10/2020"
 output:
-  pdf_document: default
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -60,7 +60,7 @@ I did this entire step within the Raspberry Pi terminal interface.
 
 1.  Open up a text document in nano by typing "nano pms5003.py" into the bar in the terminal (pms5003.py will be our document name).
 
-2.  Within the text document, enter the following code:
+2.  Copy the following code to your computer's clipboard using Ctrl C:
 
 ```{python, eval=FALSE, python.reticulate=FALSE}
 import serial
@@ -82,7 +82,7 @@ class Sensor():
     data = self.serial.read(32)
     data = ["{:02X}".format(d) for d in data]
     
-    if data[0] != '42' or data[1] != '4D' # Maybe lowercase d? No, the  code won't run with a lowercase d (AB)
+    if data[0] != '42' or data[1] != '4D':
       return None
       
     res = OrderedDict()
@@ -95,7 +95,7 @@ class Sensor():
     
     res['temperature'] = self.read_bytes(data, 24) / 10
     res['humidity'] = self.read_bytes(data, 26) / 10
-    return res # Indentation issues? Make sure the return res line is inside of the def read(self) line (this was AB's issue the first time around, but it should run with res located here) (AB)
+    return res
     
 if __name__ == '__main__':
   '''
@@ -111,11 +111,15 @@ if __name__ == '__main__':
 
 A few notes on this Python code:
 
+- Originally was an error in line 85, the colon was left out of the code; added 6/16.
+- Double check spacing with line 98... make sure the res line is inside of the def read(self) paragraph.
 - Pay very close attention to spacing and indentations! This is very, very important in Python.  The code will not run if the indentations are at all off.
 
-3.  Save the text document with ctrl O (it will ask it what you want to name it, you can leave it as pms5003.py), and then exit it with ctrl X.
+3.  Re-enter the nano file you created above, and right click anywhere within the file to bring up a menu; select the "paste" option.  This should place the code above into the file without altering the spacing or indentations.
 
-4.  Now within the main shell, type "python3 pms5003.py".  It should release a reading of the different measurements specified.
+4.  Save the text document with ctrl O (it will ask it what you want to name it, you can leave it as pms5003.py), and then exit it with ctrl X.
+
+5.  Now within the main shell, type "python3 pms5003.py".  It should release a reading of the different measurements specified.
 
 ## Still to come
 
@@ -124,8 +128,6 @@ A few notes on this Python code:
 - Getting the Pi to automatically read data when it is on, rather than with a code (might also be information in the above resource)
 
 - Checking for accuracy (why divide the temperature/humidity by ten?)
-
-- Spacing on code is weird... how to fix? Maybe within Latex?
 
 - Getting it to read onto a Box CSE file ?
 
