@@ -36,6 +36,7 @@
 \author{Anna Burns \& Marc Los Huertos}
 \title{Introduction to Raspberry Pi in Environmental Science}
 
+
 \begin{document}
 \maketitle
 
@@ -96,9 +97,11 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 
 \end{enumerate}
 
-\subsubsection{Option 1: Communicating with the Pi Using a Monitor, Keyboard, and Mouse}
+\section{Communicating with Raspberry Pi}
 
-If you have a spare monitor, keyboard, and mouse, follow the following steps to set up the Raspberry Pi. If you don't have these, then you'll need a ethernet cable and follow the steps in Option 2: Communicating with the Pi using SSH. 
+\subsection{Option 1: Direct Access with the Pi Using a Monitor, Keyboard, and Mouse}
+
+If you have a spare monitor, keyboard, and mouse, follow the following steps to set up the Raspberry Pi. If you don't have these, then you'll need a ethernet cable and follow the steps in Option 4: Remote Access to Pi using SSH. 
 
 \begin{enumerate}
 
@@ -129,13 +132,7 @@ Note: To restart the Pi, simply plug it in, unless you have a switch.
 
 \end{enumerate}
 
-
-
-
-
-
-
-\subsection{Remote Access}
+\subsection{Option 2: Remote Access with Pi}
 
 It doesn't take too long (10 minutes once you get the hang of it) to be able to work remotely on your microprocessor via a tablet or laptop.  More information at %\href{Remote Access with Raspberry Pi Tutorial}{https://pythonprogramming.net/remote-access-raspberry-pi-tutorials/]} 
 
@@ -148,7 +145,7 @@ It doesn't take too long (10 minutes once you get the hang of it) to be able to 
 
 \end{enumerate}
 
-\subsubsection{Option 1: Access to the Raspberry Pi GUI}
+\subsection{Option 3: Remote Access to the Raspberry Pi GUI}
 
 \begin{enumerate}
 
@@ -164,13 +161,24 @@ It doesn't take too long (10 minutes once you get the hang of it) to be able to 
 
 \end{enumerate}
 
-\subsubsection{Access to Raspberry Pi via SSH}
+\subsection{Option 4: Remote Access to Raspberry Pi via SSH}
 
-Note that for this option, the display is raw code - not exactly a visually-friendly experience, but potentially easier to navigate.
+This is a great option when you don't have an extra keyboard, mouse, and monitor lying around. However, to communicate you type linux commands into a terminal would is not a visually-friendly experience, but potentially easier to navigate.
 
 \begin{enumerate}
 
-\item For Windows: (if you have Mac OS or Linux, skip this step!) First, make sure you have OpenSSH Client installed.  Go to settings, Apps, Apps and Features, Optional Features, Add a Feature, and then add the client.
+\item For Windows Only: (if you have Mac OS or Linux, skip this step!) Make sure you have OpenSSH Client installed. 
+
+\begin{enumerate}
+\item Open Windows Settings. If you are using Windows 10, click the Windows menu, and select the gear icon for Settings. 
+\item Go to settings, Apps, Apps and Features, Optional Features.
+\item Click on Add a Feature.
+\item Scroll down and add Open SSH Server.
+\item Close the Settings Windows.
+\end{enumerate}
+
+\item Ethernet IP Address: 192.168.137.1 
+
 \item Open your Powershell (which acts sort of like an app, you can access it in the search bar) as an administrator, and then type "Ssh [username]@[identifier] (the IP address that you found above).  
 \item Once you press enter, it will ask if you trust it (say yes, you will only need to do this once). 
 \item Next it will ask you for your password.  Note: As you type, no characters will appear on the terminal (for privacy).  This is ok, once you have typed your password just press enter.

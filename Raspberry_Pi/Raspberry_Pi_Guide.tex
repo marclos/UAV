@@ -129,14 +129,31 @@ The Raspberry was created to help non-technical youth to learn computer and robo
 
 The \href{https://www.raspberrypi.org/}{RaspberryPi.org} has tutorials, software updates, and example projects.
 
+\subsubsection{Video Tutorials}
+
+One good way to start is to watch the following video series that introduced the Raspberry Pi. 
+
+%\href{https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r}{Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses}
+
 \subsubsection{Unpacking the Raspberry Pi}
 
-When you recieve your Pi, plan on spending about 1-2 hours setting it up which include the following steps:
+When you recieve your Pi, plan on spending about 1-2 hours setting it up which include unpacking and putting the Pi together: 
 
 \begin{enumerate}
 
 \item Unpack Kit Contents
 \item Put Pi in case and add heat sinks
+
+\end{enumerate}
+
+\section{Communicating with Raspberry Pi}
+
+\subsection{Option 1: Direct Access with the Pi Using a Monitor, Keyboard, and Mouse}
+
+If you have a spare monitor, keyboard, and mouse, follow the following steps to set up the Raspberry Pi. If you don't have these, then you'll need a ethernet cable and follow the steps in Option 4: Remote Access to Pi using SSH. 
+
+\begin{enumerate}
+
 \item Connect to keyboard, mouse and monitor. Make sure the HDMI plug is in the correct mini-HDMI socket and the monitor is configured to get a signal from the port being used. 
 \item Insert pre-loaded SD card
 \item Plug-in Pi, you'll see a rainbow screen for a minute and then a installation menu. 
@@ -156,23 +173,83 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 $ sudo shutdown -h now
 \end{lstlisting}
 
+\item You have successfully communicated with the Pi!  
+
 \item Unplug the Pi.
 
 Note: To restart the Pi, simply plug it in, unless you have a switch. 
 
 \end{enumerate}
 
+\subsection{Option 2: Remote Access with Pi}
 
+It doesn't take too long (10 minutes once you get the hang of it) to be able to work remotely on your microprocessor via a tablet or laptop.  More information at %\href{Remote Access with Raspberry Pi Tutorial}{https://pythonprogramming.net/remote-access-raspberry-pi-tutorials/]} 
 
-\subsubsection{Video Tutorials}
+\begin{enumerate}
 
-One good way to start is to watch the following video series that introduced the Raspberry Pi. 
+\item Begin by making sure all of your packages are up-to-date (even if you updated while setting up your OS, you will still need to do this).  Do this with the code "\$sudo apt-get update" and then "\$sudo apt-get upgrade".  This will take several minutes.
+\item Enable the SSH server by typing "\$if config" into the console.  This will lead you to a screen with several options; select option five, "interfacing options," and then select option two for "SSH."  Enable the server, and then exit this screen.
+\item Note that Raspberry Pi updated in November 2016 so that SSH is disabled automatically.  You will need to turn it on in order to progress.
+\item Type "\$ifconfig" into your console to find your Raspberry Pi's inet address under the "wlan" subcategory.  This should be a string of numbers that looks something like "192.168.XXX.X.XXX."  You will need this to access your Raspberry Pi remotely.
 
-%\href{https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r}{Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses}
+\end{enumerate}
+
+\subsection{Option 3: Remote Access to the Raspberry Pi GUI}
+
+\begin{enumerate}
+
+\item Install the package necessary to remotely access your screen: "\$sudo apt-get install xrdp".
+\item Connecting to Mac or Linux OS: open the terminal and add "ssh pi(at) (inet)".
+\item Connecting to Windows OS: this is a bit more involved; you will need to download an SSH client.  
+\item The Microsoft "Remote Desktop Connection" app is available for free, and is pretty intuitive to use.  Download this, and follow the instructions to set it up.  
+\item Once it is installed, all you will need to do is enter the inet address you found above into the text box
+\item A page will open for you to add your username and password (which at this point should still be "pi" and "raspberry").  Then your console will open.
+\item If it won't connect: make sure your microprocessor and the computer you are attempting to accesss it from are on the same wifi;
+\item make sure your microprocessor is connected and hasn't gone to sleep; 
+\item make sure you've properly enabled all of the packages (I had to try to run xrdp twice to get it to work the first time).  
+
+\end{enumerate}
+
+\subsection{Option 4: Remote Access to Raspberry Pi via SSH}
+
+This is a great option when you don't have an extra keyboard, mouse, and monitor lying around. However, to communicate you type linux commands into a terminal would is not a visually-friendly experience, but potentially easier to navigate.
+
+\begin{enumerate}
+
+\item For Windows Only: (if you have Mac OS or Linux, skip this step!) Make sure you have OpenSSH Client installed. 
+
+\begin{enumerate}
+\item Open Windows Settings. If you are using Windows 10, click the Windows menu, and select the gear icon for Settings. 
+\item Go to settings, Apps, Apps and Features, Optional Features.
+\item Click on Add a Feature.
+\item Scroll down and add Open SSH Server.
+\item Close the Settings Windows.
+\end{enumerate}
+
+\item Ethernet IP Address: 192.168.137.1 
+
+\item Open your Powershell (which acts sort of like an app, you can access it in the search bar) as an administrator, and then type "Ssh [username]@[identifier] (the IP address that you found above).  
+\item Once you press enter, it will ask if you trust it (say yes, you will only need to do this once). 
+\item Next it will ask you for your password.  Note: As you type, no characters will appear on the terminal (for privacy).  This is ok, once you have typed your password just press enter.
+\item The terminal should now look like the Raspberry Pi terminal that you get via HDMI, with "pi@raspberry pi: \$" as the beginning of your lines.  Hooray!
+\item For further guidance, see the troubleshooting section.
+
+\end{enumerate}
+
+\subsection{Troubleshooting}
+
+\subsubsection{Remote Access}
+
+\begin {enumerate}
+\item Your microprocessor needs to be connected to a powersource in order to remotely access it.
+\item Both the GUI and main terminal options can be rather glitchy; if the program quits, wait a moment and then log back in.  It may not work on the first try, but do it again and it should connect.
+\item Make sure that your computer is connected to Wifi, and that it is connected to the same Wifi network your microprocessor is on.
+
+\end{enumerate}
 
 \subsubsection{Screensaver}
 
-The screen goes blacn after 10 minutes of inaction. This is a bit annoying since we are often doing things that take some time to sort out, i.e. more than 10 minutes. 
+The screen goes black after 10 minutes of inaction. This is a bit annoying since we are often doing things that take some time to sort out, i.e. more than 10 minutes. 
 
 To turn this off you can a terminal window that allows you to type commands following the \$ prompt. 
 
@@ -201,60 +278,6 @@ sudo apt-get update
 
 \end{enumerate}
 
-\subsection{Remote Access}
-
-It doesn't take too long (10 minutes once you get the hang of it) to be able to work remotely on your microprocessor via a tablet or laptop.  More information at %\href{Remote Access with Raspberry Pi Tutorial}{https://pythonprogramming.net/remote-access-raspberry-pi-tutorials/]} 
-
-\begin{enumerate}
-
-\item Begin by making sure all of your packages are up-to-date (even if you updated while setting up your OS, you will still need to do this).  Do this with the code "\$sudo apt-get update" and then "\$sudo apt-get upgrade".  This will take several minutes.
-\item Enable the SSH server by typing "\$if config" into the console.  This will lead you to a screen with several options; select option five, "interfacing options," and then select option two for "SSH."  Enable the server, and then exit this screen.
-\item Note that Raspberry Pi updated in November 2016 so that SSH is disabled automatically.  You will need to turn it on in order to progress.
-\item Type "\$ifconfig" into your console to find your Raspberry Pi's inet address under the "wlan" subcategory.  This should be a string of numbers that looks something like "192.168.XXX.X.XXX."  You will need this to access your Raspberry Pi remotely.
-
-\end{enumerate}
-
-\subsubsection{Option 1: Access to the Raspberry Pi GUI}
-
-\begin{enumerate}
-
-\item Install the package necessary to remotely access your screen: "\$sudo apt-get install xrdp".
-\item Connecting to Mac or Linux OS: open the terminal and add "ssh pi(at) (inet)".
-\item Connecting to Windows OS: this is a bit more involved; you will need to download an SSH client.  
-\item The Microsoft "Remote Desktop Connection" app is available for free, and is pretty intuitive to use.  Download this, and follow the instructions to set it up.  
-\item Once it is installed, all you will need to do is enter the inet address you found above into the text box
-\item A page will open for you to add your username and password (which at this point should still be "pi" and "raspberry").  Then your console will open.
-\item If it won't connect: make sure your microprocessor and the computer you are attempting to accesss it from are on the same wifi;
-\item make sure your microprocessor is connected and hasn't gone to sleep; 
-\item make sure you've properly enabled all of the packages (I had to try to run xrdp twice to get it to work the first time).  
-
-\end{enumerate}
-
-\subsubsection{Access to Raspberry Pi via SSH}
-
-Note that for this option, the display is raw code - not exactly a visually-friendly experience, but potentially easier to navigate.
-
-\begin{enumerate}
-
-\item For Windows: (if you have Mac OS or Linux, skip this step!) First, make sure you have OpenSSH Client installed.  Go to settings, Apps, Apps and Features, Optional Features, Add a Feature, and then add the client.
-\item Open your Powershell (which acts sort of like an app, you can access it in the search bar) as an administrator, and then type "Ssh [username]@[identifier] (the IP address that you found above).  
-\item Once you press enter, it will ask if you trust it (say yes, you will only need to do this once). 
-\item Next it will ask you for your password.  Note: As you type, no characters will appear on the terminal (for privacy).  This is ok, once you have typed your password just press enter.
-\item The terminal should now look like the Raspberry Pi terminal that you get via HDMI, with "pi@raspberry pi: \$" as the beginning of your lines.  Hooray!
-\item For further guidance, see the troubleshooting section.
-
-\end{enumerate}
-
-\subsection{Troubleshooting}
-
-\subsubsection{Remote Access}
-
-\begin {enumerate}
-\item Your microprocessor needs to be connected to a powersource in order to remotely access it.
-\item Both the GUI and main terminal options can be rather glitchy; if the program quits, wait a moment and then log back in.  It may not work on the first try, but do it again and it should connect.
-\item Make sure that your computer is connected to Wifi, and that it is connected to the same Wifi network your microprocessor is on.
-
-\end{enumerate}
 
 \subsubsection{Recovering Commits from Github}
 
