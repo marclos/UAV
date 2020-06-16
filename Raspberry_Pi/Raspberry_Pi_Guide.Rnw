@@ -106,14 +106,6 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 $ sudo shutdown -h now
 \end{lstlisting}
 
-LA County = 
-
-375411+ 207795+185363+ 177546+ 84642
-
-; SB = 
-
-; Riverside = ; Orange = ; Ventura = 84,642 ; Total = 
-
 \item Unplug the Pi.
 
 Note: To restart the Pi, simply plug it in, unless you have a switch. 
