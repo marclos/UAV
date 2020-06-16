@@ -145,7 +145,11 @@ It doesn't take too long (10 minutes once you get the hang of it) to be able to 
 
 \end{enumerate}
 
+Before you proceed, look at the descriptions for options 2A and 2B below to see which is the right choice for your remote access needs.
+
 \subsubsection{Option 2A: Remote Access to the Raspberry Pi GUI}
+
+If you don't have much computer programming experience, this option may be better for you.  It allows you to access the actual Pi terminal (like the one you see when you connect an HTML cable) on another computer.  It is a more visually-friendly option, and allows you to directly access different apps through the Pi itself.
 
 \begin{enumerate}
 
@@ -163,7 +167,7 @@ It doesn't take too long (10 minutes once you get the hang of it) to be able to 
 
 \subsubsection{Option 2B: Remote Access to Raspberry Pi via SSH}
 
-This is a great option when you don't have an extra keyboard, mouse, and monitor lying around. However, to communicate you type linux commands into a terminal would is not a visually-friendly experience, but potentially easier to navigate.
+This option allows you to access your Pi microprocessor through an external shell, "piggybacking" the Pi onto an already existing computer.  It allows you to operate in raw code through an external frame, but does not have the visual aspects that the GUI does.  If you are more comfortable with programming, or feel familiar enough with navigating the Pi, this is the right option for you.
 
 \begin{enumerate}
 
