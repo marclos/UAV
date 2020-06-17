@@ -1,0 +1,16 @@
+---
+title: "Expansion boards"
+author: "Marc Los Huertos"
+date: "6/17/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+ <https://www.amazon.com/WHDTS-MCP23017-Interface-Expansion-Compatible/dp/B07GRQWQF9/ref=sr_1_20?dchild=1&keywords=sensor+channel+raspberry+pi&qid=1592404358&sr=8-20>.
+
+
