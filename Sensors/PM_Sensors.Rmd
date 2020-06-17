@@ -26,7 +26,7 @@ The guide below was compiled from an instructional Youtube video published on 11
 
 2.  Next, connect the adapter to the Raspberry Pi.  Separate four of the female-to-female connectors (the ones with the black rectangles on either end) and attach one of the ends to the TXD, RXD, GND and VCO terminals on the adapter (these correspond to the 4th, 5th, 7th, and 8th terminals from the top).  
 
-  2a.  Connect the wire attached to the VOC terminal to node 2 on the Raspberry Pi.
+  2a.  Connect the wire attached to the VCC terminal to node 2 on the Raspberry Pi.
 
   2b.  Connect the wire attached to the GND terminal to node 14 on the Raspberry Pi.
 
@@ -132,5 +132,172 @@ A few notes on this Python code:
 - Getting it to read onto a Box CSE file ?
 
 - "The Raspberry Pi does not have a Real-Time Clock: on bootstrap it gets the time via NTP protocol over the internet. If an NTP server is not available, it will default to the time of last shutdown. Neverthless the station is supposed to work and store data even when there is not internet connection, so it is required a Real-Time Clock module." -> do we need one of these?
+
+
+Potential places to store data:
+- Luftdaten: a German open-source citizen science data repository for air quality
+
+https://learn.pimoroni.com/tutorial/sandyj/enviro-plus-and-luftdaten-air-quality-station (this tutorial uses a different input w/ enviroplus, so the code is not the same as what we have)
+
+- Into a CSV file: https://stackoverflow.com/questions/57314552/saving-sensor-data-from-pi-into-csv-file (not sure how to tailor this to our project)
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+# initial set up of imports
+
+import time
+import datetime
+
+# gpiozero for CPU
+from gpiozero import CPUTemperature
+
+# imports the modules for the sensor
+from bmp280 import BMP280
+try:
+    from smbus2 import SMBus
+except ImportError:
+    from smbus import SMBus
+    
+# lux sensor
+import ltr559
+
+# csv to be able to open file
+import csv
+
+# sets up the variables for the sensor
+bus=SMBus(1)
+bmp280 = BMP280(i2c_dev=bus)
+
+# functions to use
+
+def cpu_temperature():
+    cpu = CPUTemperature()
+    cpu_temp = cpu.temperature
+    cpu_temp = str(cpu_temp)
+    return(cpu_temp)
+
+def get_temp():
+    temperature = bmp280.get_temperature()
+    temperature = round((temperature),2)
+    temperature = temperature -2
+    temperature = str(temperature)
+    return(temperature)
+
+def get_pressure():
+    pressure = bmp280.get_pressure()
+    pressure = round(pressure)
+    pressure = str(pressure)
+    return(pressure)
+
+def get_lux():
+    lux = ltr559.get_lux()
+    for x in range(1,5):
+        x_lux = lux
+        time.sleep(0.5)
+    lux_rounded = round(x_lux,2)
+    lux_str = str(lux_rounded)
+    return(lux_str)
+
+def date_now():
+    today = datetime.datetime.now().strftime("%Y-%m-%d")
+    today = str(today)
+    return(today)
+
+def time_now():
+    now = datetime.datetime.now().strftime("%H:%M:%S")
+    now = str(now)
+    return(now)
+
+def write_to_csv():
+    # the a is for append, if w for write is used then it overwrites the file
+    with open('/home/pi/twitter_sensor/sensor_readings.csv', mode='a') as sensor_readings:
+        sensor_write = csv.writer(sensor_readings, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        write_to_log = sensor_write.writerow([date_now(),time_now(),get_temp(),get_pressure(),get_lux(),cpu_temperature()])
+        return(write_to_log)
+
+write_to_csv()
+```
+
+
+- Prometheus -> pulls the data, doesn't automatically get sent it form the device, works well w/ Grafata https://www.markhansen.co.nz/raspberry-pi-air-quality-sensor/ 
+
+- InfluxDB
+
+- PostgreSQL
+
+
+
+New:
+- Connect RST to pin 11
+
+Code:
+Couldn't get this to work after ~1.5 hours of messing around with it, moving on to try to work with the code we already have
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+import serial
+import datetime
+from pymongo import MongoClient
+
+port = serial.Serial('/dev/ttyAMA0', baudrate=9600, timeout=2.0)
+client = MongoClient('localhost')
+
+
+def read_pm_line(_port):
+    rv = b''
+    while True:
+        ch1 = _port.read()
+        if ch1 == b'\x42':
+            ch2 = _port.read()
+            if ch2 == b'\x4d':
+                rv += ch1 + ch2
+                rv += _port.read(28)
+                return rv
+
+
+loop = 0
+while True:
+    try:
+        rcv_list = []
+        rcv = read_pm_line(port)
+        res = {'timestamp': datetime.datetime.now(),
+               'apm10': rcv[4] * 256 + rcv[5],
+               'apm25': rcv[6] * 256 + rcv[7],
+               'apm100': rcv[8] * 256 + rcv[9],
+               'pm10': rcv[10] * 256 + rcv[11],
+               'pm25': rcv[12] * 256 + rcv[13],
+               'pm100': rcv[14] * 256 + rcv[15],
+               'gt03um': rcv[16] * 256 + rcv[17],
+               'gt05um': rcv[18] * 256 + rcv[19],
+               'gt10um': rcv[20] * 256 + rcv[21],
+               'gt25um': rcv[22] * 256 + rcv[23],
+               'gt50um': rcv[24] * 256 + rcv[25],
+               'gt100um': rcv[26] * 256 + rcv[27]
+               }
+        # print('===============\n'
+        #       'PM1.0(CF=1): {}\n'
+        #       'PM2.5(CF=1): {}\n'
+        #       'PM10 (CF=1): {}\n'
+        #       'PM1.0 (STD): {}\n'
+        #       'PM2.5 (STD): {}\n'
+        #       'PM10  (STD): {}\n'
+        #       '>0.3um     : {}\n'
+        #       '>0.5um     : {}\n'
+        #       '>1.0um     : {}\n'
+        #       '>2.5um     : {}\n'
+        #       '>5.0um     : {}\n'
+        #       '>10um      : {}'.format(res['apm10'], res['apm25'], res['apm100'],
+        #                                res['pm10'], res['apm25'], res['pm100'],
+        #                                res['gt03um'], res['gt05um'], res['gt10um'],
+        #                                res['gt25um'], res['gt50um'], res['gt100um']))
+        rcv_list.append(res.copy())
+        loop += 1
+        if loop == 10:
+            client.air.pm.insert_many(rcv_list)
+            print('Logged to database.')
+            rcv_list.clear()
+            loop = 0
+    except KeyboardInterrupt:
+        break
+```
+
 
 
