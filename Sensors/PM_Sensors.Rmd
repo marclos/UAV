@@ -131,4 +131,6 @@ A few notes on this Python code:
 
 - Getting it to read onto a Box CSE file ?
 
+- "The Raspberry Pi does not have a Real-Time Clock: on bootstrap it gets the time via NTP protocol over the internet. If an NTP server is not available, it will default to the time of last shutdown. Neverthless the station is supposed to work and store data even when there is not internet connection, so it is required a Real-Time Clock module." -> do we need one of these?
+
 
