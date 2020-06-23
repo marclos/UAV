@@ -1,0 +1,298 @@
+\documentclass{article}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=bash,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\author{Anna Burns \& Marc Los Huertos}
+\title{Introduction to Raspberry Pi in Environmental Science}
+
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+\subsection{What is Rasberry Pi?}
+
+The Raspberry Pi is an tiny computer, that includes a tiny processor, a bit of memory, a slot for an SD card, and some input/output jacks, e.g. HDMI, USB, headphone, camera, and pin header for various sensors.
+
+\subsection{Why use Raspberry Pi?}
+
+The Pi has a lot of functionality and flexibility for develop monitoring of environmental parameters. 
+
+\subsection{Uses in Environmental Science}
+
+\subsubsection{Weather and Climate Change}
+
+\subsubsection{Air Pollution Monitoring}
+
+\subsubsection{Soil Water Monitoring and Irrigation Control}
+
+The automatation of irrigation is ubiquitous, however, in many cases systems don't have feedbacks that control the system. The first step relies on sensors to monitor soil moisture and temperature and then use plant growth models to control an irrigation system. 
+
+Here are some resources that describe how these can be done:
+
+\begin{itemize}
+\item \href{https://fyi.extension.wisc.edu/cropirrigation/files/2015/03/Methods.to_.Monitor.Soil_.Moisture.pdf}{Soil Moisture Sensors and Loggers}
+\end{itemize}
+
+\subsubsection{Conservation} 
+
+Conservation biologists use a wide range of instruments to track and monitor wildlife (camera traps, active (radio) and passive (RIF) transmitters). In addition the use of cameras are used to evaluate plant health and diversity (spectral analysis). 
+
+
+
+\subsection{Resources}
+
+\subsection{Raspberry Pi}
+
+The Raspberry was created to help non-technical youth to learn computer and robotics. The Raspberry Pi was an unexpected success and now the Pi is one of the most important minaturized computers for a wide range of projects.  
+
+The \href{https://www.raspberrypi.org/}{RaspberryPi.org} has tutorials, software updates, and example projects.
+
+\subsubsection{Video Tutorials}
+
+One good way to start is to watch the following video series that introduced the Raspberry Pi. 
+
+%\href{https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r}{Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses}
+
+\subsubsection{Unpacking the Raspberry Pi}
+
+When you recieve your Pi, plan on spending about 1-2 hours setting it up which include unpacking and putting the Pi together: 
+
+\begin{enumerate}
+
+\item Unpack Kit Contents
+\item Put Pi in case and add heat sinks
+
+\end{enumerate}
+
+\section{Communicating with Raspberry Pi}
+
+\subsection{Option 1: Direct Access with the Pi Using a Monitor, Keyboard, and Mouse}
+
+If you have a spare monitor, keyboard, and mouse, follow the following steps to set up the Raspberry Pi. If you don't have these, then you'll need a ethernet cable and follow the steps in Option 4: Remote Access to Pi using SSH. 
+
+\begin{enumerate}
+
+\item Connect to keyboard, mouse and monitor. Make sure the HDMI plug is in the correct mini-HDMI socket and the monitor is configured to get a signal from the port being used. 
+\item Insert pre-loaded SD card
+\item Plug-in Pi, you'll see a rainbow screen for a minute and then a installation menu. 
+\item Install the Rasbian operating system only. This will take 10 minutes. Read the little windows so you know some of the resources associated with the operating system. The installations stalls at the end, where it says 100\%. Be patient, it will finish on it's own and reboot.
+
+\item Once the Rasbian OS starts, you'll see four raspberries at the top and then you'd get some prompts to set up the OS. 
+
+\item I suggest you keep the password as default for now, select the langauge, keyboard type, and time zone. 
+
+\item Next you'll need to get connected to the internet. Select your modem and enter password to connect.
+
+\item Then you'll get a prompt to check for updates. Yes, there will be updates. This will take another 20 minutes. About 1/2 way the screen goes completely blank. This is because, by default, the Pi goes into screen saver mode without mouse or keyboard inputs. Move the mouse or type something and the screen should wake up. 
+
+\item Be sure to shut down your Raspberry Pi before unplugging it; you can use the keyboard and "Cntl-Alt-Delete" sequence to get a pop-up window to shut the Pi down or open the terminal window and type:
+
+\begin{lstlisting}
+$ sudo shutdown -h now
+\end{lstlisting}
+
+\item You have successfully communicated with the Pi!  
+
+\item Unplug the Pi.
+
+Note: To restart the Pi, simply plug it in, unless you have a switch. 
+
+\end{enumerate}
+
+\subsection{Option 2: Remote Access with Pi}
+
+It doesn't take too long (10 minutes once you get the hang of it) to be able to work remotely on your microprocessor via a tablet or laptop.  More information by reading \href{Remote Access with Raspberry Pi Tutorial}{https://pythonprogramming.net/remote-access-raspberry-pi-tutorials/]} 
+
+\begin{enumerate}
+
+\item Begin by making sure all of your packages are up-to-date (even if you updated while setting up your OS, you will still need to do this).  Do this with the code "\$sudo apt-get update" and then "\$sudo apt-get upgrade".  This will take several minutes.
+\item Enable the SSH server by typing "\$if config" into the console.  This will lead you to a screen with several options; select option five, "interfacing options," and then select option two for "SSH."  Enable the server, and then exit this screen.
+\item Note that Raspberry Pi updated in November 2016 so that SSH is disabled automatically.  You will need to turn it on in order to progress.
+\item Type "\$ifconfig" into your console to find your Raspberry Pi's inet address under the "wlan" subcategory.  This should be a string of numbers that looks something like "192.168.XXX.X.XXX."  You will need this to access your Raspberry Pi remotely.
+
+\end{enumerate}
+
+Before you proceed, look at the descriptions for options 2A and 2B below to see which is the right choice for your remote access needs.
+
+\subsubsection{Option 2A: Remote Access to the Raspberry Pi GUI}
+
+If you don't have much computer programming experience, this option may be better for you.  It allows you to access the actual Pi terminal (like the one you see when you connect an HTML cable) on another computer.  It is a more visually-friendly option, and allows you to directly access different apps through the Pi itself.
+
+\begin{enumerate}
+
+\item Install the package necessary to remotely access your screen: "\$sudo apt-get install xrdp".
+\item Connecting to Mac or Linux OS: open the terminal and add "ssh pi(at) (inet)".
+\item Connecting to Windows OS: this is a bit more involved; you will need to download an SSH client.  
+\item The Microsoft "Remote Desktop Connection" app is available for free, and is pretty intuitive to use.  Download this, and follow the instructions to set it up.  
+\item Once it is installed, all you will need to do is enter the address you found above into the text box (it should look something like 192.168.XXX.X.XXX).
+\item A page will open for you to add your username and password (which at this point should still be "pi" and "raspberry").  Then your console will open.
+\item If it won't connect: make sure your microprocessor and the computer you are attempting to accesss it from are on the same wifi;
+\item make sure your microprocessor is connected and hasn't gone to sleep; 
+\item make sure you've properly enabled all of the packages (I had to try to run xrdp twice to get it to work the first time).  
+
+\end{enumerate}
+
+\subsubsection{Option 2B: Remote Access to Raspberry Pi via SSH}
+
+This option allows you to access your Pi microprocessor through an external shell, "piggybacking" the Pi onto an already existing computer.  It allows you to operate in raw code through an external frame, but does not have the visual aspects that the GUI does.  If you are more comfortable with programming, or feel familiar enough with navigating the Pi, this is the right option for you.
+
+\begin{enumerate}
+
+\item For Windows Only: (if you have Mac OS or Linux, skip this step!) Make sure you have OpenSSH Client installed. 
+
+\begin{enumerate}
+\item Open Windows Settings. If you are using Windows 10, click the Windows menu, and select the gear icon for Settings. 
+\item Go to settings, Apps, Apps and Features, Optional Features.
+\item Click on Add a Feature.
+\item Scroll down and add Open SSH Server.
+\item Close the Settings Windows.
+\end{enumerate}
+
+\item Ethernet IP Address: 192.168.137.1 
+
+\item For Windows: (if you have Mac OS or Linux, skip this step!) First, make sure you have OpenSSH Client installed.  Go to settings, Apps, Apps and Features, Optional Features, Add a Feature, and then add the client.
+\item Open your Powershell (which acts sort of like an app, you can access it in the search bar) as an administrator, and then type "Ssh [username]@[identifier]" (the address that you found above, it should look something like 192.168.X.XXX). Username will be "pi" unless you have changed it during setup.
+\item Open your Powershell (which acts sort of like an app, you can access it in the search bar) as an administrator, and then type "Ssh [username]@[identifier] (the IP address that you found above).  
+\item Once you press enter, it will ask if you trust it (say yes, you will only need to do this once). 
+\item Next it will ask you for your password.  Note: As you type, no characters will appear on the terminal (for privacy).  This is ok, once you have typed your password just press enter.  If you didn't change your password during setup, it will be "raspberry".
+\item The terminal should now look like the Raspberry Pi terminal that you get via HDMI, with "pi@raspberry pi: \$" as the beginning of your lines.  Hooray!
+\item For further guidance, see the troubleshooting section.
+
+\end{enumerate}
+
+\subsection{Troubleshooting}
+
+\subsubsection{Remote Access}
+
+\begin {enumerate}
+\item Your microprocessor needs to be connected to a powersource in order to remotely access it.
+\item Both the GUI and main terminal options can be rather glitchy; if the program quits, wait a moment and then log back in.  It may not work on the first try, but do it again and it should connect.
+\item Make sure that your computer is connected to Wifi, and that it is connected to the same Wifi network your microprocessor is on.
+
+\end{enumerate}
+
+\subsubsection{Screensaver}
+
+The screen goes black after 10 minutes of inaction. This is a bit annoying since we are often doing things that take some time to sort out, i.e. more than 10 minutes. 
+
+To turn this off you can a terminal window that allows you to type commands following the \$ prompt. 
+
+Type the following command to turn off the screen saver using the following steps: 
+
+\begin{enumerate}
+
+\item Type: 
+
+\begin{lstlisting}
+sudo apt-get install xscreensaver
+\end{lstlisting}
+
+\item If this doesn't work, make sure your sudo is up to date with 
+\begin{lstlisting}
+sudo apt-get update
+\end{lstlisting}
+
+\item Once you've done this, go to the Raspberry icon in the upper-left corner and select "preferences" from the drop down menu.  Under "preferences" there is an option for "screensaver".
+
+\item Once in screensaver, under the "Mode" dropdown you can select "disable screensaver".
+
+\item Now your screen should stay active even if you aren't actively using it.
+
+\item More information/different methods are available at: \href{https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=57552}{Pi Forum:  Disable Screensaver is Raspbian}
+
+\end{enumerate}
+
+
+\subsubsection{Recovering Commits from Github}
+
+If there is a conflict between commits and some information that was previously added to a file on R is lost, follow these steps to recover the information within previous commits.
+
+\begin{enumerate}
+
+\item Go to the project's Github page over the internet and open the page for the document you wish to recover code from.
+\item On the bar before the file itself begins, select "history" on the right side of the screen.
+\item Within the history tab, there should be a list of previous commits; select a commit that will have the code you are hoping to recover within it (i.e. if you were working on the code the previous Friday, select a commit from that day).
+\item On the appropriate commit, select the "<>" option on the right of the screen to open up a historic version of the repository from that day.  Note that this will direct you to the full repository from the time of the commit you select, and not just the document you are hoping to recover.
+\item Go back to the document you need to recover code from, and open it.  It will have the historic code that was there at the time of the commit you selected; if you chose correctly, it should have the code you were looking to recover.
+\item Copy the deleted lines of code out of the historic file, and into the document on R.  
+\item Save the R document, commit, and push the information.  
+\item The Github will remain on the historic commit until you leave the project; exit the entire project (for example, by going to the home screen on Github) and then re-enter the project to enter the up-to-date portal.
+
+\end{enumerate}
+
+\subsection{Projects General-purpose input-output Examples}
+
+\subsubsection{Weather and Climate}
+
+%\href{Thermocouples Sensors}{https://www.omega.com/en-us/resources/thermocouples]}
+
+\subsubsection{Air Quality}
+
+\subsubsection{Sensors}
+
+Particulate Matter
+
+NOx
+
+O3
+
+CO
+
+Temperature and Humidity
+
+\subsubsection{Software}
+
+- Python Script
+
+\subsubsection{Soil Moisture}
+
+
+Tutorials in using a Pi to monistor soil mosture:
+
+\begin{itemize}
+
+\item \href{https://tutorials-raspberrypi.com/measuring-soil-moisture-with-raspberry-pi/}{Simple and Inexpensive Method}
+
+\item \href{moisture-sensor-dfrobothttps://www.switchdoc.com/2018/11/tutorial-capacitive-moisture-sensor-grove/}{Raspberry 3 and Capacitance Sensors -- More Accurate, limited corrosion}
+
+\item \href{https://tutorials-raspberrypi.com/raspberry-pi-capacitive-spoil-moisture-sensor-dfrobot-gravity/}{moisture-sensor-dfrobot?}
+\end{itemize}
+
+\subsubsection{Wildlife}
+
+Poacher Cam v7, Chris Kline, panthera.org
+
+\end{document}

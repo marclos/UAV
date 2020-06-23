@@ -1,0 +1,15 @@
+---
+title: "Integrating Github, Python, and Rasberry Pi"
+author: "Marc Los Huertos"
+date: "6/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Video Demo
+
+ <https://www.youtube.com/watch?v=FV7eiqN01hc>.
+
