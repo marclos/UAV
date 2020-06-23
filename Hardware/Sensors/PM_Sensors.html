@@ -1735,17 +1735,75 @@ if __name__ == &#39;__main__&#39;:
 </ul>
 <ol start="3" style="list-style-type: decimal">
 <li><p>Re-enter the nano file you created above, and right click anywhere within the file to bring up a menu; select the “paste” option. This should place the code above into the file without altering the spacing or indentations.</p></li>
-<li><p>Save the text document with ctrl O (it will ask it what you want to name it, you can leave it as pms5003.py), and then exit it with ctrl X.</p></li>
-<li><p>Now within the main shell, type “python3 pms5003.py”. It should release a reading of the different measurements specified.</p></li>
+<li><p>Save the text document with ctrl o (it will ask it what you want to name it, you can leave it as pms5003.py), and then exit it with ctrl x.</p></li>
+<li><p>Now within the main shell, type “python3 pms5003.py”. When I submitted the text, I got one of two responses – some error, usually about some indentation problem that took way too long to sort out OR it seem to quietly be in standby mode. I think it was sending the program to my Pi, perhaps compiling and sending the commands to the sensor.</p></li>
 </ol>
+<p>It should release a reading of the different measurements specified.</p>
 </div>
-<div id="still-to-come" class="section level2">
-<h2>Still to come</h2>
+</div>
+<div id="setting-up-automatic-sensor-readings" class="section level1">
+<h1>Setting up automatic sensor readings</h1>
+<p><strong>In progress</strong></p>
+<ul>
+<li><p>Try adding “time.sleep(15)” under “print.data” or “sensor.close()”.</p></li>
+<li><p>Try adding “timeout=1” to the line after baudrate</p></li>
+</ul>
+</div>
+<div id="storing-the-data-in-a-csv-file" class="section level1">
+<h1>Storing the data in a CSV file</h1>
+<p><strong>In progress</strong></p>
+<div id="writing-a-basic-csv-file" class="section level2">
+<h2>Writing a basic CSV file</h2>
+<pre class="python"><code>import csv
+
+f = open(&quot;test.csv&quot;, &quot;w&quot;, newline=&quot;&quot;)
+c = csv.writer(f)
+
+c.writerow([&quot;hello world&quot;])
+
+f.close()</code></pre>
+<p>You can then open the file in nano: “nano test.csv”.</p>
+</div>
+<div id="method-1-from-httpquabr.com818257314552saving-sensor-data-from-pi-into-csv-file" class="section level2">
+<h2>Method 1: From <a href="http://quabr.com:8182/57314552/saving-sensor-data-from-pi-into-csv-file" class="uri">http://quabr.com:8182/57314552/saving-sensor-data-from-pi-into-csv-file</a></h2>
+<p>add “import csv” to first lines of code.</p>
+<pre class="python"><code>def store_data(time,temperature,pressure,humidity):
+    append = [time,temperature,pressure,humidity]
+    with open(&#39;sensor_output.csv&#39;, &#39;a&#39;) as csvFile:
+        writer = csv.writer(csvFile)
+        writer.writerow(append)
+    csvFile.close()</code></pre>
+<p>Edited for our sensor, would be:</p>
+<pre class="python"><code>def store.data(pm1_cf,pm25_cf,pm10_cf,pm1,pm25,pm10):
+  append = [pm1_cf,pm25_cf,pm10_cf,pm1,pm25,pm10]
+  with open(&#39;sensor_output.csv&#39;, &#39;a&#39;) as csvFile:
+    writer = csv.writer(csvFile)
+    writer.writerow(append)
+  csvFile.close()  </code></pre>
+<p>Put this in the definitions row, and then add “store.data()” below “data = sensor.read()” line.</p>
+</div>
+<div id="method-2-from-httpswww.youtube.comwatchvnj_9ypbok_y" class="section level2">
+<h2>Method 2: From <a href="https://www.youtube.com/watch?v=nj_9yPBOk_Y" class="uri">https://www.youtube.com/watch?v=nj_9yPBOk_Y</a></h2>
+<pre class="python"><code>import csv #do this up above
+
+f = open(&quot;pms5003.csv&quot;, &quot;a&quot;, newline=&quot;&quot;) #original code has w, but I think we need to append
+c = csv.writer(f)
+
+c.writerow([&quot;PMS5003 Readings&quot;]) #creates a heading
+
+for x in range(5): #takes 5 readings
+  rc.writerow([data()])
+
+f.close()
+</code></pre>
+<p>Put this code BELOW the reading information, then open the file with “nano pms5003.csv”.</p>
+</div>
+</div>
+<div id="still-to-come" class="section level1">
+<h1>Still to come</h1>
 <ul>
 <li><p>Storing the data somewhere that we can see variability (perhaps Adafruit IO? Info (for a different PM sensor): <a href="https://www.raspberrypi.org/blog/monitor-air-quality-with-a-raspberry-pi/" class="uri">https://www.raspberrypi.org/blog/monitor-air-quality-with-a-raspberry-pi/</a> )</p></li>
-<li><p>Getting the Pi to automatically read data when it is on, rather than with a code (might also be information in the above resource)</p></li>
 <li><p>Checking for accuracy (why divide the temperature/humidity by ten?)</p></li>
-<li><p>Getting it to read onto a Box CSE file ?</p></li>
 <li><p>“The Raspberry Pi does not have a Real-Time Clock: on bootstrap it gets the time via NTP protocol over the internet. If an NTP server is not available, it will default to the time of last shutdown. Neverthless the station is supposed to work and store data even when there is not internet connection, so it is required a Real-Time Clock module.” -&gt; do we need one of these?</p></li>
 </ul>
 <p>Potential places to store data: - Luftdaten: a German open-source citizen science data repository for air quality</p>
@@ -1897,7 +1955,86 @@ while True:
             loop = 0
     except KeyboardInterrupt:
         break</code></pre>
-</div>
+<ul>
+<li>Alternate code from <a href="https://learn.adafruit.com/pm25-air-quality-sensor?view=all" class="uri">https://learn.adafruit.com/pm25-air-quality-sensor?view=all</a></li>
+</ul>
+<pre class="python"><code>try:
+    import struct
+except ImportError:
+    import ustruct as struct
+ 
+# Connect the sensor TX pin to the board/computer RX pin
+# For use with a microcontroller board:
+import board
+import busio
+uart = busio.UART(board.TX, board.RX, baudrate=9600)
+ 
+# For use with Raspberry Pi/Linux:
+import serial
+uart = serial.Serial(&quot;/dev/ttyS0&quot;, baudrate=9600, timeout=0.25)
+ 
+# For use with USB-to-serial cable:
+# import serial
+# uart = serial.Serial(&quot;/dev/ttyUSB0&quot;, baudrate=9600, timeout=0.25)
+ 
+buffer = []
+ 
+while True:
+    data = uart.read(32)  # read up to 32 bytes
+    data = list(data)
+    # print(&quot;read: &quot;, data)          # this is a bytearray type
+ 
+    buffer += data
+ 
+    while buffer and buffer[0] != 0x42:
+        buffer.pop(0)
+ 
+    if len(buffer) &gt; 200:
+        buffer = []  # avoid an overrun if all bad data
+    if len(buffer) &lt; 32:
+        continue
+ 
+    if buffer[1] != 0x4d:
+        buffer.pop(0)
+        continue
+ 
+    frame_len = struct.unpack(&quot;&gt;H&quot;, bytes(buffer[2:4]))[0]
+    if frame_len != 28:
+        buffer = []
+        continue
+ 
+    frame = struct.unpack(&quot;&gt;HHHHHHHHHHHHHH&quot;, bytes(buffer[4:]))
+ 
+    pm10_standard, pm25_standard, pm100_standard, pm10_env, \
+        pm25_env, pm100_env, particles_03um, particles_05um, particles_10um, \
+        particles_25um, particles_50um, particles_100um, skip, checksum = frame
+ 
+    check = sum(buffer[0:30])
+ 
+    if check != checksum:
+        buffer = []
+        continue
+ 
+    print(&quot;Concentration Units (standard)&quot;)
+    print(&quot;---------------------------------------&quot;)
+    print(&quot;PM 1.0: %d\tPM2.5: %d\tPM10: %d&quot; %
+          (pm10_standard, pm25_standard, pm100_standard))
+    print(&quot;Concentration Units (environmental)&quot;)
+    print(&quot;---------------------------------------&quot;)
+    print(&quot;PM 1.0: %d\tPM2.5: %d\tPM10: %d&quot; % (pm10_env, pm25_env, pm100_env))
+    print(&quot;---------------------------------------&quot;)
+    print(&quot;Particles &gt; 0.3um / 0.1L air:&quot;, particles_03um)
+    print(&quot;Particles &gt; 0.5um / 0.1L air:&quot;, particles_05um)
+    print(&quot;Particles &gt; 1.0um / 0.1L air:&quot;, particles_10um)
+    print(&quot;Particles &gt; 2.5um / 0.1L air:&quot;, particles_25um)
+    print(&quot;Particles &gt; 5.0um / 0.1L air:&quot;, particles_50um)
+    print(&quot;Particles &gt; 10 um / 0.1L air:&quot;, particles_100um)
+    print(&quot;---------------------------------------&quot;)
+ 
+    buffer = buffer[32:]
+    # print(&quot;Buffer &quot;, buffer)
+</code></pre>
+<p>This might have it built in to read at certain time intervals, but need to check.</p>
 </div>
 
 
