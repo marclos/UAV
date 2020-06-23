@@ -183,14 +183,48 @@ Note: To restart the Pi, simply plug it in, unless you have a switch.
 
 \subsection{Option 2: Remote Access with Pi}
 
-It doesn't take too long (10 minutes once you get the hang of it) to be able to work remotely on your microprocessor via a tablet or laptop.  More information by reading \href{Remote Access with Raspberry Pi Tutorial}{https://pythonprogramming.net/remote-access-raspberry-pi-tutorials/]} 
+It doesn't take too long (10 minutes once you get the hang of it) to be able to work remotely on your microprocessor via a tablet or laptop.  
+
+This requires the use of a keyboard, mouse, and monitor, then you'll be free!
+
+More information by reading \href{Remote Access with Raspberry Pi Tutorial}{https://pythonprogramming.net/remote-acces-raspberry-pi-tutorials/} NOTE: Link is broken.
+
+\href{or this}{https://www.raspberrypi.org/documentation/remote-access/ip-address.md}
 
 \begin{enumerate}
 
-\item Begin by making sure all of your packages are up-to-date (even if you updated while setting up your OS, you will still need to do this).  Do this with the code "\$sudo apt-get update" and then "\$sudo apt-get upgrade".  This will take several minutes.
-\item Enable the SSH server by typing "\$if config" into the console.  This will lead you to a screen with several options; select option five, "interfacing options," and then select option two for "SSH."  Enable the server, and then exit this screen.
+\item Begin by making sure all of your packages are up-to-date (even if you updated while setting up your OS, you will still need to do this).  Do this with the code 
+
+\begin{lstlisting}
+sudo apt-get update
+\end{lstlisting}
+
+and then 
+
+\begin{lstlisting}
+sudo apt-get upgrade
+\end{lstlisting}
+
+If there is an update, you will be asked to confirm the upgrade that that it might take additional disk space. I don't see anyway around this, so type in Y. The update will will take several minutes. 
+
+It might ask you to reboot, if so go for it and restart the terminal window. Eitherway, continue below as below
+
+\item Enable the SSH server by typing 
+
+\begin{lstlisting}
+sudo raspi-config
+\end{lstlisting}
+
+into the console.  This will lead you to a screen with several options; select option five, ``interfacing options,'' and then select option two for ``SSH.''  Enable the server, and then exit this screen.
+
+
 \item Note that Raspberry Pi updated in November 2016 so that SSH is disabled automatically.  You will need to turn it on in order to progress.
-\item Type "\$ifconfig" into your console to find your Raspberry Pi's inet address under the "wlan" subcategory.  This should be a string of numbers that looks something like "192.168.XXX.X.XXX."  You will need this to access your Raspberry Pi remotely.
+
+\item You will need to know your Raspberry Pi's IP address to connect to it. To find this, type 
+\begin{lstlisting}
+hostname -I 
+\end{lstlisting}
+from your Raspberry Pi terminal to find your Pi's IP address. This should be a string of numbers that looks something like ``192.168.XXX.XXX.''  You will need this to access your Raspberry Pi remotely. Find some paper and write down the number. 
 
 \end{enumerate}
 
@@ -216,7 +250,7 @@ If you don't have much computer programming experience, this option may be bette
 
 \subsubsection{Option 2B: Remote Access to Raspberry Pi via SSH}
 
-This option allows you to access your Pi microprocessor through an external shell, "piggybacking" the Pi onto an already existing computer.  It allows you to operate in raw code through an external frame, but does not have the visual aspects that the GUI does.  If you are more comfortable with programming, or feel familiar enough with navigating the Pi, this is the right option for you.
+This option allows you to access your Pi microprocessor through an external shell, ''piggybacking'' the Pi onto an already existing computer.  It allows you to operate in raw code through an external frame, but does not have the visual aspects that the GUI does.  If you are more comfortable with programming, or feel familiar enough with navigating the Pi, this is the right option for you.
 
 \begin{enumerate}
 
@@ -224,20 +258,35 @@ This option allows you to access your Pi microprocessor through an external shel
 
 \begin{enumerate}
 \item Open Windows Settings. If you are using Windows 10, click the Windows menu, and select the gear icon for Settings. 
-\item Go to settings, Apps, Apps and Features, Optional Features.
+\item Go to settings, Apps, ``Apps and Features'', Optional Features.
 \item Click on Add a Feature.
 \item Scroll down and add Open SSH Server.
 \item Close the Settings Windows.
 \end{enumerate}
 
-\item Ethernet IP Address: 192.168.137.1 
+%\item Ethernet IP Address: 192.168.137.1 
 
-\item For Windows: (if you have Mac OS or Linux, skip this step!) First, make sure you have OpenSSH Client installed.  Go to settings, Apps, Apps and Features, Optional Features, Add a Feature, and then add the client.
-\item Open your Powershell (which acts sort of like an app, you can access it in the search bar) as an administrator, and then type "Ssh [username]@[identifier]" (the address that you found above, it should look something like 192.168.X.XXX). Username will be "pi" unless you have changed it during setup.
-\item Open your Powershell (which acts sort of like an app, you can access it in the search bar) as an administrator, and then type "Ssh [username]@[identifier] (the IP address that you found above).  
+\item Open the Command Prompt (which is command line window in windows)
+
+\item I recommend that you ``ping'' the Pi before going to the next step. Ping is a short command use to check of the communications are working. As it turns out if I am using Pomona's VPN, I could not get it to work. So, I disconnected from the VPN and then typed
+
+\begin{lstlisting}
+ping 192.168.0.4
+\end{lstlisting}
+
+If you get a series of packets and not a timeout error you are talking to your Pi! If not, stop -- don't get frustrated and contact your contact person for help!
+
+\item Type 
+\begin{lstlisting}
+ssh username@IPaddress
+\end{lstlisting}
+where the username is Pi and the IPaddress is the number you wrote down in step 4 in section 2.2, and should look something like this: 192.168.X.X. If you changed your username during setup, then you'll type something other than Pi.
+
 \item Once you press enter, it will ask if you trust it (say yes, you will only need to do this once). 
+
 \item Next it will ask you for your password.  Note: As you type, no characters will appear on the terminal (for privacy).  This is ok, once you have typed your password just press enter.  If you didn't change your password during setup, it will be "raspberry".
-\item The terminal should now look like the Raspberry Pi terminal that you get via HDMI, with "pi@raspberry pi: \$" as the beginning of your lines.  Hooray!
+
+\item The terminal should now look like the Raspberry Pi terminal that you get via HDMI, with ``pi@raspberry pi: \$'' command prompt.  Hooray!
 \item For further guidance, see the troubleshooting section.
 
 \end{enumerate}

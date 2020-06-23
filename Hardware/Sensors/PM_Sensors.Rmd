@@ -117,9 +117,11 @@ A few notes on this Python code:
 
 3.  Re-enter the nano file you created above, and right click anywhere within the file to bring up a menu; select the "paste" option.  This should place the code above into the file without altering the spacing or indentations.
 
-4.  Save the text document with ctrl O (it will ask it what you want to name it, you can leave it as pms5003.py), and then exit it with ctrl X.
+4.  Save the text document with ctrl o (it will ask it what you want to name it, you can leave it as pms5003.py), and then exit it with ctrl x.
 
-5.  Now within the main shell, type "python3 pms5003.py".  It should release a reading of the different measurements specified.
+5.  Now within the main shell, type "python3 pms5003.py". When I submitted the text, I got one of two responses -- some error, usually about some indentation problem that took way too long to sort out OR it seem to quietly be in standby mode. I think it was sending the program to my Pi, perhaps compiling and sending the commands to the sensor.  
+
+It should release a reading of the different measurements specified.
 
 ## Still to come
 
