@@ -109,6 +109,7 @@ if __name__ == '__main__':
   
 ```
 
+
 A few notes on this Python code:
 
 - Originally was an error in line 85, the colon was left out of the code; added 6/16.
@@ -123,15 +124,81 @@ A few notes on this Python code:
 
 It should release a reading of the different measurements specified.
 
-## Still to come
+# Setting up automatic sensor readings
+**In progress**
+
+- Try adding "time.sleep(15)" under "print.data" or "sensor.close()". 
+
+- Try adding "timeout=1" to the line after baudrate
+
+# Storing the data in a CSV file
+**In progress**
+
+## Writing a basic CSV file
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+import csv
+
+f = open("test.csv", "w", newline="")
+c = csv.writer(f)
+
+c.writerow(["hello world"])
+
+f.close()
+```
+
+You can then open the file in nano: "nano test.csv".  
+
+## Method 1:  From http://quabr.com:8182/57314552/saving-sensor-data-from-pi-into-csv-file
+
+add "import csv" to first lines of code.
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+def store_data(time,temperature,pressure,humidity):
+    append = [time,temperature,pressure,humidity]
+    with open('sensor_output.csv', 'a') as csvFile:
+        writer = csv.writer(csvFile)
+        writer.writerow(append)
+    csvFile.close()
+```
+
+Edited for our sensor, would be:
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+def store.data(pm1_cf,pm25_cf,pm10_cf,pm1,pm25,pm10):
+  append = [pm1_cf,pm25_cf,pm10_cf,pm1,pm25,pm10]
+  with open('sensor_output.csv', 'a') as csvFile:
+    writer = csv.writer(csvFile)
+    writer.writerow(append)
+  csvFile.close()  
+```
+
+Put this in the definitions row, and then add "store.data()" below "data = sensor.read()" line.  
+
+## Method 2:  From https://www.youtube.com/watch?v=nj_9yPBOk_Y
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+import csv #do this up above
+
+f = open("pms5003.csv", "a", newline="") #original code has w, but I think we need to append
+c = csv.writer(f)
+
+c.writerow(["PMS5003 Readings"]) #creates a heading
+
+for x in range(5): #takes 5 readings
+  rc.writerow([data()])
+
+f.close()
+
+```
+
+Put this code BELOW the reading information, then open the file with "nano pms5003.csv".
+
+# Still to come
 
 - Storing the data somewhere that we can see variability (perhaps Adafruit IO?  Info (for a different PM sensor): https://www.raspberrypi.org/blog/monitor-air-quality-with-a-raspberry-pi/ )
 
-- Getting the Pi to automatically read data when it is on, rather than with a code (might also be information in the above resource)
-
 - Checking for accuracy (why divide the temperature/humidity by ten?)
-
-- Getting it to read onto a Box CSE file ?
 
 - "The Raspberry Pi does not have a Real-Time Clock: on bootstrap it gets the time via NTP protocol over the internet. If an NTP server is not available, it will default to the time of last shutdown. Neverthless the station is supposed to work and store data even when there is not internet connection, so it is required a Real-Time Clock module." -> do we need one of these?
 
@@ -301,5 +368,85 @@ while True:
         break
 ```
 
+- Alternate code from  https://learn.adafruit.com/pm25-air-quality-sensor?view=all
 
+```{python,eval=FALSE, python.reticulate=FALSE}
+try:
+    import struct
+except ImportError:
+    import ustruct as struct
+ 
+# Connect the sensor TX pin to the board/computer RX pin
+# For use with a microcontroller board:
+import board
+import busio
+uart = busio.UART(board.TX, board.RX, baudrate=9600)
+ 
+# For use with Raspberry Pi/Linux:
+import serial
+uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=0.25)
+ 
+# For use with USB-to-serial cable:
+# import serial
+# uart = serial.Serial("/dev/ttyUSB0", baudrate=9600, timeout=0.25)
+ 
+buffer = []
+ 
+while True:
+    data = uart.read(32)  # read up to 32 bytes
+    data = list(data)
+    # print("read: ", data)          # this is a bytearray type
+ 
+    buffer += data
+ 
+    while buffer and buffer[0] != 0x42:
+        buffer.pop(0)
+ 
+    if len(buffer) > 200:
+        buffer = []  # avoid an overrun if all bad data
+    if len(buffer) < 32:
+        continue
+ 
+    if buffer[1] != 0x4d:
+        buffer.pop(0)
+        continue
+ 
+    frame_len = struct.unpack(">H", bytes(buffer[2:4]))[0]
+    if frame_len != 28:
+        buffer = []
+        continue
+ 
+    frame = struct.unpack(">HHHHHHHHHHHHHH", bytes(buffer[4:]))
+ 
+    pm10_standard, pm25_standard, pm100_standard, pm10_env, \
+        pm25_env, pm100_env, particles_03um, particles_05um, particles_10um, \
+        particles_25um, particles_50um, particles_100um, skip, checksum = frame
+ 
+    check = sum(buffer[0:30])
+ 
+    if check != checksum:
+        buffer = []
+        continue
+ 
+    print("Concentration Units (standard)")
+    print("---------------------------------------")
+    print("PM 1.0: %d\tPM2.5: %d\tPM10: %d" %
+          (pm10_standard, pm25_standard, pm100_standard))
+    print("Concentration Units (environmental)")
+    print("---------------------------------------")
+    print("PM 1.0: %d\tPM2.5: %d\tPM10: %d" % (pm10_env, pm25_env, pm100_env))
+    print("---------------------------------------")
+    print("Particles > 0.3um / 0.1L air:", particles_03um)
+    print("Particles > 0.5um / 0.1L air:", particles_05um)
+    print("Particles > 1.0um / 0.1L air:", particles_10um)
+    print("Particles > 2.5um / 0.1L air:", particles_25um)
+    print("Particles > 5.0um / 0.1L air:", particles_50um)
+    print("Particles > 10 um / 0.1L air:", particles_100um)
+    print("---------------------------------------")
+ 
+    buffer = buffer[32:]
+    # print("Buffer ", buffer)
 
+```
+
+This might have it built in to read at certain time intervals, but need to check.

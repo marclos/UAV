@@ -26,6 +26,11 @@ On attaching the sensor to the breadboard: https://learn.adafruit.com/adafruit-b
 
 On wiring and programming the sensor: https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/i2c-sensors-and-devices 
 
+Detailed instructions on coding and physical assembly: https://xdevs.com/doc/RPi/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout.pdf
+
+Alternate code (for PMS5003 as well) and information on assembly:
+https://www.rigacci.org/wiki/doku.php/doc/appunti/hardware/raspberrypi_air 
+
 ## Physical Assembly
 
 1.  Take the header strip and break off the number of pins needed for your sensor (for the BME280, this should be seven).
