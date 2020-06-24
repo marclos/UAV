@@ -1,0 +1,22 @@
+---
+title: "O3 Sensors"
+author: "Anna Madison Burns"
+date: "6/23/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Our Sensor
+
+We are using a MQ-131 Ozone Concentration Sensor from Beaster, which costs 42.99 USD on Amazon.
+
+# Helpful Resources
+
+# Materials Needed
+
+# Physical Assembly
+
+# Programming
