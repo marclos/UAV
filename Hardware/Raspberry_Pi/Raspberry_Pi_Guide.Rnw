@@ -246,10 +246,38 @@ where the username is Pi and the IPaddress is the number you wrote down in step 
 
 \subsubsection{Remote Access}
 
-\begin {enumerate}
+\begin{enumerate}
+
 \item Your microprocessor needs to be connected to a powersource in order to remotely access it.
 \item Both the GUI and main terminal options can be rather glitchy; if the program quits, wait a moment and then log back in.  It may not work on the first try, but do it again and it should connect.
 \item Make sure that your computer is connected to Wifi, and that it is connected to the same Wifi network your microprocessor is on.
+
+\end{enumerate}
+
+\subsubsection{Headless SSH Connection}
+
+If you need to connect your Pi microprocessor to a new Wifi network but do not have access to a monitor, follow this process.  **NOTE: Anna is still in the process of figuring this out and has not gotten it to work yet; these are the steps I have done so far**
+
+\begin{enumerate}
+
+\item Make sure that your Pi is NOT connected to a power source, and remove the MicroSD card.
+\item Insert the MicroSD card into a computer; the process for this is different for each computer, and you can Google how to insert a MicroSD card for the model computer you are using.  It will look like a small slot (~1 cm wide), and when you insert the card it should click in.
+\item Create a notepad document entitled "wpa_supplicant.conf".  
+\item Insert the following code into the notepad document:
+\begin{lstlisting}
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=Insert 2 letter ISO 3166-1 country code here
+
+network={
+ ssid="Name of your wireless LAN"
+ psk="Password for your wireless LAN"
+}
+\end{lstlisting}
+Being sure to insert three things: your 2 letter ISO country code (if you are in the United States, this is US); your Wifi's name; and your Wifi's password.
+\item Within the notepad document, go into file/save as.  Save the file within the boot folder for the SD card.  Note that if you are on Windows, make sure that the file type is "all files" and not "txt".
+\item Within your file directory, left-click on the "boot" folder and select eject.  You can now take out the SD card by pushing the card further in so that it un-clicks.
+\item Reinsert the MicroSD card into the Pi, and continue the remote access connection in one of the methods discussed previously.
 
 \end{enumerate}
 
