@@ -256,7 +256,7 @@ where the username is Pi and the IPaddress is the number you wrote down in step 
 
 \subsubsection{Headless SSH Connection}
 
-If you need to connect your Pi microprocessor to a new Wifi network but do not have access to a monitor, follow this process.  **NOTE: Anna is still in the process of figuring this out and has not gotten it to work yet; these are the steps I have done so far**
+If you need to connect your Pi microprocessor to a new Wifi network but do not have access to a monitor, follow this process. 
 
 \begin{enumerate}
 
@@ -274,10 +274,10 @@ network={
  psk="Password for your wireless LAN"
 }
 \end{lstlisting}
-Being sure to insert three things: your 2 letter ISO country code (if you are in the United States, this is US); your Wifi's name; and your Wifi's password.
+Being sure to insert three things: your 2 letter ISO country code (if you are in the United States, this is US); your Wifi's name; and your Wifi's password.  Note that there are meant to be quotation marks around your ssid and psk.
 \item Within the notepad document, go into file/save as.  Save the file within the boot folder for the SD card.  Note that if you are on Windows, make sure that the file type is "all files" and not "txt".
 \item Within your file directory, left-click on the "boot" folder and select eject.  You can now take out the SD card by pushing the card further in so that it un-clicks.
-\item Reinsert the MicroSD card into the Pi, and continue the remote access connection in one of the methods discussed previously.
+\item Reinsert the MicroSD card into the Pi, and continue the remote access connection in one of the methods discussed previously.  Note that even if you had already enabled SSH and found your pi's IP address on a previous network, connecting to a new network means that you need to re-establish SSH connections, AND that your Pi's IP address will (strangely) be different!  The remote connection will NOT work with the IP address you had used on your previous network connection.
 
 \end{enumerate}
 
