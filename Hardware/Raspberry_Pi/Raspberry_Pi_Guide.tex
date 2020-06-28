@@ -280,7 +280,7 @@ If you get a series of packets and not a timeout error you are talking to your P
 \begin{lstlisting}
 ssh username@IPaddress
 \end{lstlisting}
-where the username is Pi and the IPaddress is the number you wrote down in step 4 in section 2.2, and should look something like this: 192.168.X.X. If you changed your username during setup, then you'll type something other than Pi.
+where the username is pi and the IPaddress is the number you wrote down in step 4 in section 2.2, and should look something like this: 192.168.X.X. If you changed your username during setup, then you'll type something other than Pi.
 
 \item Once you press enter, it will ask if you trust it (say yes, you will only need to do this once). 
 
@@ -310,22 +310,33 @@ If you need to connect your Pi microprocessor to a new Wifi network but do not h
 \begin{enumerate}
 
 \item Make sure that your Pi is NOT connected to a power source, and remove the MicroSD card.
-\item Insert the MicroSD card into a computer; the process for this is different for each computer, and you can Google how to insert a MicroSD card for the model computer you are using.  It will look like a small slot (~1 cm wide), and when you insert the card it should click in.
-\item Create a notepad document entitled "wpa_supplicant.conf".  
+
+\item Insert the MicroSD card into a computer; the process for this is different for each computer, and you can Google how to insert a MicroSD card for the model computer you are using.  It will look like a small slot (about 1 cm wide), and when you insert the card it should click in.
+
+\item Using notepad, create a document named ``wpa\_supplicant.conf''. 
+
 \item Insert the following code into the notepad document:
+
 \begin{lstlisting}
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+
 update_config=1
+
 country=Insert 2 letter ISO 3166-1 country code here
 
 network={
  ssid="Name of your wireless LAN"
  psk="Password for your wireless LAN"
 }
+
 \end{lstlisting}
+
 Being sure to insert three things: your 2 letter ISO country code (if you are in the United States, this is US); your Wifi's name; and your Wifi's password.
+
 \item Within the notepad document, go into file/save as.  Save the file within the boot folder for the SD card.  Note that if you are on Windows, make sure that the file type is "all files" and not "txt".
+
 \item Within your file directory, left-click on the "boot" folder and select eject.  You can now take out the SD card by pushing the card further in so that it un-clicks.
+
 \item Reinsert the MicroSD card into the Pi, and continue the remote access connection in one of the methods discussed previously.
 
 \end{enumerate}
@@ -371,7 +382,7 @@ If there is a conflict between commits and some information that was previously 
 \item Go to the project's Github page over the internet and open the page for the document you wish to recover code from.
 \item On the bar before the file itself begins, select "history" on the right side of the screen.
 \item Within the history tab, there should be a list of previous commits; select a commit that will have the code you are hoping to recover within it (i.e. if you were working on the code the previous Friday, select a commit from that day).
-\item On the appropriate commit, select the "<>" option on the right of the screen to open up a historic version of the repository from that day.  Note that this will direct you to the full repository from the time of the commit you select, and not just the document you are hoping to recover.
+\item On the appropriate commit, select the ``<>" option on the right of the screen to open up a historic version of the repository from that day.  Note that this will direct you to the full repository from the time of the commit you select, and not just the document you are hoping to recover.
 \item Go back to the document you need to recover code from, and open it.  It will have the historic code that was there at the time of the commit you selected; if you chose correctly, it should have the code you were looking to recover.
 \item Copy the deleted lines of code out of the historic file, and into the document on R.  
 \item Save the R document, commit, and push the information.  
