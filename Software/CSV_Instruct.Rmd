@@ -1,0 +1,57 @@
+---
+title: "CSV Files"
+author: "Anna Madison Burns"
+date: "6/26/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# What is a CSV file?
+
+CSV (comma separated value) files are a common method of storing large amounts of data.  First we will outline how to write and read a basic CSV file which simply outputs "Hello world!" before moving on to how to export sensor data to a CSV file.
+
+# Software
+
+The easiest software to do this on is with the IDLE application on Pi, which provides more guidance on writing python code than the main terminal does.  To download this interface, enter the main terminal of the Pi and type the line
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo apt-get install idle
+```
+It will take a bit of time to download, but once it is downloaded you can access it via the menu icon on the top left of your Pi terminal under the programming menu.  
+
+Note that this is only accessible via a GUI interface, either through a remote screen access app or a monitor.  For information on these options, visit the Raspberry Pi guide.
+
+# Creating a basic CSV file in IDLE
+
+Before you can send sensor data to a CSV file, it is important to know how to create a basic file.
+
+1. Open the IDLE Python shell through the menu described in the Software section.
+
+2.  Within IDLE, open a new file with cntrl+N.  This will open a file in a new window, where you can type your code.
+
+3.  Copy and paste the following code into the file:
+```{python, eval=FALSE, python.reticulate=FALSE}
+import csv # This is the repository that will create a CSV file
+
+if __name__ == "__main__": # Initialize the CSV writer
+    # Open a file in writing ('w') mode
+    with open('/home/pi/csvexample2.csv', 'w') as csv_file: 
+        csv_writer = csv.writer(csv_file) # Initialize the writer mode
+        csv_writer.writerow(["Hello world!"]) # Write a row (or two)
+        csv_writer.writerow(["HELLO WORLD!"])
+    # Open a file in reading ('r') mode
+    with open('/home/pi/csvexample2.csv', 'r') as csv_file: 
+        csv_reader = csv.reader(csv_file) # Initialize the reader mode
+
+        for row in csv_reader: # Retrieve the rows of the CSV files
+            print(row) # Print the rows
+```
+**IMPORTANT: Under NO CIRCUMSTANCES name a file "csv.py".  This will cause the code needed to formulate a csv file to redirect to your document, rather than the package needed to create a new csv file.  If you have a file named csv.py, this code will not run, and you will need to change that file's name.**
+
+4.  Press the F5 key to begin running the code in the Python shell.  First, it will ask you to save the document you just made.  Note that the code above is a python file which generates a csv file; name the file accordingly, and it will save as a python document ( as xyz.py).  The actual CSV file created by the code will be stored under the name you wrote for it within the code (in this case, csvexample2.csv).  
+
+5.  Once the document is saved, the code will run in the Python terminal and spit out the text that you put into the csv document.  
+
+6.  You can now access both the Python code you used to write the CSV file (the code above) as well as the CSV file itself within the directory where you stored it.
