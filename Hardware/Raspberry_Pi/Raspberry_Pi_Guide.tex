@@ -119,9 +119,14 @@ Here are some resources that describe how these can be done:
 
 Conservation biologists use a wide range of instruments to track and monitor wildlife (camera traps, active (radio) and passive (RIF) transmitters). In addition the use of cameras are used to evaluate plant health and diversity (spectral analysis). 
 
+<<<<<<< HEAD
+
+
+\section{Resources}
+
 \subsection{Resources}
 
-\subsection{Raspberry Pi}
+\subsection{Raspberry Pi Foundation}
 
 The Raspberry was created to help non-technical youth learn computing and robotics. The Raspberry Pi was an unexpected success and now the Pi is one of the most important minaturized computers for a wide range of projects.  
 
@@ -133,7 +138,9 @@ One good way to start is to watch the following video series that introduced the
 
 %\href{https://www.amazon.com/gp/video/detail/B07ZTR6ST2/ref=atv_dp_share_cu_r}{Amazon Prime -- Introducing Rasberry Pi History, Models, and Uses}
 
-\subsubsection{Unpacking the Raspberry Pi}
+\subsection{Unpacking the Raspberry Pi}
+
+We have three different models of Raspberry Pi, 3B version 2, 4B version X, and Zero W version X. The set up is slighly different for each. 
 
 When you recieve your Pi, plan on spending about 1-2 hours setting it up which include unpacking and putting the Pi together: 
 
@@ -141,17 +148,24 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 
 \item Unpack Kit Contents
 
-\item Put Pi in case and add heat sinks
+\item Put Pi in case and add heat sinks if included or not previously installed
 
 \end{enumerate}
 
-\section{Communicating with Raspberry Pi}
+\section{Setting Up Raspberry Pi}
 
 \subsection{Option 1: Direct Access with the Pi Using a Monitor, Keyboard, and Mouse}
 
 If you have a spare monitor, keyboard, and mouse, use the following steps to set up the Raspberry Pi. If you don't have these, then you'll need a ethernet cable and can follow the steps in Option 4: Remote Access to Pi using SSH. 
 
 \begin{enumerate}
+
+\item Connect to keyboard, mouse and monitor. Make sure the HDMI plug is in the correct mini-HDMI socket and the monitor is configured to get a signal from the port being used. 
+\item Insert pre-loaded SD card. If the SD care does not have the operating system (OS), then see the SOP for ``Imaging the Pi SD Card''. 
+
+\item Plug-in Pi, you'll see a rainbow screen for a minute and then a installation menu. 
+
+\item Install the Rasbian operating system only. This will take 10 minutes. Read the little windows so you know some of the resources associated with the operating system. The installations stalls at the end, where it says 100\%. Be patient, it will finish on it's own and reboot.
 
 \item Connect to keyboard, mouse and monitor. Make sure the HDMI plug is in the correct mini-HDMI socket and the monitor is configured to get a signal from the port being used.
 
@@ -317,6 +331,7 @@ where the username is pi and the IP address is the number you wrote down in step
 
 \end{enumerate}
 
+
 \subsection{Troubleshooting}
 
 \subsubsection{Remote Access}
@@ -369,6 +384,15 @@ Being sure to insert three things: your 2 letter ISO country code (if you are in
 \item Note that even if you had already enabled SSH and found your pi's IP address on a previous network, connecting to a new network means that you need to re-establish SSH connections, AND that your Pi's IP address will (strangely) be different!  The remote connection will NOT work with the IP address you had used on your previous network connection.
 
 \end{enumerate}
+
+\section{Maintaining the Pi}
+
+\subsection{Monitor the Pi's Temperature}
+
+Right click on tool bar and ``Add/Remove Panel Items''. Then make sure the Panel Applets tab is selected, then click on the ``Add'' button. 
+Add the ``CPU Temerature Monitor'' and close.
+
+Follow the same steps to add the ``CPU usage monitor''.
 
 \subsubsection{Screensaver}
 
