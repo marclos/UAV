@@ -44,11 +44,11 @@
 
 \subsection{What is Rasberry Pi?}
 
-The Raspberry Pi is an tiny computer, that includes a tiny processor, a bit of memory, a slot for an SD card, and some input/output jacks, e.g. HDMI, USB, headphone, camera, and pin header for various sensors.
+The Raspberry Pi is an tiny computer, that includes a microprocessor, a bit of memory, a slot for an SD card, and some input/output jacks, e.g. HDMI, USB, headphone, camera, and pin headers for various sensors.
 
 \subsection{Why use Raspberry Pi?}
 
-The Pi has a lot of functionality and flexibility for develop monitoring of environmental parameters. 
+The Pi has a lot of functionality and flexibility to develop monitoring of environmental parameters. 
 
 \subsection{Uses in Environmental Science}
 
@@ -58,7 +58,7 @@ The Pi has a lot of functionality and flexibility for develop monitoring of envi
 
 \subsubsection{Soil Water Monitoring and Irrigation Control}
 
-The automatation of irrigation is ubiquitous, however, in many cases systems don't have feedbacks that control the system. The first step relies on sensors to monitor soil moisture and temperature and then use plant growth models to control an irrigation system. 
+The automatation of irrigation is ubiquitous, however, in many cases systems don't have feedbacks that control the system. The first step relies on sensors to monitor soil moisture and temperature and then uses plant growth models to control an irrigation system. 
 
 Here are some resources that describe how these can be done:
 
@@ -70,13 +70,11 @@ Here are some resources that describe how these can be done:
 
 Conservation biologists use a wide range of instruments to track and monitor wildlife (camera traps, active (radio) and passive (RIF) transmitters). In addition the use of cameras are used to evaluate plant health and diversity (spectral analysis). 
 
-
-
 \subsection{Resources}
 
 \subsection{Raspberry Pi}
 
-The Raspberry was created to help non-technical youth to learn computer and robotics. The Raspberry Pi was an unexpected success and now the Pi is one of the most important minaturized computers for a wide range of projects.  
+The Raspberry was created to help non-technical youth learn computing and robotics. The Raspberry Pi was an unexpected success and now the Pi is one of the most important minaturized computers for a wide range of projects.  
 
 The \href{https://www.raspberrypi.org/}{RaspberryPi.org} has tutorials, software updates, and example projects.
 
@@ -93,6 +91,7 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 \begin{enumerate}
 
 \item Unpack Kit Contents
+
 \item Put Pi in case and add heat sinks
 
 \end{enumerate}
@@ -101,24 +100,27 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 
 \subsection{Option 1: Direct Access with the Pi Using a Monitor, Keyboard, and Mouse}
 
-If you have a spare monitor, keyboard, and mouse, follow the following steps to set up the Raspberry Pi. If you don't have these, then you'll need a ethernet cable and follow the steps in Option 4: Remote Access to Pi using SSH. 
+If you have a spare monitor, keyboard, and mouse, use the following steps to set up the Raspberry Pi. If you don't have these, then you'll need a ethernet cable and can follow the steps in Option 4: Remote Access to Pi using SSH. 
 
 \begin{enumerate}
 
-\item Connect to keyboard, mouse and monitor. Make sure the HDMI plug is in the correct mini-HDMI socket and the monitor is configured to get a signal from the port being used. 
-\item Insert pre-loaded SD card
+\item Connect to keyboard, mouse and monitor. Make sure the HDMI plug is in the correct mini-HDMI socket and the monitor is configured to get a signal from the port being used.
+
+\item Insert pre-loaded SD card.
+
 \item Plug-in Pi, you'll see a rainbow screen for a minute and then a installation menu. 
-\item Install the Rasbian operating system only. This will take 10 minutes. Read the little windows so you know some of the resources associated with the operating system. The installations stalls at the end, where it says 100\%. Be patient, it will finish on it's own and reboot.
+
+\item Install the Rasbian operating system only. This will take 10 minutes. Read the little windows so you know some of the resources associated with the operating system. The installations stall at the end, where it says 100\%. Be patient, it will finish on it's own and reboot.
 
 \item Once the Rasbian OS starts, you'll see four raspberries at the top and then you'd get some prompts to set up the OS. 
 
-\item I suggest you keep the password as default for now, select the langauge, keyboard type, and time zone. 
+\item I suggest you keep the username and password as default for now, select the langauge, keyboard type, and time zone. 
 
 \item Next you'll need to get connected to the internet. Select your modem and enter password to connect.
 
-\item Then you'll get a prompt to check for updates. Yes, there will be updates. This will take another 20 minutes. About 1/2 way the screen goes completely blank. This is because, by default, the Pi goes into screen saver mode without mouse or keyboard inputs. Move the mouse or type something and the screen should wake up. 
+\item Then you'll get a prompt to check for updates. Yes, there will be updates. This will take another 20 minutes. About halfway the screen goes completely blank. This is because, by default, the Pi goes into screen saver mode without mouse or keyboard inputs. Move the mouse or type something and the screen should wake up. 
 
-\item Be sure to shut down your Raspberry Pi before unplugging it; you can use the keyboard and "Cntl-Alt-Delete" sequence to get a pop-up window to shut the Pi down or open the terminal window and type:
+\item Be sure to shut down your Raspberry Pi before unplugging it; you can use the keyboard and "Ctrl-Alt-Delete" sequence to get a pop-up window to shut the Pi down or open the terminal window and type:
 
 \begin{lstlisting}
 $ sudo shutdown -h now
@@ -138,9 +140,7 @@ It doesn't take too long (10 minutes once you get the hang of it) to be able to 
 
 This requires the use of a keyboard, mouse, and monitor, then you'll be free!
 
-More information by reading \href{Remote Access with Raspberry Pi Tutorial}{https://pythonprogramming.net/remote-acces-raspberry-pi-tutorials/} NOTE: Link is broken.
-
-\href{or this}{https://www.raspberrypi.org/documentation/remote-access/ip-address.md}
+More information by reading \href{https://pythonprogramming.net/remote-access-raspberry-pi-tutorials/?completed=/introduction-raspberry-pi-tutorials/}{Remote Access with Raspberry Pi Tutorial} or \href{https://www.raspberrypi.org/documentation/remote-access/ip-address.md}{Remote Access Documentation}.
 
 \begin{enumerate}
 
@@ -156,9 +156,9 @@ and then
 sudo apt-get upgrade
 \end{lstlisting}
 
-If there is an update, you will be asked to confirm the upgrade that that it might take additional disk space. I don't see anyway around this, so type in Y. The update will will take several minutes. 
+If there is an update, you will be asked to confirm the upgrade because it might take additional disk space. I don't see anyway around this, so type in Y. The update will will take several minutes. 
 
-It might ask you to reboot, if so go for it and restart the terminal window. Eitherway, continue below as below
+It might ask you to reboot, if so go for it and restart the terminal window. Either way, continue below.
 
 \item Enable the SSH server by typing 
 
@@ -168,14 +168,15 @@ sudo raspi-config
 
 into the console.  This will lead you to a screen with several options; select option five, ``interfacing options,'' and then select option two for ``SSH.''  Enable the server, and then exit this screen.
 
-
 \item Note that Raspberry Pi updated in November 2016 so that SSH is disabled automatically.  You will need to turn it on in order to progress.
 
-\item You will need to know your Raspberry \hypertarget{Pi's IP address} to connect to it. To find this, type 
+\item You will need to know your Raspberry Pi's IP address \hypertarget{Pi's IP address} to connect to it. To find this, type 
+
 \begin{lstlisting}
 hostname -I 
 \end{lstlisting}
-from your Raspberry Pi terminal to find your Pi's IP address. This should be a string of numbers that looks something like ``192.168.XXX.XXX.''  You will need this to access your Raspberry Pi remotely. Find some paper and write down the number. 
+
+from your Raspberry Pi terminal to find your Pi's IP address. This should be a string of numbers that looks something like ``192.168.XXX.XXX''.  You will need this to access your Raspberry Pi remotely. Find some paper and write down the number. 
 
 \end{enumerate}
 
@@ -205,7 +206,7 @@ ssh pi@IPaddress
 
 \item Start the probem and it will prompt you to enter the Pi's IP  address you found above into the text box (it should look something like 192.168.X.X).
 
-\item A page will open for you to add your username and password (which at this point should still be Pi's username and password).  Then your console will open.
+\item A page will open for you to add your username and password (which at this point should still be Pi's username and password, that is, ``pi'' and ``raspberry'').  Then your console will open.
 
 \item If it won't conect: make sure your microprocessor and the computer you are attempting to accesss it from are on the same wifi, you can check by using the \hyperlink{ping}{ping} command in the command window to confirm communications.
 
@@ -217,18 +218,24 @@ ssh pi@IPaddress
 
 \subsubsection{Option 2B: Remote Access to Raspberry Pi via SSH}
 
-This option allows you to access your Pi microprocessor through an external shell, ''piggybacking'' the Pi onto an already existing computer.  It allows you to operate in raw code through an external frame, but does not have the visual aspects that the GUI does.  If you are more comfortable with programming, or feel familiar enough with navigating the Pi, this is the right option for you.
+This option allows you to access your Pi microprocessor through an external shell, ``piggybacking'' the Pi onto an already existing computer.  It allows you to operate in raw code through an external frame, but does not have the visual appeal that the GUI does.  If you are more comfortable with programming, or feel familiar enough with navigating the Pi, this is the right option for you.
 
 \begin{enumerate}
 
 \item For Windows Only: (if you have Mac OS or Linux, skip this step!) Make sure you have OpenSSH Client installed. 
 
 \begin{enumerate}
+
 \item Open Windows Settings. If you are using Windows 10, click the Windows menu, and select the gear icon for Settings. 
+
 \item Go to settings, Apps, ``Apps and Features'', Optional Features.
+
 \item Click on Add a Feature.
+
 \item Scroll down and add Open SSH Server.
+
 \item Close the Settings Windows.
+
 \end{enumerate}
 
 %\item Ethernet IP Address: 192.168.137.1 
@@ -243,17 +250,20 @@ ping 192.168.0.4
 
 If you get a series of packets and not a timeout error you are talking to your Pi! If not, stop -- don't get frustrated and contact your contact person for help!
 
-\item Type 
+\item Type
+
 \begin{lstlisting}
 ssh username@IPaddress
 \end{lstlisting}
-where the username is pi and the IPaddress is the number you wrote down in step 4 in section 2.2, and should look something like this: 192.168.X.X. If you changed your username during setup, then you'll type something other than Pi.
+
+where the username is pi and the IP address is the number you wrote down in step 4 in section 2.2 (itshould look something like this: 192.168.X.X). If you changed your username during setup, then you'll type something other than ``pi''.
 
 \item Once you press enter, it will ask if you trust it (say yes, you will only need to do this once). 
 
-\item Next it will ask you for your password.  Note: As you type, no characters will appear on the terminal (for privacy).  This is ok, once you have typed your password just press enter.  If you didn't change your password during setup, it will be "raspberry".
+\item Next it will ask you for your password.  Note: As you type, no characters will appear on the terminal (for privacy).  This is ok, once you have typed your password just press enter.  If you didn't change your password during setup, it will be ``raspberry''.
 
 \item The terminal should now look like the Raspberry Pi terminal that you get via HDMI, with ``pi@raspberry pi: \$'' command prompt.  Hooray!
+
 \item For further guidance, see the troubleshooting section.
 
 \end{enumerate}
@@ -267,6 +277,7 @@ where the username is pi and the IPaddress is the number you wrote down in step 
 \item Your microprocessor needs to be connected to a powersource in order to remotely access it.
 
 \item Both the GUI and main terminal options can be rather glitchy; if the program quits, wait a moment and then log back in.  It may not work on the first try, but do it again and it should connect.
+
 \item Make sure that your computer is connected to Wifi, and that it is connected to the same Wifi network your microprocessor is on.
 
 \end{enumerate}
@@ -296,20 +307,17 @@ network={
  ssid="Name of your wireless LAN"
  psk="Password for your wireless LAN"
 }
-
 \end{lstlisting}
 
 Being sure to insert three things: your 2 letter ISO country code (if you are in the United States, this is US); your Wifi's name; and your Wifi's password.  Note that there are meant to be quotation marks around your ssid and psk.
 
-\item Within the notepad document, go into file/save as.  Save the file within the boot folder for the SD card.  Note that if you are on Windows, make sure that the file type is "all files" and not "txt".
+\item Within the notepad document, go into file/save as.  Save the file within the boot folder for the SD card.  Note that if you are on Windows, make sure that the file type is ``all files'' and not ``txt''.
 
-\item Within your file directory, left-click on the "boot" folder and select eject.  You can now take out the SD card by pushing the card further in so that it un-clicks.
-<<<<<<< HEAD
+\item Within your file directory, left-click on the ``boot'' folder and select eject.  You can now take out the SD card by pushing the card further in so that it un-clicks.
 
 \item Reinsert the MicroSD card into the Pi, and continue the remote access connection in one of the methods discussed previously.
-=======
-\item Reinsert the MicroSD card into the Pi, and continue the remote access connection in one of the methods discussed previously.  Note that even if you had already enabled SSH and found your pi's IP address on a previous network, connecting to a new network means that you need to re-establish SSH connections, AND that your Pi's IP address will (strangely) be different!  The remote connection will NOT work with the IP address you had used on your previous network connection.
->>>>>>> c1af788340cc2b66131149ce24b828e68986c042
+
+\item Note that even if you had already enabled SSH and found your pi's IP address on a previous network, connecting to a new network means that you need to re-establish SSH connections, AND that your Pi's IP address will (strangely) be different!  The remote connection will NOT work with the IP address you had used on your previous network connection.
 
 \end{enumerate}
 
@@ -334,16 +342,15 @@ sudo apt-get install xscreensaver
 sudo apt-get update
 \end{lstlisting}
 
-\item Once you've done this, go to the Raspberry icon in the upper-left corner and select "preferences" from the drop down menu.  Under "preferences" there is an option for "screensaver".
+\item Once you've done this, go to the Raspberry icon in the upper-left corner and select ``preferences'' from the drop down menu.  Under ``preferences'' there is an option for ``screensaver''.
 
-\item Once in screensaver, under the "Mode" dropdown you can select "disable screensaver".
+\item Once in screensaver, under the ``Mode'' dropdown you can select ``disable screensaver''.
 
-\item Now your screen should stay active even if you aren't actively using it.
+\item Now your screen should stay awake even if you aren't actively using it.
 
-\item More information/different methods are available at: \href{https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=57552}{Pi Forum:  Disable Screensaver is Raspbian}
+\item More information/different methods are available at: \href{https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=57552}{Pi Forum:  Disable Screensaver in Raspbian}
 
 \end{enumerate}
-
 
 \subsubsection{Recovering Commits from Github}
 
@@ -352,12 +359,19 @@ If there is a conflict between commits and some information that was previously 
 \begin{enumerate}
 
 \item Go to the project's Github page over the internet and open the page for the document you wish to recover code from.
-\item On the bar before the file itself begins, select "history" on the right side of the screen.
+
+\item On the bar before the file itself begins, select ``history'' on the right side of the screen.
+
 \item Within the history tab, there should be a list of previous commits; select a commit that will have the code you are hoping to recover within it (i.e. if you were working on the code the previous Friday, select a commit from that day).
+
 \item On the appropriate commit, select the ``<>" option on the right of the screen to open up a historic version of the repository from that day.  Note that this will direct you to the full repository from the time of the commit you select, and not just the document you are hoping to recover.
+
 \item Go back to the document you need to recover code from, and open it.  It will have the historic code that was there at the time of the commit you selected; if you chose correctly, it should have the code you were looking to recover.
-\item Copy the deleted lines of code out of the historic file, and into the document on R.  
+
+\item Copy the deleted lines of code out of the historic file, and into the document on R. 
+
 \item Save the R document, commit, and push the information.  
+
 \item The Github will remain on the historic commit until you leave the project; exit the entire project (for example, by going to the home screen on Github) and then re-enter the project to enter the up-to-date portal.
 
 \end{enumerate}
@@ -387,7 +401,6 @@ Temperature and Humidity
 - Python Script
 
 \subsubsection{Soil Moisture}
-
 
 Tutorials in using a Pi to monistor soil mosture:
 
