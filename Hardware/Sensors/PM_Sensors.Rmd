@@ -68,6 +68,9 @@ We have made the code available on Sakai, so you can download it directly from t
 ```{python, eval=FALSE, python.reticulate=FALSE}
 import serial
 from collections import OrderedDict
+import csv
+import time
+
 class Sensor():
   def __init__(self, tty = '/dev/ttyS0'):
     self.tty = tty
@@ -100,24 +103,37 @@ class Sensor():
     res['humidity'] = self.read_bytes(data, 26) / 10
     return res
     
+def  write_to_csv():
+        if __name__ == "__main__":
+                with open('/home/pi/pms5003_data.csv', mode='a') as csv_file:
+                        csv_writer = csv.writer(csv_file)
+                        csv_writer.writerow([data])
+                with open('/home/pi/pms5003_data.csv', mode='r') as csv_file:
+                        csv_reader = csv.reader(csv_file)
+                        for row in csv_reader:
+                                print(row)
+               
 if __name__ == '__main__':
-  '''
-  Test code
-  '''
-  sensor = Sensor()
-  sensor.open()
-  data = sensor.read()
-  sensor.close()
-  print(data)
+  while True:
+    '''
+    Test code
+    '''
+    sensor = Sensor()
+    sensor.open()
+    data = sensor.read()
+    sensor.close()
+    print(data)
+    write_to_csv()
+    time.sleep(10)
   
 ```
 
 
 A few notes on this Python code:
 
-- Originally was an error in line 85, the colon was left out of the code; added 6/16.
-- Double check spacing with line 98... make sure the res line is inside of the def read(self) paragraph.
 - Pay very close attention to spacing and indentations! This is very, very important in Python.  The code will not run if the indentations are at all off.
+- This code will automatically create a csv file under the title "pms5003_data.csv".  You can access this document in your Pi's File Explorer under "Pi".  
+- When you go to open the csv file that the data stores to, select the following viewing settings for the most user-friendly experience:  tab, comma, trim spaces, and other (within the text box for other, type ")").  This will separate the actual values from the titles; you can do the rest of the "beautifying" of the data in R.
 
 3.  Re-enter the nano file you created above, and right click anywhere within the file to bring up a menu; select the "paste" option.  This should place the code above into the file without altering the spacing or indentations.
 
@@ -125,77 +141,7 @@ A few notes on this Python code:
 
 5.  Now within the main shell, type "python3 pms5003.py". When I submitted the text, I got one of two responses -- some error, usually about some indentation problem that took way too long to sort out OR it seem to quietly be in standby mode. I think it was sending the program to my Pi, perhaps compiling and sending the commands to the sensor.  
 
-It should release a reading of the different measurements specified.
-
-# Setting up automatic sensor readings
-**In progress**
-
-- Try adding "time.sleep(15)" under "print.data" or "sensor.close()". 
-
-- Try adding "timeout=1" to the line after baudrate
-
-# Storing the data in a CSV file
-**In progress**
-
-## Writing a basic CSV file
-
-```{python, eval=FALSE, python.reticulate=FALSE}
-import csv
-
-f = open("test.csv", "w", newline="")
-c = csv.writer(f)
-
-c.writerow(["hello world"])
-
-f.close()
-```
-
-You can then open the file in nano: "nano test.csv".  
-
-## Method 1:  From http://quabr.com:8182/57314552/saving-sensor-data-from-pi-into-csv-file
-
-add "import csv" to first lines of code.
-
-```{python, eval=FALSE, python.reticulate=FALSE}
-def store_data(time,temperature,pressure,humidity):
-    append = [time,temperature,pressure,humidity]
-    with open('sensor_output.csv', 'a') as csvFile:
-        writer = csv.writer(csvFile)
-        writer.writerow(append)
-    csvFile.close()
-```
-
-Edited for our sensor, would be:
-
-```{python, eval=FALSE, python.reticulate=FALSE}
-def store.data(pm1_cf,pm25_cf,pm10_cf,pm1,pm25,pm10):
-  append = [pm1_cf,pm25_cf,pm10_cf,pm1,pm25,pm10]
-  with open('sensor_output.csv', 'a') as csvFile:
-    writer = csv.writer(csvFile)
-    writer.writerow(append)
-  csvFile.close()  
-```
-
-Put this in the definitions row, and then add "store.data()" below "data = sensor.read()" line.  
-
-## Method 2:  From https://www.youtube.com/watch?v=nj_9yPBOk_Y
-
-```{python, eval=FALSE, python.reticulate=FALSE}
-import csv #do this up above
-
-f = open("pms5003.csv", "a", newline="") #original code has w, but I think we need to append
-c = csv.writer(f)
-
-c.writerow(["PMS5003 Readings"]) #creates a heading
-
-for x in range(5): #takes 5 readings
-  rc.writerow([data()])
-
-f.close()
-
-```
-
-Put this code BELOW the reading information, then open the file with "nano pms5003.csv".
+It should release a reading of the different measurements specified at intervals of ten seconds, and compile the data into a CSV file.
 
 # Still to come
 
@@ -212,244 +158,3 @@ Potential places to store data:
 https://learn.pimoroni.com/tutorial/sandyj/enviro-plus-and-luftdaten-air-quality-station (this tutorial uses a different input w/ enviroplus, so the code is not the same as what we have)
 
 - Into a CSV file: https://stackoverflow.com/questions/57314552/saving-sensor-data-from-pi-into-csv-file (not sure how to tailor this to our project)
-
-```{python, eval=FALSE, python.reticulate=FALSE}
-# initial set up of imports
-
-import time
-import datetime
-
-# gpiozero for CPU
-from gpiozero import CPUTemperature
-
-# imports the modules for the sensor
-from bmp280 import BMP280
-try:
-    from smbus2 import SMBus
-except ImportError:
-    from smbus import SMBus
-    
-# lux sensor
-import ltr559
-
-# csv to be able to open file
-import csv
-
-# sets up the variables for the sensor
-bus=SMBus(1)
-bmp280 = BMP280(i2c_dev=bus)
-
-# functions to use
-
-def cpu_temperature():
-    cpu = CPUTemperature()
-    cpu_temp = cpu.temperature
-    cpu_temp = str(cpu_temp)
-    return(cpu_temp)
-
-def get_temp():
-    temperature = bmp280.get_temperature()
-    temperature = round((temperature),2)
-    temperature = temperature -2
-    temperature = str(temperature)
-    return(temperature)
-
-def get_pressure():
-    pressure = bmp280.get_pressure()
-    pressure = round(pressure)
-    pressure = str(pressure)
-    return(pressure)
-
-def get_lux():
-    lux = ltr559.get_lux()
-    for x in range(1,5):
-        x_lux = lux
-        time.sleep(0.5)
-    lux_rounded = round(x_lux,2)
-    lux_str = str(lux_rounded)
-    return(lux_str)
-
-def date_now():
-    today = datetime.datetime.now().strftime("%Y-%m-%d")
-    today = str(today)
-    return(today)
-
-def time_now():
-    now = datetime.datetime.now().strftime("%H:%M:%S")
-    now = str(now)
-    return(now)
-
-def write_to_csv():
-    # the a is for append, if w for write is used then it overwrites the file
-    with open('/home/pi/twitter_sensor/sensor_readings.csv', mode='a') as sensor_readings:
-        sensor_write = csv.writer(sensor_readings, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-        write_to_log = sensor_write.writerow([date_now(),time_now(),get_temp(),get_pressure(),get_lux(),cpu_temperature()])
-        return(write_to_log)
-
-write_to_csv()
-```
-
-
-- Prometheus -> pulls the data, doesn't automatically get sent it form the device, works well w/ Grafata https://www.markhansen.co.nz/raspberry-pi-air-quality-sensor/ 
-
-- InfluxDB
-
-- PostgreSQL
-
-
-
-New:
-- Connect RST to pin 11
-
-Code:
-Couldn't get this to work after ~1.5 hours of messing around with it, moving on to try to work with the code we already have
-
-```{python, eval=FALSE, python.reticulate=FALSE}
-import serial
-import datetime
-from pymongo import MongoClient
-
-port = serial.Serial('/dev/ttyAMA0', baudrate=9600, timeout=2.0)
-client = MongoClient('localhost')
-
-
-def read_pm_line(_port):
-    rv = b''
-    while True:
-        ch1 = _port.read()
-        if ch1 == b'\x42':
-            ch2 = _port.read()
-            if ch2 == b'\x4d':
-                rv += ch1 + ch2
-                rv += _port.read(28)
-                return rv
-
-
-loop = 0
-while True:
-    try:
-        rcv_list = []
-        rcv = read_pm_line(port)
-        res = {'timestamp': datetime.datetime.now(),
-               'apm10': rcv[4] * 256 + rcv[5],
-               'apm25': rcv[6] * 256 + rcv[7],
-               'apm100': rcv[8] * 256 + rcv[9],
-               'pm10': rcv[10] * 256 + rcv[11],
-               'pm25': rcv[12] * 256 + rcv[13],
-               'pm100': rcv[14] * 256 + rcv[15],
-               'gt03um': rcv[16] * 256 + rcv[17],
-               'gt05um': rcv[18] * 256 + rcv[19],
-               'gt10um': rcv[20] * 256 + rcv[21],
-               'gt25um': rcv[22] * 256 + rcv[23],
-               'gt50um': rcv[24] * 256 + rcv[25],
-               'gt100um': rcv[26] * 256 + rcv[27]
-               }
-        # print('===============\n'
-        #       'PM1.0(CF=1): {}\n'
-        #       'PM2.5(CF=1): {}\n'
-        #       'PM10 (CF=1): {}\n'
-        #       'PM1.0 (STD): {}\n'
-        #       'PM2.5 (STD): {}\n'
-        #       'PM10  (STD): {}\n'
-        #       '>0.3um     : {}\n'
-        #       '>0.5um     : {}\n'
-        #       '>1.0um     : {}\n'
-        #       '>2.5um     : {}\n'
-        #       '>5.0um     : {}\n'
-        #       '>10um      : {}'.format(res['apm10'], res['apm25'], res['apm100'],
-        #                                res['pm10'], res['apm25'], res['pm100'],
-        #                                res['gt03um'], res['gt05um'], res['gt10um'],
-        #                                res['gt25um'], res['gt50um'], res['gt100um']))
-        rcv_list.append(res.copy())
-        loop += 1
-        if loop == 10:
-            client.air.pm.insert_many(rcv_list)
-            print('Logged to database.')
-            rcv_list.clear()
-            loop = 0
-    except KeyboardInterrupt:
-        break
-```
-
-- Alternate code from  https://learn.adafruit.com/pm25-air-quality-sensor?view=all
-
-```{python,eval=FALSE, python.reticulate=FALSE}
-try:
-    import struct
-except ImportError:
-    import ustruct as struct
- 
-# Connect the sensor TX pin to the board/computer RX pin
-# For use with a microcontroller board:
-import board
-import busio
-uart = busio.UART(board.TX, board.RX, baudrate=9600)
- 
-# For use with Raspberry Pi/Linux:
-import serial
-uart = serial.Serial("/dev/ttyS0", baudrate=9600, timeout=0.25)
- 
-# For use with USB-to-serial cable:
-# import serial
-# uart = serial.Serial("/dev/ttyUSB0", baudrate=9600, timeout=0.25)
- 
-buffer = []
- 
-while True:
-    data = uart.read(32)  # read up to 32 bytes
-    data = list(data)
-    # print("read: ", data)          # this is a bytearray type
- 
-    buffer += data
- 
-    while buffer and buffer[0] != 0x42:
-        buffer.pop(0)
- 
-    if len(buffer) > 200:
-        buffer = []  # avoid an overrun if all bad data
-    if len(buffer) < 32:
-        continue
- 
-    if buffer[1] != 0x4d:
-        buffer.pop(0)
-        continue
- 
-    frame_len = struct.unpack(">H", bytes(buffer[2:4]))[0]
-    if frame_len != 28:
-        buffer = []
-        continue
- 
-    frame = struct.unpack(">HHHHHHHHHHHHHH", bytes(buffer[4:]))
- 
-    pm10_standard, pm25_standard, pm100_standard, pm10_env, \
-        pm25_env, pm100_env, particles_03um, particles_05um, particles_10um, \
-        particles_25um, particles_50um, particles_100um, skip, checksum = frame
- 
-    check = sum(buffer[0:30])
- 
-    if check != checksum:
-        buffer = []
-        continue
- 
-    print("Concentration Units (standard)")
-    print("---------------------------------------")
-    print("PM 1.0: %d\tPM2.5: %d\tPM10: %d" %
-          (pm10_standard, pm25_standard, pm100_standard))
-    print("Concentration Units (environmental)")
-    print("---------------------------------------")
-    print("PM 1.0: %d\tPM2.5: %d\tPM10: %d" % (pm10_env, pm25_env, pm100_env))
-    print("---------------------------------------")
-    print("Particles > 0.3um / 0.1L air:", particles_03um)
-    print("Particles > 0.5um / 0.1L air:", particles_05um)
-    print("Particles > 1.0um / 0.1L air:", particles_10um)
-    print("Particles > 2.5um / 0.1L air:", particles_25um)
-    print("Particles > 5.0um / 0.1L air:", particles_50um)
-    print("Particles > 10 um / 0.1L air:", particles_100um)
-    print("---------------------------------------")
- 
-    buffer = buffer[32:]
-    # print("Buffer ", buffer)
-
-```
-
-This might have it built in to read at certain time intervals, but need to check.

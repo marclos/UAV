@@ -55,3 +55,7 @@ if __name__ == "__main__": # Initialize the CSV writer
 5.  Once the document is saved, the code will run in the Python terminal and spit out the text that you put into the csv document.  
 
 6.  You can now access both the Python code you used to write the CSV file (the code above) as well as the CSV file itself within the directory where you stored it.
+
+# Further Information
+
+For resources on writing a CSV file, visit https://learning.oreilly.com/library/view/python-programming-with/9781786467577/925bc69b-d6cd-4833-9e81-312f63488671.xhtml.  
