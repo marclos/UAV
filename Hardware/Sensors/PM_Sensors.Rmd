@@ -22,19 +22,20 @@ The guide below was compiled from an instructional Youtube video published on 11
 
 # Physically connecting the sensor to Raspberry Pi
 
-1.  Begin by connecting the sensor to the adapter. Take the colorful wires with white blocks on either end and attach them to both the sensor and the small adapter; they attach with the "shiny" side up, and you need to give them quite a push to get them to go in fully.  They should be snug, and not at all loose.
+1 Begin by connecting the sensor to the adapter. Take the colorful wires with white blocks on either end and attach them to both the sensor and the small adapter; they attach with the "shiny" side up, and you need to give them quite a push to get them to go in fully.  They should be snug, and not at all loose.
 
-2.  Next, connect the adapter to the Raspberry Pi.  Separate four of the female-to-female connectors (the ones with the black rectangles on either end) and attach one of the ends to the TXD, RXD, GND and VCO terminals on the adapter (these correspond to the 4th, 5th, 7th, and 8th terminals from the top).  
+2 Next, connect the adapter to the Raspberry Pi.  Separate four of the female-to-female connectors (the ones with the black rectangles on either end) and attach one of the ends to the TXD, RXD, GND and VCO terminals on the adapter (these correspond to the 4th, 5th, 7th, and 8th terminals from the top).  
 
-  2a.  Connect the wire attached to the VCC terminal to node 2 on the Raspberry Pi.
+* Connect the wire attached to the VCC terminal to node 2 on the Raspberry Pi.
 
-  2b.  Connect the wire attached to the GND terminal to node 14 on the Raspberry Pi.
+* Connect the wire attached to the GND terminal to node 14 on the Raspberry Pi.
 
-  2c.  Connect the wire attached to the RXD terminal to node 8 on the Raspberry Pi.
+* Connect the wire attached to the RXD terminal to node 10 on the Raspberry Pi. NOTE: This means connecting the sensor to the Pi TXD pin. Odd. 
 
-  2d.  Connect the wire attached to the TXD terminal to node 10 on the Raspberry Pi.
+* Connect the wire attached to the TXD terminal to node 8 on the Raspberry Pi.
 
-3.  Connect your Pi to power, and your sensor is good to go!
+* Connect your Pi to power, and your sensor is good to go!
+
 
 # Coding the PM10 sensor into Raspberry Pi
 
@@ -58,9 +59,11 @@ I did this entire step within the Raspberry Pi terminal interface.
 
 ## Code
 
-1.  Open up a text document in nano by typing "nano pms5003.py" into the bar in the terminal (pms5003.py will be our document name).
+We have made the code available on Sakai, so you can download it directly from the web onto your Pi or follow the steps below:
 
-2.  Copy the following code to your computer's clipboard using Ctrl C:
+1 Open up a text document in nano by typing "nano pms5003.py" into the bar in the terminal (pms5003.py will be our document name).
+
+2  Copy the following code to your computer's clipboard using Ctrl C:
 
 ```{python, eval=FALSE, python.reticulate=FALSE}
 import serial

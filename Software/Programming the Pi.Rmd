@@ -1,0 +1,31 @@
+---
+title: "Programming the Raspberry Pi"
+author: "Anna Burns & Marc Los Huertos"
+date: "6/28/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+
+
+### Using the GUI
+
+My suggestion is it use thonny, it seems to have the best interface for beginners. 
+
+Open a terminal window and type
+
+thonny 
+
+then you will have a new programming window. From here you can either paste in the program or type the code directly. 
+
+more soon...
+
+### Using ssh
+
+software that allowed editing and running simlutaneously...
+

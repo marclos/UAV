@@ -220,7 +220,7 @@ into the console.  This will lead you to a screen with several options; select o
 
 \item Note that Raspberry Pi updated in November 2016 so that SSH is disabled automatically.  You will need to turn it on in order to progress.
 
-\item You will need to know your Raspberry Pi's IP address to connect to it. To find this, type 
+\item You will need to know your Raspberry \hypertarget{Pi's IP address} to connect to it. To find this, type 
 \begin{lstlisting}
 hostname -I 
 \end{lstlisting}
@@ -236,15 +236,31 @@ If you don't have much computer programming experience, this option may be bette
 
 \begin{enumerate}
 
-\item Install the package necessary to remotely access your screen: "\$sudo apt-get install xrdp".
-\item Connecting to Mac or Linux OS: open the terminal and add "ssh pi(at) (inet)".
-\item Connecting to Windows OS: this is a bit more involved; you will need to download an SSH client.  
-\item The Microsoft "Remote Desktop Connection" app is available for free, and is pretty intuitive to use.  Download this, and follow the instructions to set it up.  
-\item Once it is installed, all you will need to do is enter the address you found above into the text box (it should look something like 192.168.XXX.X.XXX).
-\item A page will open for you to add your username and password (which at this point should still be "pi" and "raspberry").  Then your console will open.
-\item If it won't connect: make sure your microprocessor and the computer you are attempting to accesss it from are on the same wifi;
-\item make sure your microprocessor is connected and hasn't gone to sleep; 
-\item make sure you've properly enabled all of the packages (I had to try to run xrdp twice to get it to work the first time).  
+\item Install the package necessary to remotely access your screen: 
+
+\begin{lstlisting}
+sudo apt-get install xrdp
+\end{lstlisting}
+
+\item Connecting to Mac or Linux OS: open the terminal and type
+
+\begin{lstlisting}
+ssh pi@IPaddress
+\end{lstlisting}
+
+\item Connecting to Windows OS: this is a bit more involved; you might need to download an SSH client. 
+
+\item The Microsoft ``Remote Desktop Connection'' app is available for free, and is pretty intuitive to use. Usually, this is already installed on the computer and you can find it by searching for the name using the tool bar search icon. If not, you may need to download the application, and follow the instructions to set it up. 
+
+\item Start the probem and it will prompt you to enter the Pi's IP  address you found above into the text box (it should look something like 192.168.X.X).
+
+\item A page will open for you to add your username and password (which at this point should still be Pi's username and password).  Then your console will open.
+
+\item If it won't conect: make sure your microprocessor and the computer you are attempting to accesss it from are on the same wifi, you can check by using the \hyperlink{ping}{ping} command in the command window to confirm communications.
+
+\item Make sure your microprocessor is connected and hasn't gone to sleep;
+
+\item Make sure you've properly enabled all of the packages. Note: You may need to run the  xrdp twice to get it to work for the first time).  
 
 \end{enumerate}
 
@@ -268,7 +284,7 @@ This option allows you to access your Pi microprocessor through an external shel
 
 \item Open the Command Prompt (which is command line window in windows)
 
-\item I recommend that you ``ping'' the Pi before going to the next step. Ping is a short command use to check of the communications are working. As it turns out if I am using Pomona's VPN, I could not get it to work. So, I disconnected from the VPN and then typed
+\item I recommend that you ``\hypertarget{ping}'' the Pi before going to the next step. Ping is a short command use to check of the communications are working. As it turns out if I am using Pomona's VPN, I could not get it to work. So, I disconnected from the VPN and then typed
 
 \begin{lstlisting}
 ping 192.168.0.4
@@ -298,6 +314,7 @@ where the username is pi and the IPaddress is the number you wrote down in step 
 \begin{enumerate}
 
 \item Your microprocessor needs to be connected to a powersource in order to remotely access it.
+
 \item Both the GUI and main terminal options can be rather glitchy; if the program quits, wait a moment and then log back in.  It may not work on the first try, but do it again and it should connect.
 \item Make sure that your computer is connected to Wifi, and that it is connected to the same Wifi network your microprocessor is on.
 
@@ -305,7 +322,7 @@ where the username is pi and the IPaddress is the number you wrote down in step 
 
 \subsubsection{Headless SSH Connection}
 
-If you need to connect your Pi microprocessor to a new Wifi network but do not have access to a monitor, follow this process.  **NOTE: Anna is still in the process of figuring this out and has not gotten it to work yet; these are the steps I have done so far**
+If you need to connect your Pi microprocessor to a new Wifi network but do not have access to a monitor, follow this process. 
 
 \begin{enumerate}
 
@@ -331,13 +348,17 @@ network={
 
 \end{lstlisting}
 
-Being sure to insert three things: your 2 letter ISO country code (if you are in the United States, this is US); your Wifi's name; and your Wifi's password.
+Being sure to insert three things: your 2 letter ISO country code (if you are in the United States, this is US); your Wifi's name; and your Wifi's password.  Note that there are meant to be quotation marks around your ssid and psk.
 
 \item Within the notepad document, go into file/save as.  Save the file within the boot folder for the SD card.  Note that if you are on Windows, make sure that the file type is "all files" and not "txt".
 
 \item Within your file directory, left-click on the "boot" folder and select eject.  You can now take out the SD card by pushing the card further in so that it un-clicks.
+<<<<<<< HEAD
 
 \item Reinsert the MicroSD card into the Pi, and continue the remote access connection in one of the methods discussed previously.
+=======
+\item Reinsert the MicroSD card into the Pi, and continue the remote access connection in one of the methods discussed previously.  Note that even if you had already enabled SSH and found your pi's IP address on a previous network, connecting to a new network means that you need to re-establish SSH connections, AND that your Pi's IP address will (strangely) be different!  The remote connection will NOT work with the IP address you had used on your previous network connection.
+>>>>>>> c1af788340cc2b66131149ce24b828e68986c042
 
 \end{enumerate}
 
