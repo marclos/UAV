@@ -66,65 +66,65 @@ We have made the code available on Sakai, so you can download it directly from t
 2  Copy the following code to your computer's clipboard using Ctrl C:
 
 ```{python, eval=FALSE, python.reticulate=FALSE}
-import serial
-from collections import OrderedDict
-import csv
-import time
+import serial # These are the pre-coded Github packages that this code uses; serial allows python to run on different back-end connections.
+from collections import OrderedDict # Imports the ordered dictionary function
+import csv # Package that allows you to compile to a csv file
+import time # Allows you to define time intervals
 
-class Sensor():
-  def __init__(self, tty = '/dev/ttyS0'):
+class Sensor(): # Defining what you are gathering data from
+  def __init__(self, tty = '/dev/ttyS0'): # Signals that you are getting data from GPIO pins
     self.tty = tty
   
-  def open(self):
-    self.serial = serial.Serial(self.tty, baudrate = 9600)
+  def open(self): # Opening the connection between the sensor and the Pi
+    self.serial = serial.Serial(self.tty, baudrate = 9600) # Baudrate is the signal rate between the sensor and Pi
   
-  def close(self):
+  def close(self): # Closing the connection between the sensor and the Pi
     self.serial.close()
     
-  def read_bytes(self, data, idx, size = 2):
+  def read_bytes(self, data, idx, size = 2): # Translates data from sensor to Pi
     return int("".join(data[idx : idx + size]), 16)
     
-  def read(self):
+  def read(self): # Translates data from Pi to output
     data = self.serial.read(32)
     data = ["{:02X}".format(d) for d in data]
     
     if data[0] != '42' or data[1] != '4D':
       return None
       
-    res = OrderedDict()
+    res = OrderedDict() # This code returns an ordered dictionary of the following elements:
     res['pm1_cf'] = self.read_bytes(data, 4)
     res['pm25_cf'] = self.read_bytes(data, 6)
     res['pm10_cf'] = self.read_bytes(data, 8)
     res['pm1'] = self.read_bytes(data, 10)
     res['pm25'] = self.read_bytes(data, 12)
     res['pm10'] = self.read_bytes(data, 14)
-    
+
     res['temperature'] = self.read_bytes(data, 24) / 10
     res['humidity'] = self.read_bytes(data, 26) / 10
     return res
     
-def  write_to_csv():
+def  write_to_csv(): # Writes the output to a csv file
         if __name__ == "__main__":
-                with open('/home/pi/pms5003_data.csv', mode='a') as csv_file:
+                with open('/home/pi/pms5003_data.csv', mode='a') as csv_file: # First condition is the name and location of your csv file (this can be changed); second condition is the 'append' mode, which allows you to add new lines to the document without overwriting old ones
                         csv_writer = csv.writer(csv_file)
-                        csv_writer.writerow([data])
-                with open('/home/pi/pms5003_data.csv', mode='r') as csv_file:
+                        csv_writer.writerow([data]) # Data is what your output is titled
+                with open('/home/pi/pms5003_data.csv', mode='r') as csv_file: # Now that your csv file is appended, this allows you to read it and actually prints the output
                         csv_reader = csv.reader(csv_file)
                         for row in csv_reader:
                                 print(row)
                
-if __name__ == '__main__':
-  while True:
+if __name__ == '__main__': # This denotes the path that your code follows.  These all use the conditions that you defined in the code above.
+  while True: # Creates a loop so that the code will read in intervals as defined below.
     '''
     Test code
     '''
-    sensor = Sensor()
-    sensor.open()
-    data = sensor.read()
-    sensor.close()
-    print(data)
-    write_to_csv()
-    time.sleep(10)
+    sensor = Sensor() # Defining the sensor as above
+    sensor.open() # Opening the sensor
+    data = sensor.read() # Reading data from the sensor
+    sensor.close() # Closing the sensor
+    print(data) # Printing the data to the terminal
+    write_to_csv() # Compiling the data to a CSV file
+    time.sleep(10) # Establishing that the data will be read in ten second intervals (can be changed).
   
 ```
 
@@ -153,8 +153,9 @@ It should release a reading of the different measurements specified at intervals
 
 
 Potential places to store data:
+
 - Luftdaten: a German open-source citizen science data repository for air quality
 
-https://learn.pimoroni.com/tutorial/sandyj/enviro-plus-and-luftdaten-air-quality-station (this tutorial uses a different input w/ enviroplus, so the code is not the same as what we have)
+- https://learn.pimoroni.com/tutorial/sandyj/enviro-plus-and-luftdaten-air-quality-station (this tutorial uses a different input w/ enviroplus, so the code is not the same as what we have)
 
 - Into a CSV file: https://stackoverflow.com/questions/57314552/saving-sensor-data-from-pi-into-csv-file (not sure how to tailor this to our project)
