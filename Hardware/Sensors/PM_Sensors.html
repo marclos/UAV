@@ -1650,15 +1650,19 @@ summary {
 </div>
 <div id="physically-connecting-the-sensor-to-raspberry-pi" class="section level1">
 <h1>Physically connecting the sensor to Raspberry Pi</h1>
-<p>1 Begin by connecting the sensor to the adapter. Take the colorful wires with white blocks on either end and attach them to both the sensor and the small adapter; they attach with the “shiny” side up, and you need to give them quite a push to get them to go in fully. They should be snug, and not at all loose.</p>
-<p>2 Next, connect the adapter to the Raspberry Pi. Separate four of the female-to-female connectors (the ones with the black rectangles on either end) and attach one of the ends to the TXD, RXD, GND and VCO terminals on the adapter (these correspond to the 4th, 5th, 7th, and 8th terminals from the top).</p>
+<ol style="list-style-type: decimal">
+<li><p>Begin by connecting the sensor to the adapter. Take the colorful wires with white blocks on either end and attach them to both the sensor and the small adapter; they attach with the “shiny” side up, and you need to give them quite a push to get them to go in fully. They should be snug, and not at all loose.</p></li>
+<li><p>Next, connect the adapter to the Raspberry Pi. Separate four of the female-to-female connectors (the ones with the black rectangles on either end) and attach one of the ends to the TXD, RXD, GND and VCO terminals on the adapter (these correspond to the 4th, 5th, 7th, and 8th terminals from the top).</p></li>
+</ol>
 <ul>
 <li><p>Connect the wire attached to the VCC terminal to node 2 on the Raspberry Pi.</p></li>
 <li><p>Connect the wire attached to the GND terminal to node 14 on the Raspberry Pi.</p></li>
 <li><p>Connect the wire attached to the RXD terminal to node 10 on the Raspberry Pi. NOTE: This means connecting the sensor to the Pi TXD pin. Odd.</p></li>
 <li><p>Connect the wire attached to the TXD terminal to node 8 on the Raspberry Pi.</p></li>
-<li><p>Connect your Pi to power, and your sensor is good to go!</p></li>
 </ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Connect your Pi to power, and your sensor is good to go!</li>
+</ol>
 </div>
 <div id="coding-the-pm10-sensor-into-raspberry-pi" class="section level1">
 <h1>Coding the PM10 sensor into Raspberry Pi</h1>
@@ -1758,15 +1762,8 @@ if __name__ == &#39;__main__&#39;: # This denotes the path that your code follow
 <div id="still-to-come" class="section level1">
 <h1>Still to come</h1>
 <ul>
-<li><p>Storing the data somewhere that we can see variability (perhaps Adafruit IO? Info (for a different PM sensor): <a href="https://www.raspberrypi.org/blog/monitor-air-quality-with-a-raspberry-pi/" class="uri">https://www.raspberrypi.org/blog/monitor-air-quality-with-a-raspberry-pi/</a> )</p></li>
 <li><p>Checking for accuracy (why divide the temperature/humidity by ten?)</p></li>
 <li><p>“The Raspberry Pi does not have a Real-Time Clock: on bootstrap it gets the time via NTP protocol over the internet. If an NTP server is not available, it will default to the time of last shutdown. Neverthless the station is supposed to work and store data even when there is not internet connection, so it is required a Real-Time Clock module.” -&gt; do we need one of these?</p></li>
-</ul>
-<p>Potential places to store data:</p>
-<ul>
-<li><p>Luftdaten: a German open-source citizen science data repository for air quality</p></li>
-<li><p><a href="https://learn.pimoroni.com/tutorial/sandyj/enviro-plus-and-luftdaten-air-quality-station" class="uri">https://learn.pimoroni.com/tutorial/sandyj/enviro-plus-and-luftdaten-air-quality-station</a> (this tutorial uses a different input w/ enviroplus, so the code is not the same as what we have)</p></li>
-<li><p>Into a CSV file: <a href="https://stackoverflow.com/questions/57314552/saving-sensor-data-from-pi-into-csv-file" class="uri">https://stackoverflow.com/questions/57314552/saving-sensor-data-from-pi-into-csv-file</a> (not sure how to tailor this to our project)</p></li>
 </ul>
 </div>
 

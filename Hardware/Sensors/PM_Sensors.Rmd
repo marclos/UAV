@@ -22,9 +22,9 @@ The guide below was compiled from an instructional Youtube video published on 11
 
 # Physically connecting the sensor to Raspberry Pi
 
-1 Begin by connecting the sensor to the adapter. Take the colorful wires with white blocks on either end and attach them to both the sensor and the small adapter; they attach with the "shiny" side up, and you need to give them quite a push to get them to go in fully.  They should be snug, and not at all loose.
+1.  Begin by connecting the sensor to the adapter. Take the colorful wires with white blocks on either end and attach them to both the sensor and the small adapter; they attach with the "shiny" side up, and you need to give them quite a push to get them to go in fully.  They should be snug, and not at all loose.
 
-2 Next, connect the adapter to the Raspberry Pi.  Separate four of the female-to-female connectors (the ones with the black rectangles on either end) and attach one of the ends to the TXD, RXD, GND and VCO terminals on the adapter (these correspond to the 4th, 5th, 7th, and 8th terminals from the top).  
+2.  Next, connect the adapter to the Raspberry Pi.  Separate four of the female-to-female connectors (the ones with the black rectangles on either end) and attach one of the ends to the TXD, RXD, GND and VCO terminals on the adapter (these correspond to the 4th, 5th, 7th, and 8th terminals from the top).  
 
 * Connect the wire attached to the VCC terminal to node 2 on the Raspberry Pi.
 
@@ -34,7 +34,7 @@ The guide below was compiled from an instructional Youtube video published on 11
 
 * Connect the wire attached to the TXD terminal to node 8 on the Raspberry Pi.
 
-* Connect your Pi to power, and your sensor is good to go!
+3.  Connect your Pi to power, and your sensor is good to go!
 
 
 # Coding the PM10 sensor into Raspberry Pi
@@ -145,17 +145,6 @@ It should release a reading of the different measurements specified at intervals
 
 # Still to come
 
-- Storing the data somewhere that we can see variability (perhaps Adafruit IO?  Info (for a different PM sensor): https://www.raspberrypi.org/blog/monitor-air-quality-with-a-raspberry-pi/ )
-
 - Checking for accuracy (why divide the temperature/humidity by ten?)
 
 - "The Raspberry Pi does not have a Real-Time Clock: on bootstrap it gets the time via NTP protocol over the internet. If an NTP server is not available, it will default to the time of last shutdown. Neverthless the station is supposed to work and store data even when there is not internet connection, so it is required a Real-Time Clock module." -> do we need one of these?
-
-
-Potential places to store data:
-
-- Luftdaten: a German open-source citizen science data repository for air quality
-
-- https://learn.pimoroni.com/tutorial/sandyj/enviro-plus-and-luftdaten-air-quality-station (this tutorial uses a different input w/ enviroplus, so the code is not the same as what we have)
-
-- Into a CSV file: https://stackoverflow.com/questions/57314552/saving-sensor-data-from-pi-into-csv-file (not sure how to tailor this to our project)
