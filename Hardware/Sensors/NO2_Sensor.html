@@ -372,6 +372,12 @@ summary {
 <div id="our-sensor" class="section level1">
 <h1>Our Sensor</h1>
 <p>We are using a MiCS-2714 from SGX Sensortech, which costs 8.75 USD. In addition to the sensor, we also purchased the accompanying MiCS Quickstart Evaluation Board from SGX Sensortech for 38.75 USD. Furthermore, we have the corresponding HTU21D humidity and temperature sensor, which was purchaed from SGX Sensortech for 2.60 USD.</p>
+</div>
+<div id="work-flow" class="section level1">
+<h1>Work Flow</h1>
+<p><a href="https://sgx.cdistore.com/datasheets/sgx/micsquickstartevaluationboard-cdi.pdf" class="uri">https://sgx.cdistore.com/datasheets/sgx/micsquickstartevaluationboard-cdi.pdf</a></p>
+<p>Page 2 of this guide specifies that for the MCIS-2714, once the jumpers are on the output is via VOUTB and the power input is via V+. Accordingly, I used two F-F jumpers to connect Vin+ to pin 2 (5V) and VOUTA to pin 7 (GPIO4). Something I am worried about is that multiple sources have stated that the MICS Quick Start Evaluation Board takes between 7-24(?) volts of power and then reduces it to 5V for the sensor… with this in mind I connected the power source to 5V, but I’m not sure if it needs more in order to reduce it back.</p>
+<p>Next: Look in book on how to program to receive signal from GPIO4, ping sensor to see if this set-up even works.</p>
 <div id="helpful-resources-for-setting-up-sensor" class="section level2">
 <h2>Helpful Resources for Setting Up Sensor</h2>
 <p><strong>Note: AB has not yet figured out how to set up this sensor; these are the sources that looked like they could be useful.</strong></p>
