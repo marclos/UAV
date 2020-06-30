@@ -91,6 +91,10 @@ I use the 5V of the Raspberry Pi's. However, an external power supply is recomme
 
 \item[O3]
 
+CJMCU-131 MQ131 Ozone Concentration Sensor High And Low Concentration O3 Air Quality Detection Module 
+
+MQ-131
+
 \item[CO]
 
 \item[Pressure, Temperature and Humidity]
