@@ -1,0 +1,14 @@
+---
+title: "Sleeping Pi and Power Options"
+author: "Anna Burns & Marc Los Huertos"
+date: "6/29/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+https://www.raspberrypi.org/blog/build-low-power-clock-controlled-devices/

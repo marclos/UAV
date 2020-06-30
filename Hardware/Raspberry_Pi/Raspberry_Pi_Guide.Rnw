@@ -400,45 +400,13 @@ If there is a conflict between commits and some information that was previously 
 
 \end{enumerate}
 
-\subsection{Projects General-purpose input-output Examples}
 
-\subsubsection{Weather and Climate}
+\section{Implementing Pi Projects}
 
-%\href{Thermocouples Sensors}{https://www.omega.com/en-us/resources/thermocouples]}
+\subsection{Using Sensors with Pi}
 
-\subsubsection{Air Quality}
+Now the Pi is set up we can move on to developing environmental monitoring projects. 
+\subsection{Using a Camera with Pi}
 
-\subsubsection{Sensors}
-
-Particulate Matter
-
-NOx
-
-O3
-
-CO
-
-Temperature and Humidity
-
-\subsubsection{Software}
-
-- Python Script
-
-\subsubsection{Soil Moisture}
-
-Tutorials in using a Pi to monistor soil mosture:
-
-\begin{itemize}
-
-\item \href{https://tutorials-raspberrypi.com/measuring-soil-moisture-with-raspberry-pi/}{Simple and Inexpensive Method}
-
-\item \href{moisture-sensor-dfrobothttps://www.switchdoc.com/2018/11/tutorial-capacitive-moisture-sensor-grove/}{Raspberry 3 and Capacitance Sensors -- More Accurate, limited corrosion}
-
-\item \href{https://tutorials-raspberrypi.com/raspberry-pi-capacitive-spoil-moisture-sensor-dfrobot-gravity/}{moisture-sensor-dfrobot?}
-\end{itemize}
-
-\subsubsection{Wildlife}
-
-Poacher Cam v7, Chris Kline, panthera.org
 
 \end{document}
