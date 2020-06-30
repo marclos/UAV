@@ -95,9 +95,16 @@ I use the 5V of the Raspberry Pi's. However, an external power supply is recomme
 
 \item[Pressure, Temperature and Humidity]
 
+There are several types: BME680; DHT11; DHT22.
+
+
+The DHT11 and DHT22 sensors can measure humidity as well as temperature. Only one GPIO is used. The difference between the two is mainly the measuring range and accuracy. The white DHT22 can measure all humidity ranges from 0-100\% with an accuracy of 2\%. By comparison, the DHT11 (blue) is only able to measure areas of 20-90\% humidity and above all, the accuracy is significantly worse with 5\%. The light blue DHT11 sensor has a small price advantage (about one buck).
+
+For more information see the \href{https://tutorials-raspberrypi.com/raspberry-pi-measure-humidity-temperature-dht11-dht22/}{Raspberry Pi DHT11-DHT22 Tutorial} available on the Raspberry Pi Foundation website.
+
 Refered to as a low power gas, pressure, temperature \& humidity sensor, the BME680 is...
 
-\href{BME680 Data Sheet}{https://cdn-shop.adafruit.com/product-files/3660/BME680.pdf}{BME680 Data Sheet}
+\href{https://cdn-shop.adafruit.com/product-files/3660/BME680.pdf}{BME680 Data Sheet}
 
 \end{description}
 
