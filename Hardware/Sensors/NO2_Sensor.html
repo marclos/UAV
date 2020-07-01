@@ -372,21 +372,138 @@ summary {
 <div id="our-sensor" class="section level1">
 <h1>Our Sensor</h1>
 <p>We are using a MiCS-2714 from SGX Sensortech, which costs 8.75 USD. In addition to the sensor, we also purchased the accompanying MiCS Quickstart Evaluation Board from SGX Sensortech for 38.75 USD. Furthermore, we have the corresponding HTU21D humidity and temperature sensor, which was purchaed from SGX Sensortech for 2.60 USD.</p>
+<p>Because our sensor produces analog data, but our Pi reads digital data, we need an analog to digital convertor. We are using the MCP3008 Raspberry Pi Interface, which costs 5.99 USD from Amazon.</p>
+</div>
+<div id="materials-needed" class="section level1">
+<h1>Materials Needed</h1>
+<ul>
+<li>1 MiCS-2714 NO2 sensor</li>
+<li>1 MiCS Quickstart Evaluation Board</li>
+<li>1 jumper</li>
+<li>1 breadboard</li>
+<li>1 MCP3008 ADC convertor</li>
+<li>4 M-M extension jumper wires</li>
+<li>6 M-F extension jumper wires</li>
+</ul>
+<p><strong>Pending materials: jumper wires needed to connect startboard to breadboard</strong></p>
+</div>
+<div id="wiring-the-analog-to-digital-convertor" class="section level1">
+<h1>Wiring the Analog to Digital Convertor</h1>
+<p>To set up our Adafruit MCP3008 ADC, we will use the Adafruit Github packages. More information on this process is available at <a href="https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008" class="uri">https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008</a>.</p>
+<p>Make sure the Raspberry Pi is not connected to power as you complete these steps.</p>
+<ol style="list-style-type: decimal">
+<li><p>Remove the MCP3008 from the packaging, and find the half-circle that is printed on the back of the convertor. Place the convertor with the pins facing down in rows E and F (going across the gap in the middle of the breadboard) between rows 24 and 31, with the half-circle on row 31. The direction of the convertor is very important, because each of the pins has a specific purpose.</p></li>
+<li><p>Place two M-M jumper wires in the breadboard, with one connecting 31d to 31- (the vertical row directly next to row a), and the other connecting 30d to 30-.</p></li>
+<li><p>Connect the M end of a M-F jumper wire to 35-, and connect the F end to GPIO 1 on the Raspberry Pi. Your convertor is now connected to power!</p></li>
+<li><p>Place two more M-M jumper wires in the breadboard, with one connecting 29d to 29+ (the vertical row on the edge of the board on the a-side), and the other connecting 28d to 28+.</p></li>
+<li><p>Connect the M end of a M-F jumper wire to 36+, and connect the F end to GPIO 9 on the Raspberry Pi. Your convertor is now grounded!</p></li>
+<li><p>Connect the M end of a M-F jumper wire to 27d on the breadboard; connect the F end to GPIO 18 on the Raspberry Pi.</p></li>
+<li><p>Connect the M end of a M-F jumper wire to 26d on the breadboard; connect the F end to GPIO 23 on the Raspberry Pi.</p></li>
+<li><p>Connect the M end of a M-F jumper wire to 25d on the breadboard; connect the F end to GPIO 24 on the Raspberry Pi.</p></li>
+<li><p>Connect the M end of a M-F jumper wire to 24d on the breadboard; connect the F end to GPIO 25 on the Raspberry Pi.</p></li>
+<li><p>Your MCP3008 is now fully connected to your Pi, and you can connect your Pi to a powersource.</p></li>
+</ol>
+<div id="testing-the-digital-connection-of-the-mcp3008" class="section level2">
+<h2>Testing the Digital Connection of the MCP3008</h2>
+<p>We’ll go through this process to download the proper libraries, and to make sure that the MCP3008 is correctly wired.</p>
+<ol style="list-style-type: decimal">
+<li><p>Open up the Pi terminal, either through a monitor or a remote access connection (for more information on these options, visit the Raspberry Pi Guide).</p></li>
+<li><p>Download the necessary packages for using the MCP3008 from the Adafruit library with the following commands:</p></li>
+</ol>
+<pre class="python"><code>sudo apt-get update # Make sure your Pi is up-to-date... this can take some time
+sudo apt-get install build-essential python-dev python-smbus git # You may already have some of these packages, but re-download just in case
+cd ~ # This takes you to the main directory
+git clone https://github.com/adafruit/Adafruit_Python_MCP3008.git # This downloads the appropriate packages from Github, and is one of the advantages of using an Adafruit sensor
+cd Adafruit_Python_MCP3008 # Changing the directory to the repository we just downloaded
+sudo python setup.py install # Install the appropriate library</code></pre>
+<p>Now we can begin to test whether or not the convertor is properly connected.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Change directories to the example folder within the Adafruit MCP3008 package with</li>
+</ol>
+<pre class="python"><code>cd Adafruit_Python_MCP3008/examples</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Run the test file that the package already wrote for you with</li>
+</ol>
+<pre class="python"><code>sudo python simpletest.py</code></pre>
+<p>The output will be eight columns (for each of the ADC channels on the sensor) with a value of how much power is being sent to each one. For example, if each column has a value of 1023, then each is receiving the full 3.3 V. This code will update every half second, so to stop is you need to type Ctrl C. If the ADC channels are getting power, then you are good to go!</p>
+</div>
+</div>
+<div id="wiring-the-mics-quick-start-board" class="section level1">
+<h1>Wiring the MICS Quick Start Board</h1>
 </div>
 <div id="work-flow" class="section level1">
 <h1>Work Flow</h1>
+<div id="physical-assembly" class="section level2">
+<h2>Physical Assembly</h2>
 <p><a href="https://sgx.cdistore.com/datasheets/sgx/micsquickstartevaluationboard-cdi.pdf" class="uri">https://sgx.cdistore.com/datasheets/sgx/micsquickstartevaluationboard-cdi.pdf</a></p>
 <p>Page 2 of this guide specifies that for the MCIS-2714, once the jumpers are on the output is via VOUTB and the power input is via V+. Accordingly, I used two F-F jumpers to connect Vin+ to pin 2 (5V) and VOUTA to pin 7 (GPIO4). Something I am worried about is that multiple sources have stated that the MICS Quick Start Evaluation Board takes between 7-24(?) volts of power and then reduces it to 5V for the sensor… with this in mind I connected the power source to 5V, but I’m not sure if it needs more in order to reduce it back.</p>
+<p>GND connect to ground.</p>
 <p>Next: Look in book on how to program to receive signal from GPIO4, ping sensor to see if this set-up even works.</p>
-<div id="helpful-resources-for-setting-up-sensor" class="section level2">
-<h2>Helpful Resources for Setting Up Sensor</h2>
+</div>
+<div id="code" class="section level2">
+<h2>Code</h2>
+<p>Some potential ideas:</p>
+<div id="gpio-input" class="section level3">
+<h3>GPIO input</h3>
+<pre class="python"><code>import rpi.GPIO as GPIO
+import time
+
+try:
+  GPIO.setmode(GPIO.BOARD)
+  </code></pre>
+</div>
+<div id="editing-pms5003-code" class="section level3">
+<h3>Editing PMS5003 code</h3>
+<pre class="python"><code>import serial
+import time
+import collections
+
+class Sensor():
+  def __init__(self, tty=&#39;/dev/ttys0&#39;): # Need to change this, reads from GPIO not UART... trickles down
+    self.tty = tty
+    
+  def open(self):
+    self.serial = serial.Serial(self.tty, baudrate = 9600)
+  
+  def close(self):
+    self.serial.close()
+
+  # Need to figure out reading the sensor
+  
+def write_to_csv():
+  if __name__ == &#39;__main__&#39;:
+    with open(&#39;/home/pi/mics2714_data.csv&#39;, mode = &#39;a&#39;) as csv_file:
+      csv_writer = csv.writer(csv_file)
+      csv_writer.writerow([data])
+    with open(&#39;/home/pi/mics2714_data.csv&#39;, mode = &#39;w&#39;) as csv_file:
+      csv_reader = csv.reader(csv_file)
+      for row in csv_reader:
+        print(row)
+      
+if __name__ == &#39;__main__&#39;: 
+  while True: 
+    &#39;&#39;&#39;
+    Test code
+    &#39;&#39;&#39;
+    sensor = Sensor() 
+    sensor.open() 
+    data = sensor.read() 
+    sensor.close() 
+    print(data)
+    write_to_csv() 
+    time.sleep(30)
+  </code></pre>
+</div>
+</div>
+</div>
+<div id="helpful-resources-for-setting-up-sensor" class="section level1">
+<h1>Helpful Resources for Setting Up Sensor</h1>
 <p><strong>Note: AB has not yet figured out how to set up this sensor; these are the sources that looked like they could be useful.</strong></p>
 <p><a href="https://www.instructables.com/id/Smart-Sensor/" class="uri">https://www.instructables.com/id/Smart-Sensor/</a> - contains link to downlaod pdf on MiCS-2714 (<strong>this was probably the most helpful source I found</strong>)</p>
 <p><a href="https://download.mikroe.com/documents/datasheets/MiCS-2714%20Datasheet.pdf" class="uri">https://download.mikroe.com/documents/datasheets/MiCS-2714%20Datasheet.pdf</a> - Datasheet for the sensor</p>
 <p><a href="https://sgx.cdistore.com/datasheets/sgx/load-resistance-for-mics-sensors-measurements.pdf" class="uri">https://sgx.cdistore.com/datasheets/sgx/load-resistance-for-mics-sensors-measurements.pdf</a> - “How to set up load resistance for MiCS sensors measurements”</p>
 <p><a href="https://www.sgxsensortech.com/content/uploads/2014/08/AN2-%e2%80%93-Frequently-Asked-Questions-for-MiCS-Gas-Sensors.pdf" class="uri">https://www.sgxsensortech.com/content/uploads/2014/08/AN2-%e2%80%93-Frequently-Asked-Questions-for-MiCS-Gas-Sensors.pdf</a> - “Frequently asked questions for MiCS gas sensors”</p>
 <p><a href="https://www.sgxsensortech.com/content/uploads/2014/08/AN-0172-SGX-Metal-Oxide-Gas-Sensors-V1.pdf" class="uri">https://www.sgxsensortech.com/content/uploads/2014/08/AN-0172-SGX-Metal-Oxide-Gas-Sensors-V1.pdf</a> - “SGX metal oxide sensors (how to use them and how they perform)”</p>
-</div>
 <div id="scientific-papers-that-use-a-similar-setup" class="section level2">
 <h2>Scientific Papers that Use a Similar Setup</h2>
 <p><a href="http://ijiet.com/wp-content/uploads/2018/01/3.pdf" class="uri">http://ijiet.com/wp-content/uploads/2018/01/3.pdf</a> - “IOT based indoor air pollution monitor using Raspberry Pi” (paper that uses this sensor with Raspberry Pi)</p>

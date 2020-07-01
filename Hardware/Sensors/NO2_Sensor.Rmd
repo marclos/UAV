@@ -13,15 +13,155 @@ knitr::opts_chunk$set(echo = TRUE)
 
 We are using a MiCS-2714 from SGX Sensortech, which costs 8.75 USD.  In addition to the sensor, we also purchased the accompanying MiCS Quickstart Evaluation Board from SGX Sensortech for 38.75 USD.  Furthermore, we have the corresponding HTU21D humidity and temperature sensor, which was purchaed from SGX Sensortech for 2.60 USD.  
 
+Because our sensor produces analog data, but our Pi reads digital data, we need an analog to digital convertor.  We are using the MCP3008 Raspberry Pi Interface, which costs 5.99 USD from Amazon. 
+
+# Materials Needed
+
+* 1 MiCS-2714 NO2 sensor
+* 1 MiCS Quickstart Evaluation Board
+* 1 jumper
+* 1 breadboard
+* 1 MCP3008 ADC convertor
+* 4 M-M extension jumper wires
+* 6 M-F extension jumper wires
+
+**Pending materials: jumper wires needed to connect startboard to breadboard**
+
+# Wiring the Analog to Digital Convertor
+
+To set up our Adafruit MCP3008 ADC, we will use the Adafruit Github packages.  More information on this process is available at https://learn.adafruit.com/raspberry-pi-analog-to-digital-converters/mcp3008.  
+
+Make sure the Raspberry Pi is not connected to power as you complete these steps.
+
+1.  Remove the MCP3008 from the packaging, and find the half-circle that is printed on the back of the convertor.  Place the convertor with the pins facing down in rows E and F (going across the gap in the middle of the breadboard) between rows 24 and 31, with the half-circle on row 31.  The direction of the convertor is very important, because each of the pins has a specific purpose.
+
+2.  Place two M-M jumper wires in the breadboard, with one connecting 31d to 31- (the vertical row directly next to row a), and the other connecting 30d to 30-.  
+
+3.  Connect the M end of a M-F jumper wire to 35-, and connect the F end to GPIO 1 on the Raspberry Pi.  Your convertor is now connected to power!
+
+4.  Place two more M-M jumper wires in the breadboard, with one connecting 29d to 29+ (the vertical row on the edge of the board on the a-side), and the other connecting 28d to 28+. 
+
+5.  Connect the M end of a M-F jumper wire to 36+, and connect the F end to GPIO 9 on the Raspberry Pi.  Your convertor is now grounded!
+
+6.  Connect the M end of a M-F jumper wire to 27d on the breadboard; connect the F end to GPIO 18 on the Raspberry Pi.
+
+7.  Connect the M end of a M-F jumper wire to 26d on the breadboard; connect the F end to GPIO 23 on the Raspberry Pi.
+
+8.  Connect the M end of a M-F jumper wire to 25d on the breadboard; connect the F end to GPIO 24 on the Raspberry Pi.
+
+9.  Connect the M end of a M-F jumper wire to 24d on the breadboard; connect the F end to GPIO 25 on the Raspberry Pi.
+
+10.  Your MCP3008 is now fully connected to your Pi, and you can connect your Pi to a powersource.
+
+## Testing the Digital Connection of the MCP3008
+
+We'll go through this process to download the proper libraries, and to make sure that the MCP3008 is correctly wired.
+
+1.  Open up the Pi terminal, either through a monitor or a remote access connection (for more information on these options, visit the Raspberry Pi Guide).
+
+2.  Download the necessary packages for using the MCP3008 from the Adafruit library with the following commands:
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo apt-get update # Make sure your Pi is up-to-date... this can take some time
+sudo apt-get install build-essential python-dev python-smbus git # You may already have some of these packages, but re-download just in case
+cd ~ # This takes you to the main directory
+git clone https://github.com/adafruit/Adafruit_Python_MCP3008.git # This downloads the appropriate packages from Github, and is one of the advantages of using an Adafruit sensor
+cd Adafruit_Python_MCP3008 # Changing the directory to the repository we just downloaded
+sudo python setup.py install # Install the appropriate library
+```
+
+Now we can begin to test whether or not the convertor is properly connected.
+
+3.  Change directories to the example folder within the Adafruit MCP3008 package with
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+cd Adafruit_Python_MCP3008/examples
+```
+
+4.  Run the test file that the package already wrote for you with
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo python simpletest.py
+```
+
+The output will be eight columns (for each of the ADC channels on the sensor) with a value of how much power is being sent to each one.  For example, if each column has a value of 1023, then each is receiving the full 3.3 V.  This code will update every half second, so to stop is you need to type Ctrl C.  If the ADC channels are getting power, then you are good to go!
+
+# Wiring the MICS Quick Start Board
+
 # Work Flow
+
+## Physical Assembly
 
 https://sgx.cdistore.com/datasheets/sgx/micsquickstartevaluationboard-cdi.pdf
 
 Page 2 of this guide specifies that for the MCIS-2714, once the jumpers are on the output is via VOUTB and the power input is via V+.  Accordingly, I used two F-F jumpers to connect Vin+ to pin 2 (5V) and VOUTA to pin 7 (GPIO4).  Something I am worried about is that multiple sources have stated that the MICS Quick Start Evaluation Board takes between 7-24(?) volts of power and then reduces it to 5V for the sensor... with this in mind I connected the power source to 5V, but I'm not sure if it needs more in order to reduce it back.
 
+GND connect to ground.
+
 Next:  Look in book on how to program to receive signal from GPIO4, ping sensor to see if this set-up even works.
 
-## Helpful Resources for Setting Up Sensor
+## Code
+
+Some potential ideas:
+
+### GPIO input
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+import rpi.GPIO as GPIO
+import time
+
+try:
+  GPIO.setmode(GPIO.BOARD)
+  
+```
+
+
+### Editing PMS5003 code
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+import serial
+import time
+import collections
+
+class Sensor():
+  def __init__(self, tty='/dev/ttys0'): # Need to change this, reads from GPIO not UART... trickles down
+    self.tty = tty
+    
+  def open(self):
+    self.serial = serial.Serial(self.tty, baudrate = 9600)
+  
+  def close(self):
+    self.serial.close()
+
+  # Need to figure out reading the sensor
+  
+def write_to_csv():
+  if __name__ == '__main__':
+    with open('/home/pi/mics2714_data.csv', mode = 'a') as csv_file:
+      csv_writer = csv.writer(csv_file)
+      csv_writer.writerow([data])
+    with open('/home/pi/mics2714_data.csv', mode = 'w') as csv_file:
+      csv_reader = csv.reader(csv_file)
+      for row in csv_reader:
+        print(row)
+      
+if __name__ == '__main__': 
+  while True: 
+    '''
+    Test code
+    '''
+    sensor = Sensor() 
+    sensor.open() 
+    data = sensor.read() 
+    sensor.close() 
+    print(data)
+    write_to_csv() 
+    time.sleep(30)
+  
+```
+
+
+# Helpful Resources for Setting Up Sensor
 
 **Note: AB has not yet figured out how to set up this sensor; these are the sources that looked like they could be useful.**
 
