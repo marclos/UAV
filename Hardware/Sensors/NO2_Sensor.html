@@ -383,9 +383,9 @@ summary {
 <li>1 breadboard</li>
 <li>1 MCP3008 ADC convertor</li>
 <li>4 M-M extension jumper wires</li>
-<li>6 M-F extension jumper wires</li>
+<li>7 M-F extension jumper wires</li>
+<li>2 F-F extension jumper wires</li>
 </ul>
-<p><strong>Pending materials: jumper wires needed to connect startboard to breadboard</strong></p>
 </div>
 <div id="wiring-the-analog-to-digital-convertor" class="section level1">
 <h1>Wiring the Analog to Digital Convertor</h1>
@@ -394,13 +394,13 @@ summary {
 <ol style="list-style-type: decimal">
 <li><p>Remove the MCP3008 from the packaging, and find the half-circle that is printed on the back of the convertor. Place the convertor with the pins facing down in rows E and F (going across the gap in the middle of the breadboard) between rows 24 and 31, with the half-circle on row 31. The direction of the convertor is very important, because each of the pins has a specific purpose.</p></li>
 <li><p>Place two M-M jumper wires in the breadboard, with one connecting 31d to 31- (the vertical row directly next to row a), and the other connecting 30d to 30-.</p></li>
-<li><p>Connect the M end of a M-F jumper wire to 35-, and connect the F end to GPIO 1 on the Raspberry Pi. Your convertor is now connected to power!</p></li>
-<li><p>Place two more M-M jumper wires in the breadboard, with one connecting 29d to 29+ (the vertical row on the edge of the board on the a-side), and the other connecting 28d to 28+.</p></li>
-<li><p>Connect the M end of a M-F jumper wire to 36+, and connect the F end to GPIO 9 on the Raspberry Pi. Your convertor is now grounded!</p></li>
-<li><p>Connect the M end of a M-F jumper wire to 27d on the breadboard; connect the F end to GPIO 18 on the Raspberry Pi.</p></li>
-<li><p>Connect the M end of a M-F jumper wire to 26d on the breadboard; connect the F end to GPIO 23 on the Raspberry Pi.</p></li>
-<li><p>Connect the M end of a M-F jumper wire to 25d on the breadboard; connect the F end to GPIO 24 on the Raspberry Pi.</p></li>
-<li><p>Connect the M end of a M-F jumper wire to 24d on the breadboard; connect the F end to GPIO 25 on the Raspberry Pi.</p></li>
+<li><p>Connect the M end of a M-F jumper wire to 35-, and connect the F end to pin 1 (3.3V) on the Raspberry Pi. Your convertor is now connected to power!</p></li>
+<li><p>Place two more M-M jumper wires in the breadboard, with one connecting 29d to 29+ (the vertical row on the edge of the board on the a-side), and the other connecting 24d to 24+.</p></li>
+<li><p>Connect the M end of a M-F jumper wire to 36+, and connect the F end to pin 9 (GND) on the Raspberry Pi. Your convertor is now grounded!</p></li>
+<li><p>Connect the M end of a M-F jumper wire to 28d on the breadboard; connect the F end to pin 23 (GPIO11/SPI-SCLK) on the Raspberry Pi.</p></li>
+<li><p>Connect the M end of a M-F jumper wire to 27d on the breadboard; connect the F end to pin 21 (GPIO9/SPI-MISO) on the Raspberry Pi.</p></li>
+<li><p>Connect the M end of a M-F jumper wire to 26d on the breadboard; connect the F end to pin 19 (GPIO10/SPI-MOSI) on the Raspberry Pi.</p></li>
+<li><p>Connect the M end of a M-F jumper wire to d on the breadboard; connect the F end to pin 24 (GPIO8/SPI-CEO) on the Raspberry Pi.</p></li>
 <li><p>Your MCP3008 is now fully connected to your Pi, and you can connect your Pi to a powersource.</p></li>
 </ol>
 <div id="testing-the-digital-connection-of-the-mcp3008" class="section level2">
@@ -430,6 +430,21 @@ sudo python setup.py install # Install the appropriate library</code></pre>
 </div>
 <div id="wiring-the-mics-quick-start-board" class="section level1">
 <h1>Wiring the MICS Quick Start Board</h1>
+<p>The MiCS Quickstart Board has internal wiring for multiple MiCS sensors, and makes it much easier to begin working with our MiCS-2714. The board should come with three jumpers, as well as the board. Be careful, because the sensor itself is very, very small.</p>
+<ol style="list-style-type: decimal">
+<li><p>Remove the sensor and quickstart board from the packagining. Place the sensor into the case at the top right of the board; make sure that it is flush to the sides of the case, so that the metallic strips are connected on either side.</p></li>
+<li><p>Take one of the jumpers, and place it over the J3 and J4 pins.</p></li>
+<li><p>The MiCS-2714 sensor uses Vin+, GND, and VoutB:</p></li>
+</ol>
+<ul>
+<li><p>Using a F-F jumper wire, connect Vin+ to Raspberry Pi pin 4 (5V).</p></li>
+<li><p>Using a F-F jumper wire, connect GND to Raspberry Pi pin 6 (GND).</p></li>
+<li><p>Using a M-F jumper wire, connect VoutB to 31g (Channel 0) on the breadboard (this allows the analog data to be sent through the MCP3008 analog-digital convertor so that the Pi can read it).</p></li>
+</ul>
+<p>Now all the assembly is done… all that is left is to code!</p>
+</div>
+<div id="code-for-the-sensor" class="section level1">
+<h1>Code for the Sensor</h1>
 </div>
 <div id="work-flow" class="section level1">
 <h1>Work Flow</h1>
@@ -443,6 +458,11 @@ sudo python setup.py install # Install the appropriate library</code></pre>
 <div id="code" class="section level2">
 <h2>Code</h2>
 <p>Some potential ideas:</p>
+<div id="spi-input" class="section level3">
+<h3>SPI input</h3>
+<p>Sensor connected to channel 0 on ADC</p>
+<pre class="python"><code></code></pre>
+</div>
 <div id="gpio-input" class="section level3">
 <h3>GPIO input</h3>
 <pre class="python"><code>import rpi.GPIO as GPIO

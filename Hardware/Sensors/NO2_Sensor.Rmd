@@ -23,9 +23,8 @@ Because our sensor produces analog data, but our Pi reads digital data, we need 
 * 1 breadboard
 * 1 MCP3008 ADC convertor
 * 4 M-M extension jumper wires
-* 6 M-F extension jumper wires
-
-**Pending materials: jumper wires needed to connect startboard to breadboard**
+* 7 M-F extension jumper wires
+* 2 F-F extension jumper wires
 
 # Wiring the Analog to Digital Convertor
 
@@ -37,19 +36,19 @@ Make sure the Raspberry Pi is not connected to power as you complete these steps
 
 2.  Place two M-M jumper wires in the breadboard, with one connecting 31d to 31- (the vertical row directly next to row a), and the other connecting 30d to 30-.  
 
-3.  Connect the M end of a M-F jumper wire to 35-, and connect the F end to GPIO 1 on the Raspberry Pi.  Your convertor is now connected to power!
+3.  Connect the M end of a M-F jumper wire to 35-, and connect the F end to pin 1 (3.3V) on the Raspberry Pi.  Your convertor is now connected to power!
 
-4.  Place two more M-M jumper wires in the breadboard, with one connecting 29d to 29+ (the vertical row on the edge of the board on the a-side), and the other connecting 28d to 28+. 
+4.  Place two more M-M jumper wires in the breadboard, with one connecting 29d to 29+ (the vertical row on the edge of the board on the a-side), and the other connecting 24d to 24+. 
 
-5.  Connect the M end of a M-F jumper wire to 36+, and connect the F end to GPIO 9 on the Raspberry Pi.  Your convertor is now grounded!
+5.  Connect the M end of a M-F jumper wire to 36+, and connect the F end to pin 9 (GND) on the Raspberry Pi.  Your convertor is now grounded!
 
-6.  Connect the M end of a M-F jumper wire to 27d on the breadboard; connect the F end to GPIO 18 on the Raspberry Pi.
+6.  Connect the M end of a M-F jumper wire to 28d on the breadboard; connect the F end to pin 23 (GPIO11/SPI-SCLK) on the Raspberry Pi.
 
-7.  Connect the M end of a M-F jumper wire to 26d on the breadboard; connect the F end to GPIO 23 on the Raspberry Pi.
+7.  Connect the M end of a M-F jumper wire to 27d on the breadboard; connect the F end to pin 21 (GPIO9/SPI-MISO) on the Raspberry Pi.
 
-8.  Connect the M end of a M-F jumper wire to 25d on the breadboard; connect the F end to GPIO 24 on the Raspberry Pi.
+8.  Connect the M end of a M-F jumper wire to 26d on the breadboard; connect the F end to pin 19 (GPIO10/SPI-MOSI) on the Raspberry Pi.
 
-9.  Connect the M end of a M-F jumper wire to 24d on the breadboard; connect the F end to GPIO 25 on the Raspberry Pi.
+9.  Connect the M end of a M-F jumper wire to d on the breadboard; connect the F end to pin 24 (GPIO8/SPI-CEO)  on the Raspberry Pi.
 
 10.  Your MCP3008 is now fully connected to your Pi, and you can connect your Pi to a powersource.
 
@@ -88,6 +87,27 @@ The output will be eight columns (for each of the ADC channels on the sensor) wi
 
 # Wiring the MICS Quick Start Board
 
+The MiCS Quickstart Board has internal wiring for multiple MiCS sensors, and makes it much easier to begin working with our MiCS-2714.  The board should come with three jumpers, as well as the board.  Be careful, because the sensor itself is very, very small.
+
+1.  Remove the sensor and quickstart board from the packagining.  Place the sensor into the case at the top right of the board; make sure that it is flush to the sides of the case, so that the metallic strips are connected on either side.
+
+2.  Take one of the jumpers, and place it over the J3 and J4 pins.
+
+3.  The MiCS-2714 sensor uses Vin+, GND, and VoutB:
+
+* Using a F-F jumper wire, connect Vin+ to Raspberry Pi pin 4 (5V).
+
+* Using a F-F jumper wire, connect GND to Raspberry Pi pin 6 (GND).
+
+* Using a M-F jumper wire, connect VoutB to 31g (Channel 0) on the breadboard (this allows the analog data to be sent through the MCP3008 analog-digital convertor so that the Pi can read it).
+
+Now all the assembly is done... all that is left is to code!
+
+# Code for the Sensor
+
+
+
+
 # Work Flow
 
 ## Physical Assembly
@@ -103,6 +123,16 @@ Next:  Look in book on how to program to receive signal from GPIO4, ping sensor 
 ## Code
 
 Some potential ideas:
+
+### SPI input
+
+Sensor connected to channel 0 on ADC
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+
+
+```
+
 
 ### GPIO input
 
