@@ -30,8 +30,6 @@ https://www.amazon.com/gp/product/B0852XJN11/ref=ppx_yo_dt_b_asin_title_o03_s01?
 
 - Price:  8.75 USD
 
-- Reimbursement:  Not submitted
-
 - Link:  https://www.cdiweb.com/portalproductdetail.aspx?ProdId=333416&ManufId=364 
 
 - Notes:  MOX Sensor; used in Ripoll et al., accuracy evaluated by Spinelle
@@ -46,13 +44,21 @@ https://www.amazon.com/gp/product/B0852XJN11/ref=ppx_yo_dt_b_asin_title_o03_s01?
 
 - Price:  ? (Inquiry sent)
 
-- Ordered by Anna/date arriving: Inquiry sent to company
-
-- Reimbursement:  NA
-
 - Link:  https://www.citytech.com/en-gb/
 
 - Notes:  Need to submit inquiry before ordering; Similar to monitor used in Ripoll but rated by Spinelle to be more effective; Used with uSu-edu board and Raspberry pi 3 by Ripoll; potentially not necessary, re-evaluate when sensor is built
+
+### Enviro for Raspberry Pi
+
+- Manufacturer:  Pimoroni
+
+- Source:  Amazon
+
+- Price: 56.99 USD
+
+- Link:  https://www.amazon.com/gp/product/B07WZJJ8BV/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1
+
+- Notes:  Has built in NO2 and temp sensors, very well-built data library and packages
 
 ## Associated Parts for NO2 Sensors
 
@@ -64,11 +70,21 @@ https://www.amazon.com/gp/product/B0852XJN11/ref=ppx_yo_dt_b_asin_title_o03_s01?
 
 - Price: 38.75 USD
 
-- Reimbursement:  Not submitted
-
 - Link:  https://www.cdiweb.com/products/detail/micsquickstart-sgx-sensortech/486656/
 
 - Notes:  Cheaper equivalent of what was used by Ripoll, can mount both CO2 and NO2 sensors but doesn't have a built-in humidity sensor
+
+### Adafruit MCP3008 Raspberry Pi Interface
+
+- Manufacturer:  Adafruit
+
+- Source:  Amazon
+
+- Price: 5.99 USD
+
+- Link:  https://www.amazon.com/gp/product/B00NAY3RB2/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1 
+
+- Notes: Analog to digital convertor, needed for Ozone and NO2 sensors
 
 ### HTU21D (Humidity + Temp Sensor)
 
@@ -79,8 +95,6 @@ https://www.amazon.com/gp/product/B0852XJN11/ref=ppx_yo_dt_b_asin_title_o03_s01?
 - Source: CDI Web
 
 - Price:  2.60 USD
-
-- Reimbursement:  Not submitted
 
 - Link:  https://www.cdiweb.com/products/detail/hpp845e031r4-te-connectivity/558681/
 
@@ -96,11 +110,9 @@ https://www.amazon.com/gp/product/B0852XJN11/ref=ppx_yo_dt_b_asin_title_o03_s01?
 
 - Price:  38.75 USD
 
-- Reimbursement:  Not submitted
-
 - Link:  https://www.amazon.com/gp/product/B0787H244V/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&psc=1
 
-- Notes:  Comes with connectors for Arduino; updated version of PMS3003 used by Ripoll
+- Notes:  Comes with connectors for Pi and Arduino, as well as conversion board
 
 # Temperature/Humidity Sensors
 
@@ -112,27 +124,7 @@ https://www.amazon.com/gp/product/B0852XJN11/ref=ppx_yo_dt_b_asin_title_o03_s01?
 
 - Price: 24.96 USD
 
-- Reimbursement: Not submitted
-
 - Link: https://www.amazon.com/gp/product/B013W1AJUY/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1 
-
-## Associated parts for temperature/humidity sensors
-
-### Adafruit MCP3008 Raspberry Pi Interface
-
-**Re-evaluate**
-
-- Manufacturer:  Adafruit
-
-- Source:  Amazon
-
-- Price: 5.99 USD
-
-- Reimbursement: Not submitted
-
-- Link:  https://www.amazon.com/gp/product/B00NAY3RB2/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1 
-
-- Notes: Potentially not necessary, re-evaluate at end of summer
 
 # Ozone Sensors
 
@@ -143,8 +135,6 @@ https://www.amazon.com/gp/product/B0852XJN11/ref=ppx_yo_dt_b_asin_title_o03_s01?
 - Source:  Amazon
 
 - Price: 42.99 USD
-
-- Reimbursement: Not submitted
 
 - Link:  https://www.amazon.com/gp/product/B07LGZH46N/ref=ppx_yo_dt_b_asin_title_o03_s00?ie=UTF8&psc=1
 
@@ -158,8 +148,6 @@ https://www.amazon.com/gp/product/B0852XJN11/ref=ppx_yo_dt_b_asin_title_o03_s01?
 
 - Price: 8.99 USD
 
-- Reimbursement: Not submitted
-
 - Link: https://www.amazon.com/gp/product/B01EV6LJ7G/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1
 
 - Notes: Includes 3 breadboard units
@@ -171,8 +159,6 @@ https://www.amazon.com/gp/product/B0852XJN11/ref=ppx_yo_dt_b_asin_title_o03_s01?
 - Source:  Amazon
 
 - Price: 6.98 USD
-
-- Reimbursement: Not submitted
 
 - Link:  https://www.amazon.com/gp/product/B01EV70C78/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1 
 
