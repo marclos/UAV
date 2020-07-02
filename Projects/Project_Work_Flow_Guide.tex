@@ -124,6 +124,16 @@ Details on the individual Raspberry Pi gas sensors can also be found in the corr
 
 If someone wants to build an alcohol tester or something similar, you should also be aware that these modules are not absolutely accurate and can not compete with a professional measurement.
 
+\begin{table}
+\centering
+\begin{tabular}{lrrrr}\hline
+Sensor & Volt X & Volt Y & Volt\_REF & ?? \\
+\hline\hline
+MQ-2  & &&& \\
+MQ-131 & &&& \\ \hline
+\end{tabular}
+\end{table}
+
 \subsubsection{Wiring MQ-X Sensors}
 
 In this example, we use a 5V voltage as output. This is too much for the GPIOs, which is why we use a logic level converter (TTL) that cuts down the voltage. If you use a sensor other than the MQ-2 and it has a different voltage, the setup must be adjusted.
