@@ -65,8 +65,9 @@ A Logic Level Converter is easy to connect and use since it doesn’t need any p
 
 Take note that some 3.3V sensors and module can be 5V tolerant, but if you want to make sure just insert a Logic Level Converter.
 
-\item[Breadboard]
-\item[Jumper wire]
+\item[Breadboard] Breadboards are testing platforms to build circuts. The have rows and columns which are electrically connected to give desing flexibility. There are usually two or four rails or bus strips on the long sides of the board that are for power, in our case 3.5 or 5 volts, which is usually red. The ground, usually on the inside of this power is usually blue or back colored. The rows in the inside are electrically connected, with a break in the center line. The center line is often strattled by a DIP (dual in-line package), so you can connect to each of the pins from both sides of the breadboard independently. Watch this \href{https://www.google.com/search?q=how+to+breadboards+work&rlz=1C1CHBD_enUS834US834&oq=how+to+breadboards+work&aqs=chrome..69i57j0l3.5628j1j7&sourceid=chrome&ie=UTF-8#kpvalbx=_Gz39Xq2-CuTi9APB3JGYCQ52}{Youtube video describing breadboards} for more information. 
+\item[Jumper wire] is a wire the is used to connect various electronic components. For example, a jumper wire will connect our Raspberry Pi to the breadboard, various components on the breadboard, and various sensors. These are usually found in a variety of colors, which can be tough to keep track of. However, red is almost always for the positive voltage and black is used for ground. It's highly recommneded to follow this convention -- could save much heartache.
+
 \end{description}
 
 Details on the individual Raspberry Pi gas sensors can also be found in the corresponding data sheets. Simply google the name of the sensor including ``datasheet''. There is also the voltage at which the sensor operates mentioned.
