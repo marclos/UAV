@@ -53,13 +53,17 @@ What is SPI?
 
 This has 8x2 pins, why?
 
-\item[5V to 3.3V Logic Level Converter -- LLC] This is not a problem if you are connecting many standard modules like the SR-04 distance sensor or the DHT11 temperature sensor, since these also use 5V to communicate with the Arduino.
+\item[5V to 3.3V Logic Level Converter -- LLC] 
+Digital input/output signals are 3.3 volts, but sensors might need 5 volts to power them.
+
+
+This is not a problem if you are connecting many standard modules like the SR-04 distance sensor or the DHT11 temperature sensor, since these also use 5V to communicate with the Arduino.
 
 But more recent modules now use 3.3V digital power, and can be damaged if connected directly to an Arduino models that uses 5V to communicate with external modules.
 
 This is where the Logic Level Converter comes in, it takes a 5V signal and converts it to a safe 3.3V signal.
 
-Most of these modules are bi-directional, meaning they will also convert back the 3.3V signal to 5V.
+Most of these modules are bi-directional, meaning they will also convert back the 3.3V signal to 5V. \href{https://learn.sparkfun.com/tutorials/bi-directional-logic-level-converter-hookup-guide}{Bi Directional LLC}
 
 A Logic Level Converter is easy to connect and use since it doesn’t need any programming, all you have to do is connect the 5V wire on one side and the 3.3V on the other.
 
