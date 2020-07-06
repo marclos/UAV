@@ -142,8 +142,8 @@ spi.max_speed_hz=1000000
  
 # Function to read SPI data from MCP3008 chip
 # Channel must be an integer 0-7
-def ReadChannel(0):
-  adc = spi.xfer2([1,(8+0)<<4,0])
+def ReadChannel(channel):
+  adc = spi.xfer2([1,(8+channel)<<4,0])
   data = ((adc[1]&3) << 8) + adc[2]
   return data
  
@@ -181,7 +181,7 @@ def ConvertNO2(data,places):
   #  775
   # 1023      10     3.30
  
-  NO2 = ((data * 9.95)/float(1023))+0.05
+  NO2 = ((data * 10.05)/float(1023))+0.05
   NO2 = round(NO2,places)
   return NO2
  
