@@ -26,11 +26,6 @@ On attaching the sensor to the breadboard: https://learn.adafruit.com/adafruit-b
 
 On wiring and programming the sensor: https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/i2c-sensors-and-devices 
 
-Detailed instructions on coding and physical assembly: https://xdevs.com/doc/RPi/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout.pdf
-
-Alternate code (for PMS5003 as well) and information on assembly:
-https://www.rigacci.org/wiki/doku.php/doc/appunti/hardware/raspberrypi_air 
-
 ## Physical Assembly
 
 1.  Take the header strip and break off the number of pins needed for your sensor (for the BME280, this should be seven).
@@ -39,7 +34,9 @@ https://www.rigacci.org/wiki/doku.php/doc/appunti/hardware/raspberrypi_air
 
 3.  Place holes on the sensor onto the short pins facing upwards on the header strip.  Orient the sensor so that it falls over the f-h rows on the breadboard.
 
-4.  Assemble the M-F wires, attaching the male end to the breadboard and the female end to the Raspberry Pi as follows:
+4.  Solder the short pins into the temperature reader as per the instructions in the "solder guide" document.
+
+5.  Assemble the M-F wires, attaching the male end to the breadboard and the female end to the Raspberry Pi as follows:
 
 - BB [breadboard] A2 to RP [Raspberry Pi] 1
 
@@ -49,7 +46,7 @@ https://www.rigacci.org/wiki/doku.php/doc/appunti/hardware/raspberrypi_air
 
 - BB A7 to RP 3
 
-5.  Connect the Raspberry Pi to power.
+6.  Connect the Raspberry Pi to power.
 
 ## Programming
 
@@ -57,15 +54,13 @@ https://www.rigacci.org/wiki/doku.php/doc/appunti/hardware/raspberrypi_air
 
 2.  To ensure that your Pi can read your sensor, run "sudo i2cdetect -y 1". 
 
-**note: this is the point at which AB's Pi did not pick up the sensor, see troubleshooting below.  The rest is from the instructions, but has not actually been completed by AB.**
-
 3.  Install the correct library with "pip3 install adafruit-circuitpython-bme280".  Additionally, update the package before the first time you use it with "pip3 install --upgrade adafruit_blinka".
 
 4.  Import the following code into a text file by using the nano function, typing "nano bme280.py".  (Incidentally, bme280.py will also be the name of your text file).  Enter the code into the file and save it using Ctrl O, and then exit the file with Ctrl X.
 
 ```{python, eval=FALSE, python.reticulate=FALSE}
 import time
- 
+import csv
 import board
 import busio
 import adafruit_bme280
@@ -81,20 +76,29 @@ bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c)
  
 # change this to match the location's pressure (hPa) at sea level
 bme280.sea_level_pressure = 1013.25
+
+# create a csv file to save your data to
+def  write_to_csv():
+        if __name__ == "__main__":
+                with open('/home/pi/bme280_data.csv', mode='a') as csv_file: # First condition is the name and location of your csv file (this can be changed); second condition is the 'append' mode, which allows you to add new lines to the document without overwriting old ones
+                        csv_writer = csv.writer(csv_file)
+                        csv_writer.writerow([bme280.temperature, bme280.humidity, bme280.pressure, bme280.altitude]) # This is your data
+                with open('/home/pi/bme280_data.csv', mode='r') as csv_file: # Now that your csv file is appended, this allows you to read it and actually prints the output
+                        csv_reader = csv.reader(csv_file)
+                        for row in csv_reader:
+                                print(row)
  
 while True:
     print("\nTemperature: %0.1f C" % bme280.temperature)
     print("Humidity: %0.1f %%" % bme280.humidity)
     print("Pressure: %0.1f hPa" % bme280.pressure)
     print("Altitude = %0.2f meters" % bme280.altitude)
-    time.sleep(2)
+    write_to_csv()
+    time.sleep(10)
 ```
 
-4.  Now, you can run your code by running the line "python3 bme280.py".  It should provide an output for temperature, humidity, and pressure.  
+4.  Now, you can run your code by running the line "python3 bme280.py".  It should provide an output for temperature, humidity, and pressure every ten seconds.  You can also access the data from the sensor in the "bme280_data.csv" within your document reader within the "pi" folder. 
 
-## Troubleshooting
-
-- While running the I2C detect command, it doesn't read that there is anything connected via I2C.  Is it possible I need to solder the sensor to the header strip? - AB
 
 
 

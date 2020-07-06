@@ -385,8 +385,6 @@ summary {
 <p>For diagrams and images, please refer to the following links.</p>
 <p>On attaching the sensor to the breadboard: <a href="https://learn.adafruit.com/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout/assembly" class="uri">https://learn.adafruit.com/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout/assembly</a></p>
 <p>On wiring and programming the sensor: <a href="https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/i2c-sensors-and-devices" class="uri">https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/i2c-sensors-and-devices</a></p>
-<p>Detailed instructions on coding and physical assembly: <a href="https://xdevs.com/doc/RPi/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout.pdf" class="uri">https://xdevs.com/doc/RPi/adafruit-bme280-humidity-barometric-pressure-temperature-sensor-breakout.pdf</a></p>
-<p>Alternate code (for PMS5003 as well) and information on assembly: <a href="https://www.rigacci.org/wiki/doku.php/doc/appunti/hardware/raspberrypi_air" class="uri">https://www.rigacci.org/wiki/doku.php/doc/appunti/hardware/raspberrypi_air</a></p>
 </div>
 <div id="physical-assembly" class="section level2">
 <h2>Physical Assembly</h2>
@@ -394,6 +392,7 @@ summary {
 <li><p>Take the header strip and break off the number of pins needed for your sensor (for the BME280, this should be seven).</p></li>
 <li><p>Place the header strip – long pins facing down – into the breadboard between D2 and D8 (note: you can place the header strip and sensor elsewhere on your breadboard, but you will need to adjust the wiring instructions below, which assume you are using the setup within these instructions).</p></li>
 <li><p>Place holes on the sensor onto the short pins facing upwards on the header strip. Orient the sensor so that it falls over the f-h rows on the breadboard.</p></li>
+<li><p>Solder the short pins into the temperature reader as per the instructions in the “solder guide” document.</p></li>
 <li><p>Assemble the M-F wires, attaching the male end to the breadboard and the female end to the Raspberry Pi as follows:</p></li>
 </ol>
 <ul>
@@ -402,7 +401,7 @@ summary {
 <li><p>BB A5 to RP 5</p></li>
 <li><p>BB A7 to RP 3</p></li>
 </ul>
-<ol start="5" style="list-style-type: decimal">
+<ol start="6" style="list-style-type: decimal">
 <li>Connect the Raspberry Pi to power.</li>
 </ol>
 </div>
@@ -411,14 +410,11 @@ summary {
 <ol style="list-style-type: decimal">
 <li><p>Turn on I2C interfacing capabilities on your Pi by typing “sudo raspi-config”, then select option 5 (“Interfacing options”). Next select P5 (“I2C”) and it will ask “would you like the ARM I2C interface to be enabled?” Select yes, and then exit.</p></li>
 <li><p>To ensure that your Pi can read your sensor, run “sudo i2cdetect -y 1”.</p></li>
-</ol>
-<p><strong>note: this is the point at which AB’s Pi did not pick up the sensor, see troubleshooting below. The rest is from the instructions, but has not actually been completed by AB.</strong></p>
-<ol start="3" style="list-style-type: decimal">
 <li><p>Install the correct library with “pip3 install adafruit-circuitpython-bme280”. Additionally, update the package before the first time you use it with “pip3 install –upgrade adafruit_blinka”.</p></li>
 <li><p>Import the following code into a text file by using the nano function, typing “nano bme280.py”. (Incidentally, bme280.py will also be the name of your text file). Enter the code into the file and save it using Ctrl O, and then exit the file with Ctrl X.</p></li>
 </ol>
 <pre class="python"><code>import time
- 
+import csv
 import board
 import busio
 import adafruit_bme280
@@ -434,22 +430,28 @@ bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c)
  
 # change this to match the location&#39;s pressure (hPa) at sea level
 bme280.sea_level_pressure = 1013.25
+
+# create a csv file to save your data to
+def  write_to_csv():
+        if __name__ == &quot;__main__&quot;:
+                with open(&#39;/home/pi/bme280_data.csv&#39;, mode=&#39;a&#39;) as csv_file: # First condition is the name and location of your csv file (this can be changed); second condition is the &#39;append&#39; mode, which allows you to add new lines to the document without overwriting old ones
+                        csv_writer = csv.writer(csv_file)
+                        csv_writer.writerow([bme280.temperature, bme280.humidity, bme280.pressure, bme280.altitude]) # This is your data
+                with open(&#39;/home/pi/bme280_data.csv&#39;, mode=&#39;r&#39;) as csv_file: # Now that your csv file is appended, this allows you to read it and actually prints the output
+                        csv_reader = csv.reader(csv_file)
+                        for row in csv_reader:
+                                print(row)
  
 while True:
     print(&quot;\nTemperature: %0.1f C&quot; % bme280.temperature)
     print(&quot;Humidity: %0.1f %%&quot; % bme280.humidity)
     print(&quot;Pressure: %0.1f hPa&quot; % bme280.pressure)
     print(&quot;Altitude = %0.2f meters&quot; % bme280.altitude)
-    time.sleep(2)</code></pre>
+    write_to_csv()
+    time.sleep(10)</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>Now, you can run your code by running the line “python3 bme280.py”. It should provide an output for temperature, humidity, and pressure.</li>
+<li>Now, you can run your code by running the line “python3 bme280.py”. It should provide an output for temperature, humidity, and pressure every ten seconds. You can also access the data from the sensor in the “bme280_data.csv” within your document reader within the “pi” folder.</li>
 </ol>
-</div>
-<div id="troubleshooting" class="section level2">
-<h2>Troubleshooting</h2>
-<ul>
-<li>While running the I2C detect command, it doesn’t read that there is anything connected via I2C. Is it possible I need to solder the sensor to the header strip? - AB</li>
-</ul>
 </div>
 
 
