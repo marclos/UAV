@@ -216,7 +216,7 @@ while True:
  
   # Print out results
   print "--------------------------------------------"
-  print("Temp : {} ({}V) {} ppm".format(NO2_level,NO2_volts,NO2))
+  print("NO2 : {} ({}V) {} ppm".format(NO2_level,NO2_volts,NO2))
   write_to_csv()
   
   # Wait before repeating loop
