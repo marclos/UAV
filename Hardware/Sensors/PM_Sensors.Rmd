@@ -28,11 +28,11 @@ The guide below was compiled from an instructional Youtube video published on 11
 
 * Connect the wire attached to the VCC terminal to node 2 on the Raspberry Pi.
 
-* Connect the wire attached to the GND terminal to node 14 on the Raspberry Pi.
+* Connect the wire attached to the GND terminal to node 9 on the Raspberry Pi.
 
-* Connect the wire attached to the RXD terminal to node 10 on the Raspberry Pi. NOTE: This means connecting the sensor to the Pi TXD pin. Odd. 
+* Connect the wire attached to the RXD terminal to node 8 on the Raspberry Pi. 
 
-* Connect the wire attached to the TXD terminal to node 8 on the Raspberry Pi.
+* Connect the wire attached to the TXD terminal to node 10 on the Raspberry Pi.
 
 3.  Connect your Pi to power, and your sensor is good to go!
 
