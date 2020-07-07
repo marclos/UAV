@@ -15,6 +15,10 @@ We are using a MiCS-2714 from SGX Sensortech, which costs 8.75 USD.  In addition
 
 Because our sensor produces analog data, but our Pi reads digital data, we need an analog to digital convertor.  We are using the MCP3008 Raspberry Pi Interface, which costs 5.99 USD from Amazon. 
 
+Finally, because the sensor output is 3.3V but the ADC reader can only interpret 5V messages, we need a logic-level convertor to transition the energy from 3.3V to 5V.  This is available under the name Cylewet 10Pcs 2 Channel Logic Level Convertor 3.3V to 5V TTL Module for Arduino, produced by Aloway and available via Amazon for 9.39 USD.
+
+The idea is that the MiCS-2714 sensor outputs a 3.3V analog data reading of NO2 levels in the air; this signal needs to be converted to 5V by the logic level convertor before being read by the MCP3008 analog-digital convertor, which then translates the analog signal into a digital signal that can then be read by our Raspberry Pi.  Therefore, we have three pieces of hardware that we need to wire before we can read the NO2 levels in our environment!
+
 # Materials Needed
 
 * 1 MiCS-2714 NO2 sensor
@@ -22,9 +26,17 @@ Because our sensor produces analog data, but our Pi reads digital data, we need 
 * 1 jumper
 * 1 breadboard
 * 1 MCP3008 ADC convertor
-* 4 M-M extension jumper wires
-* 7 M-F extension jumper wires
-* 2 F-F extension jumper wires
+* 1 5V to 3.3V logic level convertor
+* 9 M-M extension jumper wires
+* 5 M-F extension jumper wires
+
+# Before We Begin
+
+Take a look at your breadboard.  The way this works, is that each of the horizontal rows in the middle (for example, 60A-E) are wired together.  That means placing input from a pin in 60A can be read and converted to output by a pin in 60E.  Similarly, the + and - columns on the far edges are connected, but vertically rather than horizontally.
+
+For this project, assign three of the four +/- vertical rows to three outputs: 5V, 3.3V, and GND.  It is useful to label these in pen on the breadboard itself.  I will reference your "breadboard 5V", etc. ... these are referring to your labeled vertical row.  
+
+Doing this allows us to have multiple peices connected to our Raspberry Pi which all use the single 3.3V power source.
 
 # Wiring the Analog to Digital Convertor
 
@@ -34,13 +46,13 @@ Make sure the Raspberry Pi is not connected to power as you complete these steps
 
 1.  Remove the MCP3008 from the packaging, and find the half-circle that is printed on the back of the convertor.  Place the convertor with the pins facing down in rows E and F (going across the gap in the middle of the breadboard) between rows 24 and 31, with the half-circle on row 31.  The direction of the convertor is very important, because each of the pins has a specific purpose.
 
-2.  Place two M-M jumper wires in the breadboard, with one connecting 31d to 31- (the vertical row directly next to row a), and the other connecting 30d to 30-.  
+2.  Place two M-M jumper wires in the breadboard, with one each connecting 31d and 30d to somewhere in the 3.3V vertical row.  
 
-3.  Connect the M end of a M-F jumper wire to 35-, and connect the F end to pin 1 (3.3V) on the Raspberry Pi.  Your convertor is now connected to power!
+3.  Connect the M end of a M-F jumper wire to somewhere in the 3.3V vertical row, and connect the F end to pin 1 (3.3V) on the Raspberry Pi.  Your convertor is now connected to power!
 
-4.  Place two more M-M jumper wires in the breadboard, with one connecting 29d to 29+ (the vertical row on the edge of the board on the a-side), and the other connecting 24d to 24+. 
+4.  Place two more M-M jumper wires in the breadboard, with one each connecting 29d and 24d to your GND vertical row. 
 
-5.  Connect the M end of a M-F jumper wire to 36+, and connect the F end to pin 9 (GND) on the Raspberry Pi.  Your convertor is now grounded!
+5.  Connect the M end of a M-F jumper wire to somewhere in the GND vertical row, and connect the F end to pin 9 (GND) on the Raspberry Pi.  Your convertor is now grounded!
 
 6.  Connect the M end of a M-F jumper wire to 28d on the breadboard; connect the F end to pin 23 (GPIO11/SPI-SCLK) on the Raspberry Pi.
 
@@ -85,6 +97,24 @@ sudo python simpletest.py
 
 The output will be eight columns (for each of the ADC channels on the sensor) with a value of how much power is being sent to each one.  For example, if each column has a value of 1023, then each is receiving the full 3.3 V.  This code will update every half second, so to stop is you need to type Ctrl C.  If the ADC channels are getting power, then you are good to go!
 
+# Wiring the Logic Level Convertor
+
+1.  Make sure that your logic level convertor is properly soldered, and then place it in the breadboard with the TX1 pin in 35d and the TX0 pin in 35G.
+
+2.  Place one end of a M-M connecting wire in 37D; place the other end in the 3.3V vertical row.
+
+3.  Place one end of a M-M connecting wire in 37H; place the other end in the 5V vertical row.
+
+4.  Place one end of a M-M connecting wire in 38H; place the other end in the GND vertical row.
+
+5.  Place one end of a M-M connecting wire in 38D; place the other end in the GND vertical row.
+
+6.  Place one end of a M-M connecting wire in 39D; place the other end in 31G (this connects it to the MCP3008 that we set up earlier).
+
+7.  Place the male end of a M-F connecting wire in the 5V vertical row; connect the female end to pin 4 on the Raspberry Pi.
+
+Now all that is left is to connect your sensor!
+
 # Wiring the MICS Quick Start Board
 
 The MiCS Quickstart Board has internal wiring for multiple MiCS sensors, and makes it much easier to begin working with our MiCS-2714.  The board should come with three jumpers, as well as the board.  Be careful, because the sensor itself is very, very small.
@@ -95,45 +125,21 @@ The MiCS Quickstart Board has internal wiring for multiple MiCS sensors, and mak
 
 3.  The MiCS-2714 sensor uses Vin+, GND, and VoutB:
 
-* Using a F-F jumper wire, connect Vin+ to Raspberry Pi pin 4 (5V).
+* Using a M-F jumper wire, connect Vin+ to the 5V vertical row on the breadboard.
 
-* Using a F-F jumper wire, connect GND to Raspberry Pi pin 6 (GND).
+* Using a M-F jumper wire, connect GND to the GND vertical row on the breadboard.
 
-* Using a M-F jumper wire, connect VoutB to 31g (Channel 0) on the breadboard (this allows the analog data to be sent through the MCP3008 analog-digital convertor so that the Pi can read it).
+* Using a M-F jumper wire, connect VoutB to 39H on the breadboard (corresponding to the RXI input on the logic level convertor).
 
 Now all the assembly is done... all that is left is to code!
 
 # Code for the Sensor
 
-
-
-
-# Work Flow
-
-## Physical Assembly
-
-https://sgx.cdistore.com/datasheets/sgx/micsquickstartevaluationboard-cdi.pdf
-
-Page 2 of this guide specifies that for the MCIS-2714, once the jumpers are on the output is via VOUTB and the power input is via V+.  Accordingly, I used two F-F jumpers to connect Vin+ to pin 2 (5V) and VOUTA to pin 7 (GPIO4).  Something I am worried about is that multiple sources have stated that the MICS Quick Start Evaluation Board takes between 7-24(?) volts of power and then reduces it to 5V for the sensor... with this in mind I connected the power source to 5V, but I'm not sure if it needs more in order to reduce it back.
-
-GND connect to ground.
-
-Next:  Look in book on how to program to receive signal from GPIO4, ping sensor to see if this set-up even works.
-
-## Code
-
-Some potential ideas:
-
-### SPI input
-
-Sensor connected to channel 0 on ADC
-
-Typical NO2 detection range is .05 to 10 ppm
-
 ```{python, eval=FALSE, python.reticulate=FALSE}
 import spidev
 import time
 import os
+import csv
  
 # Open SPI bus
 spi = spidev.SpiDev()
@@ -191,83 +197,112 @@ NO2_channel = 0
 # Define delay between readings
 delay = 10
  
+# Define the csv where you are storing your data
+def  write_to_csv(): # Writes the output to a csv file
+        if __name__ == "__main__":
+                with open('/home/pi/mics2714_data.csv', mode='a') as csv_file: # First condition is the name and location of your csv file (this can be changed); second condition is the 'append' mode, which allows you to add new lines to the document without overwriting old ones
+                        csv_writer = csv.writer(csv_file)
+                        csv_writer.writerow([NO2_level,NO2_volts,NO2]) # What your output is titled
+                with open('/home/pi/mics2714_data.csv', mode='r') as csv_file: # Now that your csv file is appended, this allows you to read it and actually prints the output
+                        csv_reader = csv.reader(csv_file)
+                        for row in csv_reader:
+                                print(row)
 while True:
  
   # Read the temperature sensor data
   NO2_level = ReadChannel(NO2_channel)
-  NO2_volts = ConvertVolts(NO2_level,0)
-  NO2       = ConvertTemp(NO2_level,0)
+  NO2_volts = ConvertVolts(NO2_level,2)
+  NO2       = ConvertTemp(NO2_level,2)
  
   # Print out results
   print "--------------------------------------------"
   print("Temp : {} ({}V) {} ppm".format(NO2_level,NO2_volts,NO2))
+  write_to_csv()
+  
+  # Wait before repeating loop
+  time.sleep(delay)
+
+```
+
+This code will output the NO2 levels in the air in three different forms: the ADC value (the analog reading), the voltage value (the MCP3008 reading), and finally the parts per million (the data we can actually use).  It will save to a csv file entitled "mics2714_data.csv", which can then be utilized.
+
+### SPI input
+
+Original code from https://www.raspberrypi-spy.co.uk/2013/10/analogue-sensors-on-the-raspberry-pi-using-an-mcp3008/ 
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+import spidev
+import time
+import os
+ 
+# Open SPI bus
+spi = spidev.SpiDev()
+spi.open(0,0)
+spi.max_speed_hz=1000000
+ 
+# Function to read SPI data from MCP3008 chip
+# Channel must be an integer 0-7
+def ReadChannel(channel):
+  adc = spi.xfer2([1,(8+channel)<<4,0])
+  data = ((adc[1]&3) << 8) + adc[2]
+  return data
+ 
+# Function to convert data to voltage level,
+# rounded to specified number of decimal places.
+def ConvertVolts(data,places):
+  volts = (data * 3.3) / float(1023)
+  volts = round(volts,places)
+  return volts
+ 
+# Function to calculate temperature from
+# TMP36 data, rounded to specified
+# number of decimal places.
+def ConvertTemp(data,places):
+ 
+  # ADC Value
+  # (approx)  Temp  Volts
+  #    0      -50    0.00
+  #   78      -25    0.25
+  #  155        0    0.50
+  #  233       25    0.75
+  #  310       50    1.00
+  #  465      100    1.50
+  #  775      200    2.50
+  # 1023      280    3.30
+ 
+  temp = ((data * 330)/float(1023))-50
+  temp = round(temp,places)
+  return temp
+ 
+# Define sensor channels
+light_channel = 0
+temp_channel  = 1
+ 
+# Define delay between readings
+delay = 5
+ 
+while True:
+ 
+  # Read the light sensor data
+  light_level = ReadChannel(light_channel)
+  light_volts = ConvertVolts(light_level,2)
+ 
+  # Read the temperature sensor data
+  temp_level = ReadChannel(temp_channel)
+  temp_volts = ConvertVolts(temp_level,2)
+  temp       = ConvertTemp(temp_level,2)
+ 
+  # Print out results
+  print "--------------------------------------------"
+  print("Light: {} ({}V)".format(light_level,light_volts))
+  print("Temp : {} ({}V) {} deg C".format(temp_level,temp_volts,temp))
  
   # Wait before repeating loop
   time.sleep(delay)
 
 ```
 
-
-### GPIO input
-
-```{python, eval=FALSE, python.reticulate=FALSE}
-import rpi.GPIO as GPIO
-import time
-
-try:
-  GPIO.setmode(GPIO.BOARD)
-  
-```
-
-
-### Editing PMS5003 code
-
-```{python, eval=FALSE, python.reticulate=FALSE}
-import serial
-import time
-import collections
-
-class Sensor():
-  def __init__(self, tty='/dev/ttys0'): # Need to change this, reads from GPIO not UART... trickles down
-    self.tty = tty
-    
-  def open(self):
-    self.serial = serial.Serial(self.tty, baudrate = 9600)
-  
-  def close(self):
-    self.serial.close()
-
-  # Need to figure out reading the sensor
-  
-def write_to_csv():
-  if __name__ == '__main__':
-    with open('/home/pi/mics2714_data.csv', mode = 'a') as csv_file:
-      csv_writer = csv.writer(csv_file)
-      csv_writer.writerow([data])
-    with open('/home/pi/mics2714_data.csv', mode = 'w') as csv_file:
-      csv_reader = csv.reader(csv_file)
-      for row in csv_reader:
-        print(row)
-      
-if __name__ == '__main__': 
-  while True: 
-    '''
-    Test code
-    '''
-    sensor = Sensor() 
-    sensor.open() 
-    data = sensor.read() 
-    sensor.close() 
-    print(data)
-    write_to_csv() 
-    time.sleep(30)
-  
-```
-
-
 # Helpful Resources for Setting Up Sensor
-
-**Note: AB has not yet figured out how to set up this sensor; these are the sources that looked like they could be useful.**
 
 https://www.instructables.com/id/Smart-Sensor/ - contains link to downlaod pdf on MiCS-2714 (**this was probably the most helpful source I found**) 
 
