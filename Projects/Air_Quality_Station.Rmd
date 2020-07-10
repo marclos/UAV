@@ -20,10 +20,9 @@ Wiring: PMS, LLC, ADC, MiCS, breadboard, BME
 
 # Wiring
 
-**I want to import an image from my computer of the wiring... how do I do this?**
-```{r}
-!(Sensors.png)
-```
+
+![Wiring Diagram](WiringDiagram.png)
+
 
 ## PMS5003 Wiring
 
