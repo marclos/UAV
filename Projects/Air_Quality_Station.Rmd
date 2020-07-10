@@ -13,14 +13,17 @@ knitr::opts_chunk$set(echo = TRUE)
 Overview
 Materials Needed
 Wiring: PMS, LLC, ADC, MiCS, breadboard, BME
-Packages needed
-Code
 
 # Overview
 
 # Materials Needed
 
 # Wiring
+
+**I want to import an image from my computer of the wiring... how do I do this?**
+```{Python, eval=FALSE, python.reticulate=FALSE}
+![Wiring Diagram](Sensors.pdf)
+```
 
 ## PMS5003 Wiring
 
@@ -36,9 +39,73 @@ Code
 
 # Code
 
+## Settings
+
+Now that the station is assembled, we need to prepare our Raspberry Pi to be able to receive and process the signals from our sensors.  To do so, there are several settings we need to change.
+
+Our sensors use several different communication methods with the Pi, which is fortunate because it allows us to run all of them at the same time!  The following instructions will help you enable communication with the BME280 (I2C), PMS5003 (Serial), and MiCS-2714 (SPI).
+
+1.  Enter the Raspberry Pi's configuration page by opening the shell and typing
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo raspi-config
+```
+which will take you to a menu with several options listed.
+
+2.  Select option 5, "Interfacing Options."
+
+3.  Within this page, enable the following portals by selecting them and then indicating "Yes," that you do want them to run:
+
+- I2C
+
+- SPI
+
+4.  We now need to enable serial communication.  Within the same menu, select Serial.  
+
+5. A window will pop up asking, "would you like a login shell to be accessible over serial?", and the answer is NO.
+
+6.  Next, a window will pop up asking, "Would you like the serial port hardware to be enabled?", this time say YES, and exit the window.
+
+4.  Once you have enabled these options, you can exit the screen and begin installing the necessary packages.  It may ask you to reboot you Pi, in which case do so before moving on.
+
 ## Packages Needed
 
+Before we can use our code, there are several packages that need to be downloaded.  To do so, enter your Raspberry Pi's shell and enter the following commands.
+
+First, it is essential that you make sure your Pi is up-to-date, so that you can get the latest versions of each package.  Do this with the following two commands:
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo apt-get update
+sudo apt-get upgrade
+```
+
+## MiCS-2714 Packages
+
+The MiCS-2714 sensor code operates with a github package that controls the MCP3008 (the analog to digital convertor that allows the Pi to read our sensor's signals).  To install these packages, run each of the lines of the following code within your Pi's shell:
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo apt-get install build-essential python-dev python-smbus git 
+cd ~
+git clone https://github.com/adafruit/Adafruit_Python_MCP3008.git
+cd Adafruit_Python_MCP3008
+sudo python setup.py install
+cd ~
+```
+
+## BME280 Packages
+
+Our BME280 also operates with an Adafruit package on Github, which can be accessed with the following commands within the Pi shell:
+
+```{python, eval=FALSE, python.reticulate=FALSE}
+pip3 install adafruit-circuitpython-bme280
+pip3 install --upgrade adafruit_blinka
+```
+
+These are all the packages we need to run our code, so now you can import the code and get your station running!
+
 ## Air Quality Station Code
+
+The following code will output values to a csv file entitled "airquality_data.csv", with readings for: NO2 levels in ppm; PM1, PM2.5, and PM10 levels in standard and environmental units; temperature, humidity, air pressure, and altitude. 
+
+To use this code, copy and paste it into a python shell within your Pi (either Nano, Thonny, or IDLE) and run the code per your chosen shell's commands.
 
 ```{python, eval=FALSE, python.reticulate=FALSE}
 # Import packages (which sensor uses which package is noted)

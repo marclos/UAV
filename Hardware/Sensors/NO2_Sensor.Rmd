@@ -97,6 +97,14 @@ sudo python simpletest.py
 
 The output will be eight columns (for each of the ADC channels on the sensor) with a value of how much power is being sent to each one.  For example, if each column has a value of 1023, then each is receiving the full 3.3 V.  This code will update every half second, so to stop is you need to type Ctrl C.  If the ADC channels are getting power, then you are good to go!
 
+# Open the SPI Terminal
+
+While we are working in the Raspberry Pi shell, we can configure the Pi's settings to allow us to receive SPI signlas, which is what the MiCS-2714 produces.  To do so, enter
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo raspi-config
+```
+Which will take you to a new screen that lists several options.  Select option 5, which is Interfacing Options.  Now enable SPI communication by clicking on the SPI option and clicking "Yes."  You can now exit this screen, and begin your wiring process.
+
 # Wiring the Logic Level Convertor
 
 1.  Make sure that your logic level convertor is properly soldered, and then place it in the breadboard with the TX1 pin in 35d and the TX0 pin in 35G.
@@ -212,7 +220,7 @@ while True:
   # Read the temperature sensor data
   NO2_level = ReadChannel(NO2_channel)
   NO2_volts = ConvertVolts(NO2_level,2)
-  NO2       = ConvertTemp(NO2_level,2)
+  NO2       = ConvertNO2(NO2_level,2)
  
   # Print out results
   print "--------------------------------------------"

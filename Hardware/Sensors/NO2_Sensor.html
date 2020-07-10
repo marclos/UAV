@@ -436,6 +436,12 @@ sudo python setup.py install # Install the appropriate library</code></pre>
 <p>The output will be eight columns (for each of the ADC channels on the sensor) with a value of how much power is being sent to each one. For example, if each column has a value of 1023, then each is receiving the full 3.3 V. This code will update every half second, so to stop is you need to type Ctrl C. If the ADC channels are getting power, then you are good to go!</p>
 </div>
 </div>
+<div id="open-the-spi-terminal" class="section level1">
+<h1>Open the SPI Terminal</h1>
+<p>While we are working in the Raspberry Pi shell, we can configure the Pi’s settings to allow us to receive SPI signlas, which is what the MiCS-2714 produces. To do so, enter</p>
+<pre class="python"><code>sudo raspi-config</code></pre>
+<p>Which will take you to a new screen that lists several options. Select option 5, which is Interfacing Options. Now enable SPI communication by clicking on the SPI option and clicking “Yes.” You can now exit this screen, and begin your wiring process.</p>
+</div>
 <div id="wiring-the-logic-level-convertor" class="section level1">
 <h1>Wiring the Logic Level Convertor</h1>
 <ol style="list-style-type: decimal">
@@ -542,11 +548,11 @@ while True:
   # Read the temperature sensor data
   NO2_level = ReadChannel(NO2_channel)
   NO2_volts = ConvertVolts(NO2_level,2)
-  NO2       = ConvertTemp(NO2_level,2)
+  NO2       = ConvertNO2(NO2_level,2)
  
   # Print out results
   print &quot;--------------------------------------------&quot;
-  print(&quot;Temp : {} ({}V) {} ppm&quot;.format(NO2_level,NO2_volts,NO2))
+  print(&quot;NO2 : {} ({}V) {} ppm&quot;.format(NO2_level,NO2_volts,NO2))
   write_to_csv()
   
   # Wait before repeating loop
