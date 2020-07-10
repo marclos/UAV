@@ -20,9 +20,7 @@ Wiring: PMS, LLC, ADC, MiCS, breadboard, BME
 
 # Wiring
 
-
 ![Wiring Diagram](WiringDiagram.png)
-
 
 ## PMS5003 Wiring
 
