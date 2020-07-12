@@ -58,7 +58,9 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 \maketitle
+\tableofcontents
 
+\newpage
 \section{Sensors}
 
 \subsection{How do electronic sensors work?}
@@ -91,11 +93,11 @@ For additional resources:
 \begin{table}
 \caption{Common Thermocouple Types Temperature Ranges}
 \begin{tabular}{lll}\hline
-Type      & 	Temperature	& Metals \\ \hline\hline
-J	        &   0\textdegree{} to 750\textdegree{}C & \\
-K         & 	-200\textdegree{} to 1250\textdegree{}C & \\
-E	        &   -200\textdegree{} to 900\textdegree{}C & \\
-T	        &   -250\textdegree{} to 350\textdegree{}C & \\
+Type     & Metals & 	Temperature	 \\ \hline\hline
+J	       &  &   0\textdegree{} to 750\textdegree{}C  \\
+K        &  & 	-200\textdegree{} to 1250\textdegree{}C  \\
+E	       &  &   -200\textdegree{} to 900\textdegree{}C  \\
+T	       &  &   -250\textdegree{} to 350\textdegree{}C  \\
 \hline
 \end{tabular}
 \end{table}
@@ -184,7 +186,7 @@ V_u = \frac{Vcc \cdot R}{(R+R_s)}
  
 in which $V_u$ is the voltage at the ends of the load resistor $R$, while $Vcc$ is the sensor's power voltage, and $Rs$ is the electrical resistance of the sensitive element.
 
-\section{Parameters -- }
+\section{Sensor Applications}
 
 \begin{description}
 
@@ -194,25 +196,34 @@ in which $V_u$ is the voltage at the ends of the load resistor $R$, while $Vcc$ 
 
 \item[O3]
 
-CJMCU-131 MQ131 Ozone Concentration Sensor High And Low Concentration O3 Air Quality Detection Module 
-
-MQ-131
+\begin{itemize}
+  \item CJMCU-131 Ozone Concentration Sensor High And Low Concentration O3 Air Quality Detection Module
+  \item MQ-131
+\end{itemize}
 
 \item[CO]
 
 \item[Pressure, Temperature and Humidity]
 
-There are several types: BME680; DHT11; DHT22.
 
+\begin{itemize}
+  \item BME680 is refered to as a low power gas, pressure, temperature \& humidity sensor, the BME680 is \ldots
+  \item DHT11
+  \item DHT22
+\end{itemize}
 
 The DHT11 and DHT22 sensors can measure humidity as well as temperature. Only one GPIO is used. The difference between the two is mainly the measuring range and accuracy. The white DHT22 can measure all humidity ranges from 0-100\% with an accuracy of 2\%. By comparison, the DHT11 (blue) is only able to measure areas of 20-90\% humidity and above all, the accuracy is significantly worse with 5\%. The light blue DHT11 sensor has a small price advantage (about one buck).
 
-For more information see the \href{https://tutorials-raspberrypi.com/raspberry-pi-measure-humidity-temperature-dht11-dht22/}{Raspberry Pi DHT11-DHT22 Tutorial} available on the Raspberry Pi Foundation website.
+For more information
 
-Refered to as a low power gas, pressure, temperature \& humidity sensor, the BME680 is...
+\begin{itemize}
+  \item \href{https://tutorials-raspberrypi.com/raspberry-pi-measure-humidity-temperature-dht11-dht22/}{Raspberry Pi DHT11-DHT22 Tutorial} available on the Raspberry Pi Foundation website.
+  \item \href{https://cdn-shop.adafruit.com/product-files/3660/BME680.pdf}{BME680 Data Sheet}
+\end{itemize}
 
-\href{https://cdn-shop.adafruit.com/product-files/3660/BME680.pdf}{BME680 Data Sheet}
 
 \end{description}
+
+
 
 \end{document}
