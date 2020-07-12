@@ -149,12 +149,12 @@ in which $V_u$ is the voltage at the ends of the load resistor $R$, while $Vcc$ 
 \begin{itemize}
   \item CJMCU-131 Ozone Concentration Sensor High And Low Concentration O3 Air Quality Detection Module
   \item MQ-131
+  \item 3SP_O3_20 P Ozone Sensor
 \end{itemize}
 
 \item[CO]
 
 \item[Pressure, Temperature and Humidity]
-
 
 \begin{itemize}
   \item BME680 is refered to as a low power gas, pressure, temperature \& humidity sensor, the BME680 is \ldots
