@@ -9,30 +9,109 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-**ANNA TO-DO**
-Overview
-Materials Needed
-Wiring: PMS, LLC, ADC, MiCS, breadboard, BME
-
 # Overview
+
+This air quality station uses a PMS5003 particulate matter sensor, BME280 temperature/pressure/humidity sensor, and a MiCS-2714 nitrous oxide sensor to measure the air quality in a small, light, and inexpensive package.  In general, each of these sensors needs a power source, a ground, and a communication method in order to function.  The following guide includes the physical setup of these sensors, as well as the code which allows the weather station to collect data.
 
 # Materials Needed
 
+- 1 PMS5003 (including wire connector and Pi adaptor)
+- 1 BME280 (including header strip)
+- 1 analog to digital convertor
+- 1 logic level convertor
+- 1 MiCS-2714 (including quickstart board and jumper)
+- 2 F-F connecting wires
+- 14 M-F connecting wires
+- 10 M-M connecting wires
+- 1 breadboard
+
 # Wiring
+
+The following is an example of the wiring diagram connecting each of the sensors, the breadboard, and the Pi.  While your placements on the breadboard do not need to match this image exactly, it is a good visual guide to how a breadboard functions.  You can reference it if you are confused by any of the following wirign instructions.
 
 ![Wiring Diagram](WiringDiagram.png)
 
+## Breadboard Labeling
+
+Before we wire the actual sensors, it will be useful to set up our breadboard.  What a breadboard does is it allows you to connect multiple elements to the same input pin on the Raspberry Pi; the board is arranged in a series of ~65 horizontal rows that are split in half by a plastic bridge, and four vertical rows.  So, for example, pins placed in 35a and 35d (within the same horizontal row) are connected through the breadboard.
+
+Because we have limited power and grounding sources on the Pi, we need to use them efficiently; a breadboard takes care of this for us.  Before we start, it will be useful to assign three of the four vertical rows to: ground, 3.3. volt power, and 5v power.  You can label these on the board itself.  Every input that needs 3.3 volts of power, for example, can now be connected to your 3.3V row, which we will later connect to the 3.3V power output pin on the Pi. 
+
 ## PMS5003 Wiring
 
+Our PMS5003 particulate matter sensor sends input to the Pi via UART, and needs both a 5V power source and a grounding source.  To assemble, snuggly attach the connector that comes with your sensor to both the sensor and the Raspberry Pi adaptor.  The adaptor (the small, green piece with the eight output pins) is what you will connect to the Pi.  
+
+* Provide power to the sensor by using a M-F wire to connect the VCC terminal on the adaptor with the 5V column on your breadboard.
+
+* Ground your sensor by using a M-F wire to connect the GND terminal on the adaptor to the grounding column on your breadboard.
+
+* Begin establishing communication between the sensor and the Pi by using a F-F wire to connect the RXD terminal on the adaptor to the TXD pin on the Pi (pin 8/GPIO 14).  Pay attention to this labeling -- unintuitively, the RXD is connected to the TXD pin on the Pi (not the RXD pin!).
+
+* Conclude establishing communication by connecting the TXD terminal on the adaptor to the RXD pin on the Pi (pin 10/GPIO 15) with another F-F wire. 
+
 ## BME280 Wiring
+
+Our BME280 temperature, humidity and pressure sensor sends input to the Pi via I2C, and requires a ground as well as a 3.3V power source.  The sensor does need some soldering in order to attach the header pins to the sensor, which you can find information on in the soldering guide.  These instructions assume that your sensor is already connected to your header pins.  Begin by placing your BME280 in your breadboard such that it allows you to insert connecting wires in the same horizontal row as the various pins on the sensor.
+
+* Provide power to the sensor with a M-M wire connecting the VIN terminal on the BME280 to the 3.3V column on the breadboard.
+
+* Ground the sensor with a M-M wire connecting the GND terminal on the BME280 to the ground column on the breadboard.
+
+* Begin establishing communication between the sensor and the Pi with a M-F wire connecting the SCK terminal on the BME280 to the SCL pin on the Pi (pin 5/GPIO 3).
+
+* Conclude establishing communication with a M-F wire connecting the SDI terminal on the BME280 to the SDA pin on the Pi (pin 3/GPIO 2).
  
+## ADC Wiring
+
+Before we begin setting up our final sensor (the MiCS-2714 nitrous oxide sensor), we need to create a path of communication between it and the Pi.  The MiCS-2714 only provides analog data, whereas the Pi can only interpret digital data signals; therefore, we need an analog to digital converter (ADC) so that the two can communicate.  Begin by placing the ADC on the breadboard so that it bridges the plastic gap between the horizontal rows; make sure the sensor is facing the right direction, with the indented circle facing the "bottom" (higher level rows) of the breadboard.  Unfortunately, our ADC is not labeled, so the following instructions are relative to its position on the breadboard (for example "pin 1a on the ADC" refers to the pin with the lowest numerical equivalent on the breadboard in the row furthest from the circle -- if the ADC is between rows 24 and 31, this refers to row 24).  "A" refers to the side of the ADC furthest to the circle, and the "B" refers to the side of the ADC nearest to the indented circle. 
+
+Our ADC convertor needs a 3 volt power source, a ground, and to establish communication with the Pi via SPI.
+
+* Provide power to the convertor with a M-M wire connecting pin 7 on the convertor to the 3.3V column on the breadboard.
+
+* Ground the convertor with two M-M wires, one connecting pin 1 on the convertor to the ground column on the breadboard, and the second connecting pin 6 on the convertor to the ground column on the breadboard.
+
+* Begin establishing communication between the convertor and the Pi with a M-F wire connecting pin 2 on the convertor to the CE1 pin on the Pi (pin 24/GPIO 7).
+
+* Continue with a M-F wire connecting pin 3 on the convertor to the MOSI pin on the Pi (pin 19/GPIO 10).
+
+* Next use a M-F wire to connect pin 4 on the convertor to the MISO pin on the Pi (pin 21/GPIO 9).
+
+* Conclude establishing communication with a M-F wire connecting pin 5 on the convertor to the SCLK pin on the Pi (pin 23/GPIO 11).
+
 ## LLC Wiring
 
-## ADC Wiring
+Unfortunately, using the ADC creates more problems for us; the MiCS-2714 sensor provides 5V data output, but the ADC only reads 3.3V data.  To solve this problem, we need a logic level convertor (or LLC) to lower the power of the signal to 3.3 volts.  Our logic level convertor needs a ground, a 5 volt power source, a 3 volt power source, and a connection to the ADC.  Place the LLC so that is bridging the plastic gap in the center of the breadboard.
+
+* Provide the 5 volt power to the convertor with a M-M wire connecting the HV terminal on the convertor to the 5V column on the breadboard.
+
+* Provide the 3 volt power to the convertor with a M-M wire connecting the LV terminal on the convertor to the 3.3V column on the breadboard.
+
+* Ground the convertor with two M-M wires, one connecting each of the two GND terminals on the convertor the grounding column on the breadboard.
+
+* Establish communication with the ADC with a M-M wire connecting the RXD terminal on the LLC to pin 8b on the ADC (the "lowest" pin on the breadboard, on the side nearest to the circle).
 
 ## MiCS-2714 Wiring
 
+Our MiCS-2714 nitrous oxide reader and quickstart board is simply assembled: place the sensor in the fitted plastic bed on the quickstart board, and use one of the jumpers to cover pins J3 and J4 on the quickstart board.  Now, all that the sensor needs is a 5 volt power source, a ground, and to be connected to the LLC.
+
+* Provide power to the sensor with a M-F wire connecting the Vin+ pin on the sensor to the 5V column on the breadboard.
+
+* Ground the sensor with a M-F wire connecting the GND pin on the sensor to the grounding column on the breadboard.
+
+* Establish communication between the sensor and the LLC with a M-F wire connecting the VoutB pin on the sensor to the RX1 pin on the LLC.
+
 ## Breadboard Wiring
+
+Now all that is left is to connect each of your established columns on the breadboard to the Raspberry Pi.
+
+* Connect the 5V column on the breadboard to one of the 5V pins on the Pi (either pin 2 or 4) with a M-F wire.
+
+* Connect the 3V column on the breadboard to one of the 3.3V pins on the Pi (either pin 1 or 17) with a M-F wire.
+
+* Connect the grounding column on the breadboard to one of the GND pins on the Pi (either pin 6, 9, 14, etc.) with a M-F wire.
+
+Now, you can attach your Pi to power, and your sensors are connected!
 
 # Code
 
