@@ -154,6 +154,8 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 
 \section{Setting Up Raspberry Pi}
 
+In order to set up your Raspberry Pi, you will need one of two things: access to a USB-connected mouse and keyboard as well as a monitor that allows you to connect via HDMI (TVs or desktop computers both have this capability); or a computer that can read an SD card.  The first of these options is simplest; if you do not have access, use option two for the SD-card option.  If you do not have access to either, contact your professor so that they can get a monitor, keyboard, and mouse to you.
+
 \subsection{Option 1: Direct Access with the Pi Using a Monitor, Keyboard, and Mouse}
 
 If you have a spare monitor, keyboard, and mouse, use the following steps to set up the Raspberry Pi. If you don't have these, then you'll need a ethernet cable and can follow the steps in Option 4: Remote Access to Pi using SSH. 
@@ -193,11 +195,103 @@ $ sudo shutdown -h now
 
 \item Unplug the Pi.
 
-Note: To restart the Pi, simply plug it in, unless you have a switch. 
+Note: To restart the Pi, simply plug it in, unless you have a switch.
+
+You can now access your Pi via a monitor; however, if you would like a more portable option, read the next section on "Remote Access on a Configured Pi" to be able to use your monitor to install the correct settings and software so that you can access your Pi from anywhere (and thus be freed from your monitor!).
 
 \end{enumerate}
 
-\subsection{Option 2: Remote Access with Pi}
+\subsection{Option 2: Remote Access Startup with the Pi}
+
+If you do not have access to a keyboard, mouse, and monitor, but DO have access to a laptop with an SD card slot, this option is for you.  Once you go through these steps, you will be ready to begin working on your Pi remotely (and thus will not need to follow the instructions in the following section, "Remote Access on a Configured Pi").
+
+Our Pi comes with a pre-downloaded SD card with the various operating systems already downloaded; you need to select which one you would like (Raspain), and you then need to add files to the boot on the SD card so that your Pi can connect to Wifi and the SSH is enabled.  Finally, you need to find your Pi's specific IP address so that you can connect remotely, and then you can access your Pi via SSH!
+
+**NOTE: This section has not been tested, but should be shortly.  Edited instructions are pending**
+
+Source: %\href{https://medium.com/@maheshsenni/setting-up-a-raspberry-pi-without-keyboard-and-mouse-headless-9359e0926807}{Setting Up Raspberry Pi Without a Keyboard or Mouse (Headless)}
+
+\begin{enumerate}
+
+\item Insert the Pi's SD card into your computer and access it through your computer's file navigator.  It should be accessible under ``BOOT'' and ``RECOVERY''.
+
+\item Within the RECOVERY file system, open the ``OS'' folder.  Within OS, there should be multiple system options in different folders; delete all of them except for ``Raspian''. This configures your operating system to Raspian.
+
+\item Go back to the root (or the main level) of the BOOT folder.  This is where we will create the files that will allow you to operate via SSH and connect to wifi.
+
+\item Using notepad, create a document named ``wpa\_supplicant.conf''. 
+
+\item Insert the following code into the notepad document:
+
+\begin{lstlisting}
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+
+update_config=1
+
+country=Insert 2 letter ISO 3166-1 country code here
+
+network={
+ ssid="Name of your wireless LAN"
+ psk="Password for your wireless LAN"
+}
+\end{lstlisting}
+
+Being sure to insert three things: your 2 letter ISO country code (if you are in the United States, this is US); your Wifi's name; and your Wifi's password.  Note that there are meant to be quotation marks around your ssid and psk.
+
+\item Within the notepad document, go into file/save as.  Save the file within the boot folder for the SD card.  Note that if you are on Windows, make sure that the file type is ``all files'' and not ``txt''.
+
+\item Next, create a notepad document named ``ssh''.
+
+\item Insert the following code into the document:
+
+\begin{lstlisting}
+cd /Volumes/boot
+touch ssh
+\end{lstlisting}
+
+\item Once again, within the notepad document go into file/save as.  Save the file within the boot folder on the SD card.  Note that if you are on Windows, make sure that the file type is ``all files'' and not ``txt''.
+
+\item Double check that both of the files you created are within the boot folder, and then left-click on the folder and select ``eject''.  
+
+\item Remove the SD card from your computer, and reinsert it into the Pi.
+
+\item Connect your Pi to power.
+
+\item Open up your computer's shell (on Windows, this can be accessed under apps by typing ``Windows Powershell'').
+
+\item Within the command line on the shell, find your Pi's IP address by typing ``ping raspberrypi.local''.  As long as your computer and the Pi are on the same wifi network, this will tell you your Pi's IP address.
+
+\item Your Pi is now configured, and now we can access it via SSH with the following instructions in your computer's shell.
+
+\item Type
+
+\begin{lstlisting}
+ssh username@IPaddress
+\end{lstlisting}
+
+where the username is pi and the IP address you just found by pinging (it should look something like this: 192.168.X.X). If you changed your username during setup, then you'll type something other than ``pi''.
+
+\item Once you press enter, it will ask if you trust it (say yes, you will only need to do this once). 
+
+\item Next it will ask you for your password.  Note: As you type, no characters will appear on the terminal (for privacy).  This is ok, once you have typed your password just press enter.  If you didn't change your password during setup, it will be ``raspberry''.
+
+\item The terminal should now look like the Raspberry Pi terminal that you get via HDMI, with ``pi@raspberry pi: \$'' command prompt.  Hooray!
+
+\item Finally, you need to make sure your Pi is up to date.  Do this with the following lines within the Pi shell:
+\begin{lstlisting}
+sudo apt-get upgrade
+sudo apt-get update
+\end{lstlisting}
+Since this is your first time using your Pi, this process could take several minutes.
+
+\item Now that your Pi is updated, you can follow the instructions undersection 2A of ``Remote Access on a Configured Pi'' to access your Pi's GUI (user interface).  Instead of typing the commands into the Pi terminal in your monitor , you will do so in your computer's shell with the Pi shell piggybacked onto it.  Note that this guide takes you through a remote setup of option 2B of ``Remote Access on a Configured Pi'', and you will be able to follow the rest of the setup protocol without switching to a GUI.  Read the following section to see which option is right for you.
+
+\end{enumerate}
+
+
+\subsection{Remote Access on a Configured Pi}
+
+This section is for if you have already set up your Pi via a monitor, and would like to be able to access it via a laptop.  If you have not yet configured your Raspberry Pi with the correct operating systems and settings, please refer to the previous section, "Remote Access Startup with the Pi."
 
 It doesn't take too long (10 minutes once you get the hang of it) to be able to work remotely on your microprocessor via a tablet or laptop.  
 
@@ -382,6 +476,8 @@ Being sure to insert three things: your 2 letter ISO country code (if you are in
 \item Reinsert the MicroSD card into the Pi, and continue the remote access connection in one of the methods discussed previously.
 
 \item Note that even if you had already enabled SSH and found your pi's IP address on a previous network, connecting to a new network means that you need to re-establish SSH connections, AND that your Pi's IP address will (strangely) be different!  The remote connection will NOT work with the IP address you had used on your previous network connection.
+
+\item To find your Pi's new IP address, connect the Pi to power and then enter the shell of a computer that is on the same wifi network as the Pi.  In the command line, ping your Pi by typing ``ping raspberrypi.local''.  This should give you the Pi's IP address, which should look something like ``192.168.X.XXX''.  You can use this to connect to your Pi via SSH with the instructions in ``Remote Access to a Configured Pi''.
 
 \end{enumerate}
 
