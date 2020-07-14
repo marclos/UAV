@@ -1,0 +1,15 @@
+\contentsline {section}{\numberline {1}Sensors}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}How do electronic sensors work?}{2}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Sensor Applications}{2}{subsection.1.2}
+\contentsline {section}{\numberline {2}Pressure}{2}{section.2}
+\contentsline {section}{\numberline {3}Temperature}{2}{section.3}
+\contentsline {subsection}{\numberline {3.1}Thermocouples}{2}{subsection.3.1}
+\contentsline {section}{\numberline {4}Particulates}{3}{section.4}
+\contentsline {section}{\numberline {5}Gas Chemical Sensors}{3}{section.5}
+\contentsline {subsection}{\numberline {5.1}Humidity}{3}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}MQ-X Sensors}{3}{subsection.5.2}
+\contentsline {subsubsection}{\numberline {5.2.1}Description}{3}{subsubsection.5.2.1}
+\contentsline {subsubsection}{\numberline {5.2.2}Resistance Response}{5}{subsubsection.5.2.2}
+\contentsline {subsubsection}{\numberline {5.2.3}Pin-outs}{5}{subsubsection.5.2.3}
+\contentsline {subsubsection}{\numberline {5.2.4}Coupling to a microcontroller}{6}{subsubsection.5.2.4}
+\contentsline {section}{\numberline {6}Sensor Applications}{6}{section.6}
