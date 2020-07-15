@@ -494,9 +494,11 @@ summary {
 <p>First, it is essential that you make sure your Pi is up-to-date, so that you can get the latest versions of each package. Do this with the following two commands:</p>
 <pre class="python"><code>sudo apt-get update
 sudo apt-get upgrade</code></pre>
+<p>We always suggest you reboot after new updating your Pi:</p>
+<pre class="python"><code>sudo shutdown -r now (or sudo reboot)</code></pre>
 </div>
-<div id="mics-2714-packages" class="section level2">
-<h2>MiCS-2714 Packages</h2>
+<div id="mics-2714-packages-title-seems-disconnected-to-code-for-mcp3008" class="section level2">
+<h2>MiCS-2714 Packages – Title seems disconnected to code for MCP3008?</h2>
 <p>The MiCS-2714 sensor code operates with a github package that controls the MCP3008 (the analog to digital convertor that allows the Pi to read our sensor’s signals). To install these packages, run each of the lines of the following code within your Pi’s shell:</p>
 <pre class="python"><code>sudo apt-get install build-essential python-dev python-smbus git 
 cd ~
@@ -551,7 +553,7 @@ NO2_channel = 0
 
 # PMS5003 Code
 class Sensor():
-  def __init__(self, tty = &#39;/dev/ttyS0&#39;): 
+  def __init__(self, tty = '/dev/ttyS0'): 
     self.tty = tty
   
   def open(self): 
@@ -567,16 +569,16 @@ class Sensor():
     data = self.serial.read(32)
     data = [&quot;{:02X}&quot;.format(d) for d in data]
     
-    if data[0] != &#39;42&#39; or data[1] != &#39;4D&#39;:
+    if data[0] != '42' or data[1] != '4D':
       return None
       
     res = OrderedDict()
-    res[&#39;pm1_cf&#39;] = self.read_bytes(data, 4)
-    res[&#39;pm25_cf&#39;] = self.read_bytes(data, 6)
-    res[&#39;pm10_cf&#39;] = self.read_bytes(data, 8)
-    res[&#39;pm1&#39;] = self.read_bytes(data, 10)
-    res[&#39;pm25&#39;] = self.read_bytes(data, 12)
-    res[&#39;pm10&#39;] = self.read_bytes(data, 14)
+    res['pm1_cf'] = self.read_bytes(data, 4)
+    res['pm25_cf'] = self.read_bytes(data, 6)
+    res['pm10_cf'] = self.read_bytes(data, 8)
+    res['pm1'] = self.read_bytes(data, 10)
+    res['pm25'] = self.read_bytes(data, 12)
+    res['pm10'] = self.read_bytes(data, 14)
     return res
 
 # BME280 Code
@@ -587,10 +589,10 @@ bme280.sea_level_pressure = 1013.25
 # CSV Code
 def  write_to_csv():
         if __name__ == &quot;__main__&quot;:
-                with open(&#39;/home/pi/airquality_data.csv&#39;, mode=&#39;a&#39;) as csv_file: 
+                with open('/home/pi/airquality_data.csv', mode='a') as csv_file: 
                         csv_writer = csv.writer(csv_file)
                         csv_writer.writerow([NO2,data,bme280.temperature, bme280.humidity, bme280.pressure, bme280.altitude])
-                with open(&#39;/home/pi/airquality_data.csv&#39;, mode=&#39;r&#39;) as csv_file: 
+                with open('/home/pi/airquality_data.csv', mode='r') as csv_file: 
                         csv_reader = csv.reader(csv_file)
                         for row in csv_reader:
                                 print(row)

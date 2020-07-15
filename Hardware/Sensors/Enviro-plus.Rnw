@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\usepackage{listings}
+\lstset{frame=tb,
+  language=bash,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+
+\author{Marc and Anna}
+\title{Using the Enviro+ Sensor}
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\section{Connecting to Pi}
+
+\subsection{Hardware Connection Options}
+
+\subsection{Raspberry Pi Connections}
+
+\subsubsection{Update Firmware}
+
+\subsubsection{Download software}
+
+\begin{lstlisting}
+curl -sSL https://get.pimoroni.com/enviroplus | bash
+\end{lstlisting}
+
+Until I can figure out what files we need then move them onto a Pomona server, we are going to have to trust these guys with our virtual life. Ugh!
+
+Downloading (cloning the site, take about 10-15 minutes).
+
+but didn't work... so try the next section git instead...
+
+\begin{lstlisting}
+git clone https://github.com/pimoroni/enviroplus-python
+cd enviroplus-python
+sudo ./install.sh
+\end{lstlisting}
+
+
+
+\end{document}

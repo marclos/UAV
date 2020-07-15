@@ -84,9 +84,13 @@ The sensors of the MQ series are mainly used in closed environments that anyway 
 
 Each sensor of the series reacts to more than one gas, even if usually only one or two gases excite it the most, and supply relevant resistance variations, as it is shown by the sensitivity graphs shown in these pages.
 
+
+\href{https://playground.arduino.cc/Main/MQGasSensors/#list}{List of sensors and characteristics (Source: playground.arduino)}
+
 \begin{table}
+\caption{MQ-X Sensor Parameters }
 \begin{tabular}{lp{8cm}cc}\hline
-Sensor  & Parameter       & Power   & Response \\ \hline\hline
+Sensor  & Parameter       & Heater voltage   & Response \\ \hline\hline
 MQ-2 & Flammable gases such as LPG and propane & & \\
 MQ-3 & Ethanol && \\
 MQ-4 & Methane (CH4) and natural gas && \\
@@ -94,7 +98,7 @@ MQ-5 & LPG and methane && \\
 MQ-6 & LPG and methane && \\
 MQ-7 & Carbon monoxide (CO) and Hydrogen (H2) && \\
 MQ-8 & Hydrogen (H2) && \\
-MQ131 & Ozone && \\
+MQ131 & Ozone & 6 volts & \\
 MQ-135 & Gaseous ammonia (NH3), benzene, ethyl alcohol and carbon dioxide (CO2) && \\
 MQ136 & Hydrogen Sulphide gas  && \\
 MQ137 & Ammonia  && \\
@@ -149,7 +153,7 @@ in which $V_u$ is the voltage at the ends of the load resistor $R$, while $Vcc$ 
 \begin{itemize}
   \item CJMCU-131 Ozone Concentration Sensor High And Low Concentration O3 Air Quality Detection Module
   \item MQ-131
-  \item 3SP_O3_20 P Ozone Sensor
+  \item 3SP\_O3\_20 P Ozone Sensor
 \end{itemize}
 
 \item[CO]
