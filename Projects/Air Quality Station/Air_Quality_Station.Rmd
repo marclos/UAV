@@ -153,7 +153,11 @@ sudo apt-get update
 sudo apt-get upgrade
 ```
 
-## MiCS-2714 Packages
+We always suggest you reboot after new updating your Pi:
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo shutdown -r now (or sudo reboot)
+```
+## MiCS-2714 Packages  -- Title seems disconnected to code for MCP3008?
 
 The MiCS-2714 sensor code operates with a github package that controls the MCP3008 (the analog to digital convertor that allows the Pi to read our sensor's signals).  To install these packages, run each of the lines of the following code within your Pi's shell:
 

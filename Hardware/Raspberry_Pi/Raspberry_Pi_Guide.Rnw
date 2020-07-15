@@ -40,6 +40,10 @@
 \begin{document}
 \maketitle
 
+\tableofcontents
+
+\newpage
+
 \section{Introduction}
 
 \subsection{What is Rasberry Pi?}
@@ -377,9 +381,17 @@ where the username is pi and the IP address is the number you wrote down in step
 \end{enumerate}
 
 
-\subsection{Troubleshooting}
+\section{Troubleshooting}
 
-\subsubsection{Remote Access}
+\subsection{Unable establish ssh connection}
+
+if you can ping, but the ``connection refused'', then the pi might not have the ssh enabled. See section XXX to make sure it's enabled. 
+
+If it is enabled, double check IP address to make sure there is no typo.
+
+
+
+\subsection{Remote Access}
 
 \begin{enumerate}
 
@@ -391,7 +403,7 @@ where the username is pi and the IP address is the number you wrote down in step
 
 \end{enumerate}
 
-\subsubsection{Headless SSH Connection}
+\subsection{Headless SSH Connection}
 
 If you need to connect your Pi microprocessor to a new Wifi network but do not have access to a monitor, follow this process. 
 
@@ -432,6 +444,39 @@ Being sure to insert three things: your 2 letter ISO country code (if you are in
 
 \end{enumerate}
 
+\section{Copying Files (e.g. python) on the Pi}
+
+\subsection{USB}
+
+\subsection{SD card}
+
+\subsection{via Internet}
+
+\subsubsection{curl}
+
+curl is a command line program that can be used to get files from websites and install them directly onto your pi.
+
+
+
+\begin{lstlisting}
+curl -sSL URL | bash
+\end{lstlisting}
+
+When you use this command, you will get a warning, that downloading filed from the internet is inherantly unsafe, unless you trust the source with your virtual life. 
+
+with the following arguments: 
+
+\begin{itemize}
+  \item -s silent mode
+  \item -S show error (even when in silent mode)
+  \item -L location, follow redirects (not sure what this means!
+\end{itemize}
+
+
+
+\subsubsection{github}
+
+
 \section{Maintaining the Pi}
 
 \subsection{Monitor the Pi's Temperature}
@@ -441,7 +486,7 @@ Add the ``CPU Temerature Monitor'' and close.
 
 Follow the same steps to add the ``CPU usage monitor''.
 
-\subsubsection{Screensaver}
+\subsection{Screensaver}
 
 The screen goes black after 10 minutes of inaction. This is a bit annoying since we are often doing things that take some time to sort out, i.e. more than 10 minutes. 
 
@@ -472,7 +517,10 @@ sudo apt-get update
 
 \end{enumerate}
 
-\subsubsection{Recovering Commits from Github}
+
+
+\subsubsection{MOVE THIS to GIT SOP? Recovering Commits from Github}
+
 
 If there is a conflict between commits and some information that was previously added to a file on R is lost, follow these steps to recover the information within previous commits.
 
