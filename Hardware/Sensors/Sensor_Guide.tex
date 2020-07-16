@@ -92,17 +92,19 @@ For additional resources:
 
 \begin{table}
 \caption{Common Thermocouple Types Temperature Ranges}
-\begin{tabular}{lll}\hline
-Type     & Metals & 	Temperature	 \\ \hline\hline
-J	       &  &   0\textdegree{} to 750\textdegree{}C  \\
-K        &  & 	-200\textdegree{} to 1250\textdegree{}C  \\
-E	       &  &   -200\textdegree{} to 900\textdegree{}C  \\
-T	       &  &   -250\textdegree{} to 350\textdegree{}C  \\
+\begin{tabular}{lllr}\hline
+Type     & Metals & 	Temperature	Range & Error \\ \hline\hline
+J	       &  iron and constantan (copper-nickel alloy) &   -210\textdegree{}C to 1200\textdegree{}C  &   $\pm 2.2$ \textdegree{}C \\
+K        &  & 	-200\textdegree{}C to 1250\textdegree{}C & \\
+E	       &  &   -200\textdegree{}C to 900\textdegree{}C & \\
+T	       & copper and constantan &   -270\textdegree{}C to 400\textdegree{}C & $\pm 1.0$ \textdegree{}C  \\
 \hline
 \end{tabular}
 \end{table}
 
+The voltage change across the junction is proportional to the temperature. 
 
+24-bit measurement devices, high-accuracy ADCs are used, and design practices are implemented to minimize noise, linearity and offset errors.
 
 \section{Particulates}
 
@@ -126,7 +128,7 @@ Most sensors of the MQ series operate with working voltages that are typically a
 \includegraphics[width=1.0\textwidth]{MQ-X.png}
 \end{figure}
 
-The sensors of the MQ series are mainly used in closed environments that anyway should not be particularly cold or warm, given that the heating filament's temperature is kept quite constant by its resistance variation (it grows when the temperature grows, and vice versa) but it is not stabilized nor controlled by any circuit, therefore if the environment is too cold or warm, the obtained measurement would turn out to be altered.
+The sensors of the MQ series are mainly used in closed environments that anyway should not be particularly cold or warm,\footnote{We should define what hot and cold mean!} given that the heating filament's temperature is kept quite constant by its resistance variation (it grows when the temperature grows, and vice versa) but it is not stabilized nor controlled by any circuit, therefore if the environment is too cold or warm, the obtained measurement would turn out to be altered.
 
 \begin{figure}
 \includegraphics[width=1.0\textwidth]{MQ-X2.png}
@@ -159,6 +161,11 @@ MQ303A & Alcohol, Ethanol, smoke  && \\
 MQ306A & LPG, butane  && \\
 MQ307A &  Carbon Monoxide  && \\
 MQ309A & Carbon Monoxide, flammable gas  && \\
+MG811 (Carbon Dioxide (CO2)) && \\
+AQ-104 (air quality) && \\
+AQ-2 (Flamable gasses, smoke) && \\
+AQ-3 (Alcohol, Benzine) && \\
+AQ-7 (Carbon Monoxide) && \\
 \hline
 \end{tabular}
 \end{table}
