@@ -1,0 +1,81 @@
+---
+title: "Running Sensors at Boot"
+author: "Anna Madison Burns"
+date: "7/17/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Method 1 - Rc.local
+
+**I have not yet had success with this, and it is a bit intimidating because if you type something in wrong, it gets stuck as you boot up**
+
+Source:  https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/
+
+Adding the code you want to run to rc.local (the startup document), so that (hypothetically) as soon as you connect your Pi to power and it boots, the code will start.  "This is especially useful if you want to power up your Pi in headless mode (that is without a connected monitor), and have it run a program without configuration or a manual start."
+
+1.  Open the rc.local file in an editor by typing the following command into the shell:
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo nano /etc/rc.local
+```
+
+2.  Add the code you want to run before the last line in the document, which should say "exit 0" (in the example below, the address is for the sensors.py code):
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo python /home/pi/Sensors/sensors.py &
+```
+
+- Note 1:  It is very important to put the entire address (/home/pi/Sensors/sensors.py) rather than just the document name (sensors.py) so that your Pi can find the document.
+
+- Note 2:  You MUST put the ampersand (&) at the end of your line.  Because the sensors.py code is a continual loop that reads the code every ten seconds, you need to create a branch so that startup can be completed and the boot code doesn't just run your sensor indefinitely.  The ampersand splits the code so that the sensor can run AND the boot can complete.
+
+3.  Be sure to test your code several times before you reboot it, to make sure that it actually works and your Pi will be able to boot:
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo python /etc/rc.local
+```
+
+4.  Use the following code to restart your Pi and test to see if the boot code works:
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo reboot
+```
+
+### Method 1:  Additional Information
+
+- https://www.raspberrypi.org/documentation/linux/usage/rc-local.md
+
+This link is directly from the Pi website and basically has the same process.  It says that if your Pi uses a systemd OS, this may not work as well.  It includes a link for a separate systemd process, as well as a cron procedure that does the same thing:
+
+https://www.raspberrypi.org/documentation/linux/usage/systemd.md
+
+https://www.raspberrypi.org/documentation/linux/usage/cron.md
+
+- Troubleshooting:
+
+https://askubuntu.com/questions/9853/how-can-i-make-rc-local-run-on-startup
+
+https://unix.stackexchange.com/questions/49626/purpose-and-typical-usage-of-etc-rc-local
+
+https://www.linuxbabe.com/linux-server/how-to-enable-etcrc-local-with-systemd (note: I tried this, and it didn't help, although it did provide some new direction... worth looking at)
+
+# Method 2:  Init.d Directory
+
+**I have not had success with this, either**
+
+Source:  https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/
+
+The basic idea of this is that you add the code into your "init" folder, which initializes when you power on.  Pretty much you are adding your document so that it begins with your boot process.
+
+1.  Add your program to the initializing folder with this code in the Pi shell (side note, it seems like a missed opportunity not to call this the "pi crust"):
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo cp /home/pi/Sensors/sensors.py /etc/init.d
+```
+
+2.  Move to the directory, and open the script from within it:
+```{python, eval=FALSE, python.reticulate=FALSE}
+cd /etc/init.d
+sudo nano sensors.py
+```
+
+3.  
