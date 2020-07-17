@@ -40,7 +40,7 @@
 \begin{document}
 \maketitle
 
-\tableofcontents
+%\tableofcontents
 
 \newpage
 
@@ -73,9 +73,6 @@ Here are some resources that describe how these can be done:
 \subsubsection{Conservation} 
 
 Conservation biologists use a wide range of instruments to track and monitor wildlife (camera traps, active (radio) and passive (RIF) transmitters). In addition the use of cameras are used to evaluate plant health and diversity (spectral analysis). 
-
-<<<<<<< HEAD
-
 
 \section{Resources}
 
