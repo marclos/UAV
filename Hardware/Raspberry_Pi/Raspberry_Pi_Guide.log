@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.7.16)  17 JUL 2020 10:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.6.29) (preloaded format=pdflatex 2020.7.16)  17 JUL 2020 10:40
 entering extended mode
 **./Raspberry_Pi_Guide.tex
 (Raspberry_Pi_Guide.tex
@@ -331,7 +331,7 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 602.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 602.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 602.
 Package rerunfilecheck Info: File `Raspberry_Pi_Guide.out' has not changed.
-(rerunfilecheck)             Checksum: A998C42D8357628ACCFA8E4C77CF4270;2658.
+(rerunfilecheck)             Checksum: C9A802B74F7B0ABAE021821F7C28A599;2670.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 602.
  ) 
 Here is how much of TeX's memory you used:
@@ -351,7 +351,7 @@ pe1/public/amsfonts/cm/cmbx12.pfb><C:/Users/annam/AppData/Local/Programs/MikTex
 ms/MikTex2/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/annam/AppData/Loc
 al/Programs/MikTex2/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Users/annam/Ap
 pData/Local/Programs/MikTex2/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on Raspberry_Pi_Guide.pdf (14 pages, 169455 bytes).
+Output written on Raspberry_Pi_Guide.pdf (14 pages, 169446 bytes).
 PDF statistics:
  438 PDF objects out of 1000 (max. 8388607)
  197 named destinations out of 1000 (max. 500000)

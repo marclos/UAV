@@ -108,9 +108,9 @@ When you recieve your Pi, plan on spending about 1-2 hours setting it up which i
 
 In order to set up your Raspberry Pi, you will need one of two things: access to a USB-connected mouse and keyboard as well as a monitor that allows you to connect via HDMI (TVs or desktop computers both have this capability); or a computer that can read an SD card.  The first of these options is simplest; if you do not have access, use option two for the SD-card option.  If you do not have access to either, contact your professor so that they can get a monitor, keyboard, and mouse to you.
 
-\subsection{Option 1: Direct Access with the Pi Using a Monitor, Keyboard, and Mouse}
+\subsection{Section 1: Direct Access with the Pi Using a Monitor, Keyboard, and Mouse}
 
-If you have a spare monitor, keyboard, and mouse, use the following steps to set up the Raspberry Pi. If you don't have these, then you'll need a ethernet cable and can follow the steps in Option 4: Remote Access to Pi using SSH. 
+If you have a spare monitor, keyboard, and mouse, use the following steps to set up the Raspberry Pi. If you don't have these, but do have a slot on your computer for an SD card, then follow the instructions in Section 2.
 
 \begin{enumerate}
 
@@ -149,11 +149,11 @@ $ sudo shutdown -h now
 
 Note: To restart the Pi, simply plug it in, unless you have a switch.
 
-You can now access your Pi via a monitor; however, if you would like a more portable option, read the next section on "Remote Access on a Configured Pi" to be able to use your monitor to install the correct settings and software so that you can access your Pi from anywhere (and thus be freed from your monitor!).
+You can now access your Pi via a monitor; however, if you would like a more portable option, read section 3 on "Remote Access on a Configured Pi" to be able to use your monitor to install the correct settings and software so that you can access your Pi from anywhere (and thus be freed from your monitor!).
 
 \end{enumerate}
 
-\subsection{Option 2: Remote Access Startup with the Pi}
+\subsection{Section 2: Remote Access Startup with the Pi}
 
 If you do not have access to a keyboard, mouse, and monitor, but DO have access to a laptop with an SD card slot, this option is for you.  Once you go through these steps, you will be ready to begin working on your Pi remotely (and thus will not need to follow the instructions in the following section, "Remote Access on a Configured Pi").
 
@@ -236,12 +236,12 @@ sudo apt-get update
 \end{lstlisting}
 Since this is your first time using your Pi, this process could take several minutes.
 
-\item Now that your Pi is updated, you can follow the instructions undersection 2A of ``Remote Access on a Configured Pi'' to access your Pi's GUI (user interface).  Instead of typing the commands into the Pi terminal in your monitor , you will do so in your computer's shell with the Pi shell piggybacked onto it.  Note that this guide takes you through a remote setup of option 2B of ``Remote Access on a Configured Pi'', and you will be able to follow the rest of the setup protocol without switching to a GUI.  Read the following section to see which option is right for you.
+\item Now that your Pi is updated, you can follow the instructions undersection 3A of ``Remote Access on a Configured Pi'' to access your Pi's GUI (user interface).  Instead of typing the commands into the Pi terminal in your monitor , you will do so in your computer's shell with the Pi shell piggybacked onto it.  Note that this guide takes you through a remote setup of option 2B of ``Remote Access on a Configured Pi'', and you will be able to follow the rest of the setup protocol without switching to a GUI.  Read the following section to see which option is right for you.
 
 \end{enumerate}
 
 
-\subsection{Remote Access on a Configured Pi}
+\subsection{Option 3: Remote Access on a Configured Pi}
 
 This section is for if you have already set up your Pi via a monitor, and would like to be able to access it via a laptop.  If you have not yet configured your Raspberry Pi with the correct operating systems and settings, please refer to the previous section, "Remote Access Startup with the Pi."
 
@@ -289,9 +289,9 @@ from your Raspberry Pi terminal to find your Pi's IP address. This should be a s
 
 \end{enumerate}
 
-Before you proceed, look at the descriptions for options 2A and 2B below to see which is the right choice for your remote access needs.
+Before you proceed, look at the descriptions for options 3A and 3B below to see which is the right choice for your remote access needs.
 
-\subsubsection{Option 2A: Remote Access to the Raspberry Pi GUI}
+\subsubsection{Option 3A: Remote Access to the Raspberry Pi GUI}
 
 If you don't have much computer programming experience, this option may be better for you.  It allows you to access the actual Pi terminal (like the one you see when you connect an HTML cable) on another computer.  It is a more visually-friendly option, and allows you to directly access different apps through the Pi itself.
 
@@ -325,7 +325,7 @@ ssh pi@IPaddress
 
 \end{enumerate}
 
-\subsubsection{Option 2B: Remote Access to Raspberry Pi via SSH}
+\subsubsection{Option 3B: Remote Access to Raspberry Pi via SSH}
 
 This option allows you to access your Pi microprocessor through an external shell, ``piggybacking'' the Pi onto an already existing computer.  It allows you to operate in raw code through an external frame, but does not have the visual appeal that the GUI does.  If you are more comfortable with programming, or feel familiar enough with navigating the Pi, this is the right option for you.
 
