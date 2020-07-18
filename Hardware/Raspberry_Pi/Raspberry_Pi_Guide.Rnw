@@ -60,6 +60,8 @@ The Pi has a lot of functionality and flexibility to develop monitoring of envir
 
 \subsubsection{Air Pollution Monitoring}
 
+Raspberry Pi can also be used to monitor air quality. For a quick introduction, watch \href{https://use.vg/hDDhGdtnuhPT}{Marc's video describing the use of the Pi} to monitor air pollution. 
+
 \subsubsection{Soil Water Monitoring and Irrigation Control}
 
 The automatation of irrigation is ubiquitous, however, in many cases systems don't have feedbacks that control the system. The first step relies on sensors to monitor soil moisture and temperature and then uses plant growth models to control an irrigation system. 
