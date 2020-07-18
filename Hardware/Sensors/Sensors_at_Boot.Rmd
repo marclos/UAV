@@ -13,6 +13,10 @@ knitr::opts_chunk$set(echo = TRUE)
 
 **I have not yet had success with this, and it is a bit intimidating because if you type something in wrong, it gets stuck as you boot up**
 
+Pros:  Has official documentation from Raspberry Pi with instructions
+
+Cons:  Seems pretty high-stakes, didn't work when I tried it, maybe doesn't work if we have a systemd OS?
+
 Source:  https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/
 
 Adding the code you want to run to rc.local (the startup document), so that (hypothetically) as soon as you connect your Pi to power and it boots, the code will start.  "This is especially useful if you want to power up your Pi in headless mode (that is without a connected monitor), and have it run a program without configuration or a manual start."
@@ -63,6 +67,10 @@ https://www.linuxbabe.com/linux-server/how-to-enable-etcrc-local-with-systemd (n
 
 **I have not had success with this, either**
 
+Pros: Isn't quite as high risk as adding to RC local
+
+Cons:  I don't really understand how init scripts work, and I haven't gotten it to work yet.
+
 Source:  https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/
 
 The basic idea of this is that you add the code into your "init" folder, which initializes when you power on.  Pretty much you are adding your document so that it begins with your boot process.
@@ -78,4 +86,45 @@ cd /etc/init.d
 sudo nano sensors.py
 ```
 
-3.  
+3.  Add the following code to the top of your script:
+```{python, eval=FALSE, python.reticulate=FALSE}
+# /etc/init.d/sample.py
+### BEGIN INIT INFO
+# Provides:          sample.py
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start daemon at boot time
+# Description:       Enable service provided by daemon.
+### END INIT INFO
+```
+Which makes the code document a standard initializing script by dictating its runtime, as well as its place in the boot order.
+
+4.  Change the script's permission so that it is executable at boot by typing the following into your shell:
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo chmod +x sensors.py
+sudo update-rc.d sensors.py defaults
+```
+
+5.  Finally, reboot your Pi to verify that it is running:
+```{python, eval=FALSE, python.reticulate=FALSE}
+sudo reboot
+```
+
+# Method 3 - Using systemd
+
+Depending on what OS you are using, rc.local can have drawbacks... Buster, Stretch, and Jessie all use systemd, and so rc.local won't be as effective.  You can check which version of Raspbian you have uploaded by typing the following line into the Pi terminal:
+```{python, eval=FALSE, python.reticulate=FALSE}
+cat /etc/os-release
+```
+This will release several lines of information; the first line is "PRETTY_NAME", which will tell you which version you have.  Mine happens to be Buster, so I'm going to give systemd a go.
+
+Sources:  
+
+https://www.linuxbabe.com/linux-server/how-to-enable-etcrc-local-with-systemd
+
+So this didn't quite work either.  From what it looks like, this program would run AFTER it gets connected to Wifi in the boot process, so that doesn't solve any of our problems.
+
+While not the original plan, Wifi "dongles" are cheap and easy to use, and just connect to the Pi's USB port.  Most of the blogs I found used these, and recommended them.  However, I'm still looking through reports to see if they mention how they run the code on their drones.
+

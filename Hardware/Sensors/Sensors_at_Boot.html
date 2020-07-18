@@ -372,6 +372,8 @@ summary {
 <div id="method-1---rc.local" class="section level1">
 <h1>Method 1 - Rc.local</h1>
 <p><strong>I have not yet had success with this, and it is a bit intimidating because if you type something in wrong, it gets stuck as you boot up</strong></p>
+<p>Pros: Has official documentation from Raspberry Pi with instructions</p>
+<p>Cons: Seems pretty high-stakes, didn’t work when I tried it, maybe doesn’t work if we have a systemd OS?</p>
 <p>Source: <a href="https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/" class="uri">https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/</a></p>
 <p>Adding the code you want to run to rc.local (the startup document), so that (hypothetically) as soon as you connect your Pi to power and it boots, the code will start. “This is especially useful if you want to power up your Pi in headless mode (that is without a connected monitor), and have it run a program without configuration or a manual start.”</p>
 <ol style="list-style-type: decimal">
@@ -413,6 +415,8 @@ summary {
 <div id="method-2-init.d-directory" class="section level1">
 <h1>Method 2: Init.d Directory</h1>
 <p><strong>I have not had success with this, either</strong></p>
+<p>Pros: Isn’t quite as high risk as adding to RC local</p>
+<p>Cons: I don’t really understand how init scripts work, and I haven’t gotten it to work yet.</p>
 <p>Source: <a href="https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/" class="uri">https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/</a></p>
 <p>The basic idea of this is that you add the code into your “init” folder, which initializes when you power on. Pretty much you are adding your document so that it begins with your boot process.</p>
 <ol style="list-style-type: decimal">
@@ -425,8 +429,38 @@ summary {
 <pre class="python"><code>cd /etc/init.d
 sudo nano sensors.py</code></pre>
 <ol start="3" style="list-style-type: decimal">
-<li></li>
+<li>Add the following code to the top of your script:</li>
 </ol>
+<pre class="python"><code># /etc/init.d/sample.py
+### BEGIN INIT INFO
+# Provides:          sample.py
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Start daemon at boot time
+# Description:       Enable service provided by daemon.
+### END INIT INFO</code></pre>
+<p>Which makes the code document a standard initializing script by dictating its runtime, as well as its place in the boot order.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Change the script’s permission so that it is executable at boot by typing the following into your shell:</li>
+</ol>
+<pre class="python"><code>sudo chmod +x sensors.py
+sudo update-rc.d sensors.py defaults</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Finally, reboot your Pi to verify that it is running:</li>
+</ol>
+<pre class="python"><code>sudo reboot</code></pre>
+</div>
+<div id="method-3---using-systemd" class="section level1">
+<h1>Method 3 - Using systemd</h1>
+<p>Depending on what OS you are using, rc.local can have drawbacks… Buster, Stretch, and Jessie all use systemd, and so rc.local won’t be as effective. You can check which version of Raspbian you have uploaded by typing the following line into the Pi terminal:</p>
+<pre class="python"><code>cat /etc/os-release</code></pre>
+<p>This will release several lines of information; the first line is “PRETTY_NAME”, which will tell you which version you have. Mine happens to be Buster, so I’m going to give systemd a go.</p>
+<p>Sources:</p>
+<p><a href="https://www.linuxbabe.com/linux-server/how-to-enable-etcrc-local-with-systemd" class="uri">https://www.linuxbabe.com/linux-server/how-to-enable-etcrc-local-with-systemd</a></p>
+<p>So this didn’t quite work either. From what it looks like, this program would run AFTER it gets connected to Wifi in the boot process, so that doesn’t solve any of our problems.</p>
+<p>While not the original plan, Wifi “dongles” are cheap and easy to use, and just connect to the Pi’s USB port. Most of the blogs I found used these, and recommended them. However, I’m still looking through reports to see if they mention how they run the code on their drones.</p>
 </div>
 
 
