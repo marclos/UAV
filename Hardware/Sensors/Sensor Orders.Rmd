@@ -162,3 +162,27 @@ https://www.amazon.com/gp/product/B0852XJN11/ref=ppx_yo_dt_b_asin_title_o03_s01?
 
 - Link:  https://www.amazon.com/gp/product/B01EV70C78/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&psc=1 
 
+# Time Clocks
+
+### Adafruit 3296 DS1307 Real Time Clock Breakout Board
+
+- Manufacturer:  Adafruit
+
+- Source:  Amazon
+
+- Price: 9.92 USD
+
+- Link:  https://www.amazon.com/gp/product/B01MG3NEWF/ref=ox_sc_act_title_2?smid=AM0JQO74J587C&psc=1
+
+## Associated Parts for Time Clocks
+
+### Energizer CR1220 Low Drain 3V lithuim Battery (pack of 5)
+
+- Manufacturer:  Energizer
+
+- Source:  Amazon
+
+- Price: 6.98 USD
+
+- Link:  https://www.amazon.com/gp/product/B003CU3E2Q/ref=ox_sc_act_title_1?smid=A19DY5EK03NION&psc=1 
+
