@@ -29,7 +29,7 @@ This air quality station uses a PMS5003 particulate matter sensor, BME280 temper
 
 The following is an example of the wiring diagram connecting each of the sensors, the breadboard, and the Pi.  While your placements on the breadboard do not need to match this image exactly, it is a good visual guide to how a breadboard functions.  You can reference it if you are confused by any of the following wirign instructions.
 
-![Wiring Diagram](WiringDiagram.png)
+![Wiring Diagram](WiringDiagram2.png)
 
 ## Breadboard Labeling
 
