@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Overview
 
-This air quality station uses a PMS5003 particulate matter sensor, BME280 temperature/pressure/humidity sensor, and a MiCS-2714 nitrous oxide sensor to measure the air quality in a small, light, and inexpensive package.  In general, each of these sensors needs a power source, a ground, and a communication method in order to function.  The following guide includes the physical setup of these sensors, as well as the code which allows the weather station to collect data.
+This air quality station uses a PMS5003 particulate matter sensor, BME280 temperature/pressure/humidity sensor, MiCS-2714 nitrous oxide sensor, and a MQ-131 ozone sensor to measure the air quality in a small, light, and inexpensive package.  In general, each of these sensors needs a power source, a ground, and a communication method in order to function.  The following guide includes the physical setup of these sensors, as well as the code which allows the weather station to collect data.
 
 # Materials Needed
 
@@ -20,9 +20,10 @@ This air quality station uses a PMS5003 particulate matter sensor, BME280 temper
 - 1 analog to digital convertor
 - 1 logic level convertor
 - 1 MiCS-2714 (including quickstart board and jumper)
+- 1 MQ-131 (including header strip)
 - 2 F-F connecting wires
-- 14 M-F connecting wires
-- 10 M-M connecting wires
+- 19 M-F connecting wires
+- 12 M-M connecting wires
 - 1 breadboard
 
 # Wiring
@@ -100,6 +101,20 @@ Our MiCS-2714 nitrous oxide reader and quickstart board is simply assembled: pla
 * Ground the sensor with a M-F wire connecting the GND pin on the sensor to the grounding column on the breadboard.
 
 * Establish communication between the sensor and the LLC with a M-F wire connecting the VoutB pin on the sensor to the RX1 pin on the LLC.
+
+* Send the signal to the ADC by using a M-M wire to connect the RX0 pin on the LLC that is directly across from the RX1 pin where you connected the sensor to one of the channels on the MCP3008 (the code below assumes you use Channel 0, which is in position 8a on the ADC - you will need to change this if you connect to another channel).
+
+## MQ-131 Wiring
+
+Similarly to the BME280, the MQ-131 needs some soldering; and similarly to the MiCS-2714, because this sensor produces a 5V analog signal, it needs a logic level convertor to decrease the signal to 3V, and an analog to digital convertor to change the signal to digital.  Luckily, we will be able to use the same LLC and ADC as we already had set up for the MiCS-2714.  Beyond the signal output being passed through the LLC and ADC, the MQ-131 also needs a ground and a 5 volt power source.  If the MQ-131 you are using has a high concentration AND a low concentration sensor, you will need to ground and provide power to each one; however, the code below only has input for readings from one of these sensors (if you wanted both, we would need a second LLC).  The low concentration sensor is good for cooler, indoor environments; the high concentration sensor is good for hotter, outdoor environments.  Assuming you are setting this up indoors, the wiring below has information for how to connect the low concentration sensor; however, if you want to use the high concentration sensor, all you need to do is change the connecting wire from the "OUTL" (low concentration output) pin on the MQ-131 to the "OUTH" (high concentration output) pin directly next to it.
+
+* Provide power to the sensor with two M-F wires connecting the two VCC pins on the sensor (one for high and one for low concentration) to the 5V column on the breadboard.
+
+* Ground the sensor with two M-F wire connecting the two GND pins on the sensor to the grounding column on the breadboard.
+
+* Establish communication between the sensor and the LLC with a M-F wire connecting the OUTL pin on the sensor to the other RX1 pin on the LLC (that does not have the MiCS-2714 connection).
+
+* Send the signal to the ADC by using a M-M wire to connect the RX0 pin on the LLC that is directly across from the RX1 pin where you connected the sensor to one of the channels on the MCP3008 (the code below assumes you use Channel 1, which is in position 7a on the ADC - you will need to change this if you connect to another channel).
 
 ## Breadboard Wiring
 
