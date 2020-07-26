@@ -1,0 +1,40 @@
+---
+title: "Real Time Clock"
+author: "Anna Madison Burns"
+date: "7/25/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Our Sensor
+
+To save precious weight and power, the Raspberry Pi does not come equipped with a clock in the same way that your computer likely does -- instead, it gets time information over the internet.  However, in settings where the Pi has no connection to power, it is important to still be able to have time stamps on data measurements.  That is where a real time clock (RTC) comes in.  We are using a middle-grade DTS1307, available through Amazon for 9.92 USD.  Note that you will also likely need to purchase an accompanying CR1220 battery, which often come in packs of 4 and cost around 5.45 USD.  This clock will be able to keep time for up to five years.
+
+Note that it is important to buy the already assembled breakout board so that you don't need to get all the little accompanying parts!  If you have the breakout board, all you need to do is a quick solder, some simple wiring, and you're good to go.
+
+# Materials Needed
+
+* 1 DS1307 real time clock assembled breakout board (Adafruit recommended, but not necessary)
+* 1 CR1220 battery
+* 1 soldering gun (and associated solder)
+
+# Physical Assembly
+
+1.  Solder the pins per the instructions in the Soldering SOP.
+
+2.  Place the battery into the DS1307 with the side marked with a "+" facing upwards.
+
+3.  Using a connecting wire, connect the "5V" pin on the DS1307 to a 5V outlet on the Pi (either a GPIO, or via a breadboard connection).
+
+4.  Connect the "GND" pin on the DS1307 to a grounding source on the Pi (either a GPIO, or via a breadboard connection).
+
+5.  Connect the "SDA" pin on the DS1307 to a SDA pin on the Pi (either directly on the GPIO, or via a breadboard connection - multiple inputs can be placed through the I2C bus if you have more than one sensor which uses I2C).
+
+6.  Connect the "SCL" pin on the DS1307 to a SCL pin on the Pi (either directly on the GPIO, or via breadboard connection).
+
+# Code
+
+
