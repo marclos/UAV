@@ -563,6 +563,15 @@ def ConvertNO2(data,places):
  
 NO2_channel = 0
 
+# MQ-131 Code
+
+def ConvertO3(data,places):
+  O3 = ((data * 1001)/float(1023))+1
+  O3 = round(O3,places)
+  return O3
+  
+O3_channel = 1
+
 # PMS5003 Code
 class Sensor():
   def __init__(self, tty = &#39;/dev/ttyS0&#39;): 
@@ -603,7 +612,7 @@ def  write_to_csv():
         if __name__ == &quot;__main__&quot;:
                 with open(&#39;/home/pi/airquality_data.csv&#39;, mode=&#39;a&#39;) as csv_file: 
                         csv_writer = csv.writer(csv_file)
-                        csv_writer.writerow([NO2,data,bme280.temperature, bme280.humidity, bme280.pressure, bme280.altitude])
+                        csv_writer.writerow([NO2,O3,data,bme280.temperature, bme280.humidity, bme280.pressure, bme280.altitude])
                 with open(&#39;/home/pi/airquality_data.csv&#39;, mode=&#39;r&#39;) as csv_file: 
                         csv_reader = csv.reader(csv_file)
                         for row in csv_reader:
@@ -616,6 +625,10 @@ if __name__ == &quot;__main__&quot;:
     NO2_level = ReadChannel(NO2_channel)
     NO2_volts = ConvertVolts(NO2_level,2)
     NO2       = ConvertNO2(NO2_level,2)
+    # MQ-131 output
+    O3_level = ReadChannel(O3_channel)
+    O3_volts = ConvertVolts(O3_level,2)
+    O3       = ConvertO3(O3_level,2)
     # PMS5003 output
     sensor = Sensor()
     sensor.open()
