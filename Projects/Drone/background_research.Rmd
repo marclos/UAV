@@ -1,0 +1,94 @@
+---
+title: "Drone Background"
+author: "Anna Madison Burns"
+date: "7/27/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Drone Dojo's "Raspberry Pi Drone - a Complete Drone Kit"
+
+Link: https://dojofordrones.com/raspberry-pi-drone/
+
+This source goes through building a drone around your Raspberry Pi (from scratch), but also details power sources and useful drone software.
+
+- This guide uses velcro, zip ties, and double-sided tape to attach hardware to the frame
+
+- What is our drone's thrust to weight ratio? How would the addition of the Raspberry Pi change that?
+
+- Things like Ardupilot build Linux-based flight controllers... but we already have a remote control for our drone.  Potentially could look into this to develop self-piloted drone (using a stepwise method to move along pollutant gradients?)
+
+- This website also has a "drone programming primer" (https://dojofordrones.teachable.com/p/drone-programming-primer-for-software-development) that is a 99 USD course; just good to know about.
+
+### Drone Dojo's "Open Source Drone Software Projects"
+
+Link: https://dojofordrones.com/open-source-drone/
+
+This source gives background on Ardupilot and PDX, the two most prevalent open sources for drone code.
+
+- Ardupilot was originally developed for Arduino (but seems to have expanded beyond) which means it is definitely compatible with the Pi, just may take some fanagaling
+
+- PX4 is part of the Linux Foundation and provides an operating system upon which to build drone code
+
+- PX4 doesn't require you to push your code back to the source, so it's more compatible for intellectual property than Ardupilot is
+
+- Ardupilot started in Dronecode (which is the project PX4 is a part of) but then went renegade; as a result, PX4 is better funded
+
+- Both Ardupilot and PX4 are useful for autonomous drones
+
+- Betaflight is largely a quadracopter code source for remote-controlled quadracopters (!!! this might be the best option for us until we reach a point where we want to go autonomous)
+
+- Betaflight is "supported on any autopilot hardware board using at least a STM32F3 processor"
+
+- Librepilot and Cleanflight are other options similar to Betaflight
+
+### Drone Dojo's "ArduPilot Introduction"
+
+Link: https://www.youtube.com/watch?list=PLgiealSjeVyx3t4N9GroE29SbVwhYrOtL&v=jfP71egUpg8
+
+This video specifically talks about ArduPilot, but is part of a playlist that goes into all sorts of information about programming drones that may be relevant to us later.
+
+Once again, Ardupilot is more autonomous than it is remote-controlled, but this could be cool further down the line.
+
+### Instructable's "Drone Pi"
+
+Link: https://www.instructables.com/id/The-Drone-Pi/
+
+This is the details of a project done by students in France. Definitely has a school project vibe, but goes into the process of building a drone.  Again, this isn't quite what we're doing, but it does describe the way that they mount the Pi, as well as how they get the drone connected to Wifi.
+
+- They use a mounting pad (link is unfortunately broken), Wifi key, and a USB key to save their data (which is a video... I think our Pi would be able to store sensor sample measurements in CSV form without a USB)
+
+- Use an "anti-vibration pad"? What is this?
+
+- They set up their programs to automate at boot with crontab -e, which I tried and it didn't work for me.  Why?
+
+### Vjaunet's "QUADCOPTER" Github code
+
+Link: https://github.com/vjaunet/QUADCOPTER
+
+### Erlerobot's "ros_erle_takeoff_land" Github code
+
+Link: https://github.com/erlerobot/ros_erle_takeoff_land
+
+### Device Plus' "DIY Raspberry Pi Drone Mechanics"
+
+Link: https://www.deviceplus.com/raspberry-pi/diy-raspberry-pi-drone-mechanics-part-1/
+
+- These people use a wifi dongle, and also (interestingly) use a suction-cup cell phone holder for a car to attach their phone to their controller, but this seems like it might also work for the Pi?
+
+- They attach the Pi itself with hot glue, which does not seem conducive to removing the Pi at any given point.  So far, I like the velcro on the anti-vibration pad the best.
+
+### Thingiverse's "Flamewheel f450 Anti-Vibration Raspberry Pi 3 and Navio 2 Mount"
+
+Link: https://www.thingiverse.com/thing:2083427 
+
+These people made their own anti-vibration mount to connect their Pi to a drone.
+
+### Anti-Vibration Mounts on Amazon
+
+https://www.amazon.com/Anti-Vibration-Vibration-Absorber-Controller-Quadcopter/dp/B07FKG339P
+
+https://www.amazon.com/Hobbypower-Anti-vibration-Phantom-Vision-Walkera/dp/B00MGIZSMY/ref=pd_lpo_21_t_0/132-8264944-1614032?_encoding=UTF8&pd_rd_i=B00MGIZSMY&pd_rd_r=798f92b6-be9c-4775-b069-356ed5d34254&pd_rd_w=UDcjO&pd_rd_wg=STqhH&pf_rd_p=7b36d496-f366-4631-94d3-61b87b52511b&pf_rd_r=ZTVC65P9FQHPZV2MMYQ3&psc=1&refRID=ZTVC65P9FQHPZV2MMYQ3
