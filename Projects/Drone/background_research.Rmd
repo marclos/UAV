@@ -9,7 +9,39 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# What we need
+
+### Something to put the Pi/sensors in
+
+https://cpc.farnell.com/olan/ol20112/box-ip55-glanded-150x110x70mm/dp/EN82191 
+
+Datasheet: http://www.farnell.com/datasheets/1513687.pdf
+
+This already comes with air holes, and is what is used for the Raspberry Pi's tutorial on a home weather station. It is inexpensive, and made of thermoplastic (so it's light - only .22 kg).  It has four screw holes on the bottom to fasten it, but we could attach it to the anti-vibration pad in another way if that is not conducive.  2.76" x 5.91" x 4.33".
+
+### A way to circulate air into the sensors
+
+If we get the box above, the problem is fixed for us; we can remove the side plugs to allow air to circulate through.  Otherwise, we can look into the tubing - I didn't find where it mentioned this?
+
+### A way to attach the Pi/sensors to the drone
+
+Velcro, zip ties, double sided tape (this seems iffy), or screw it to the anti-vibration pad.  I think a combination of velcro and zip ties would be secure.
+
+### A way to connect to a computer to begin the sensor
+
+Wifi dongle - https://www.amazon.com/Adapter-Wireless-Network-External-OS10-6-10-13/dp/B019SRBUNG would this work? Need to look more into how this functions (we need the computer and the Pi to be on the same Wifi network, can we create a hotspot? How?)
+
+### Something to fasten the connectors more tightly
+
+Printed circuit board OR Adafruit Perma-Proto Hat (used in https://projects.raspberrypi.org/en/projects/build-your-own-weather-station/10 , this seems like it could totally work for us! Can we solder our connecting wires shorter, or do we need to buy those?)
+
 # Sources and Info
+
+### Furmanova et al.'s "The Mobile Environment Monitoring System"
+
+Link: http://ceur-ws.org/Vol-2300/Paper44.pdf
+
+- PCB (printed circuit board):  "Tracing of the printing unit was carried out on a basis of an electric schematic diagram in the easyEDA system.  
 
 ### Adafruit Perma-Proto HAT for Mini Pi Kit - No EEPROM
 

@@ -369,6 +369,53 @@ summary {
 </div>
 
 
+<div id="what-we-need" class="section level1">
+<h1>What we need</h1>
+<div id="something-to-put-the-pisensors-in" class="section level3">
+<h3>Something to put the Pi/sensors in</h3>
+<p><a href="https://cpc.farnell.com/olan/ol20112/box-ip55-glanded-150x110x70mm/dp/EN82191" class="uri">https://cpc.farnell.com/olan/ol20112/box-ip55-glanded-150x110x70mm/dp/EN82191</a></p>
+<p>Datasheet: <a href="http://www.farnell.com/datasheets/1513687.pdf" class="uri">http://www.farnell.com/datasheets/1513687.pdf</a></p>
+<p>This already comes with air holes, and is what is used for the Raspberry Pi’s tutorial on a home weather station. It is inexpensive, and made of thermoplastic (so it’s light - only .22 kg). It has four screw holes on the bottom to fasten it, but we could attach it to the anti-vibration pad in another way if that is not conducive. 2.76&quot; x 5.91&quot; x 4.33&quot;.</p>
+</div>
+<div id="a-way-to-circulate-air-into-the-sensors" class="section level3">
+<h3>A way to circulate air into the sensors</h3>
+<p>If we get the box above, the problem is fixed for us; we can remove the side plugs to allow air to circulate through. Otherwise, we can look into the tubing - I didn’t find where it mentioned this?</p>
+</div>
+<div id="a-way-to-attach-the-pisensors-to-the-drone" class="section level3">
+<h3>A way to attach the Pi/sensors to the drone</h3>
+<p>Velcro, zip ties, double sided tape (this seems iffy), or screw it to the anti-vibration pad. I think a combination of velcro and zip ties would be secure.</p>
+</div>
+<div id="a-way-to-connect-to-a-computer-to-begin-the-sensor" class="section level3">
+<h3>A way to connect to a computer to begin the sensor</h3>
+<p>Wifi dongle - <a href="https://www.amazon.com/Adapter-Wireless-Network-External-OS10-6-10-13/dp/B019SRBUNG" class="uri">https://www.amazon.com/Adapter-Wireless-Network-External-OS10-6-10-13/dp/B019SRBUNG</a> would this work? Need to look more into how this functions (we need the computer and the Pi to be on the same Wifi network, can we create a hotspot? How?)</p>
+</div>
+<div id="something-to-fasten-the-connectors-more-tightly" class="section level3">
+<h3>Something to fasten the connectors more tightly</h3>
+<p>Printed circuit board OR Adafruit Perma-Proto Hat (used in <a href="https://projects.raspberrypi.org/en/projects/build-your-own-weather-station/10" class="uri">https://projects.raspberrypi.org/en/projects/build-your-own-weather-station/10</a> , this seems like it could totally work for us! Can we solder our connecting wires shorter, or do we need to buy those?)</p>
+</div>
+</div>
+<div id="sources-and-info" class="section level1">
+<h1>Sources and Info</h1>
+<div id="furmanova-et-al.s-the-mobile-environment-monitoring-system" class="section level3">
+<h3>Furmanova et al.’s “The Mobile Environment Monitoring System”</h3>
+<p>Link: <a href="http://ceur-ws.org/Vol-2300/Paper44.pdf" class="uri">http://ceur-ws.org/Vol-2300/Paper44.pdf</a></p>
+<ul>
+<li>PCB (printed circuit board): &quot;Tracing of the printing unit was carried out on a basis of an electric schematic diagram in the easyEDA system.</li>
+</ul>
+</div>
+<div id="adafruit-perma-proto-hat-for-mini-pi-kit---no-eeprom" class="section level3">
+<h3>Adafruit Perma-Proto HAT for Mini Pi Kit - No EEPROM</h3>
+<p>Link: <a href="https://www.adafruit.com/product/2310?PageSpeed=noscript&amp;gclid=CjwKCAjwsO_4BRBBEiwAyagRTQlFrwAQD-yHQiCUn9EkWyqoN04rhlgcNxCR1CWLppUoJAZe5dbNixoCL4YQAvD_BwE" class="uri">https://www.adafruit.com/product/2310?PageSpeed=noscript&amp;gclid=CjwKCAjwsO_4BRBBEiwAyagRTQlFrwAQD-yHQiCUn9EkWyqoN04rhlgcNxCR1CWLppUoJAZe5dbNixoCL4YQAvD_BwE</a></p>
+<p>This is a hat we can solder units onto that then fits over the Pi. Doesn’t look like this particular one will work for the number of connections we need, but good to know that it’s out there.</p>
+</div>
+<div id="how-to-make-a-20v-to-12v-to-5v-convertor-using-7812-ic-and-7085" class="section level3">
+<h3>How to Make a 20V to 12V to 5V Convertor Using 7812 IC and 7085</h3>
+<p>Link: <a href="https://www.youtube.com/watch?v=NutYeB8H5WE" class="uri">https://www.youtube.com/watch?v=NutYeB8H5WE</a></p>
+<p>Our drone puts out 20V, and has a UART socket that has a 7.7V output. This means we need to reduce the voltage in order for our Pi to run off of our drone’s power. This video builds one, but <strong>can we find one that is premade</strong>?</p>
+<p>Premade options -</p>
+<p><a href="https://www.amazon.com/9V-20V-Step-down-Supply-Converter-Module/dp/B01H9702ZY" class="uri">https://www.amazon.com/9V-20V-Step-down-Supply-Converter-Module/dp/B01H9702ZY</a> -&gt; this has USB input and output, will this work with the drone or do we need UART? USB can be converted to work with the Pi (M-F USB adaptor to connect to Pi’s power output). This is super cheap.</p>
+<p><a href="https://www.mouser.com/ProductDetail/CUI-Inc/PQDE6W-Q24-S5-T?qs=fAHHVMwC%252BbijFYVgeEIusg%3D%3D&amp;gclid=Cj0KCQjwvIT5BRCqARIsAAwwD-QNYlkWxNM8pCuN66PljLKYQis72U-sCM82bPkkNtZIgRbKoTCLkaUaAk3UEALw_wcB" class="uri">https://www.mouser.com/ProductDetail/CUI-Inc/PQDE6W-Q24-S5-T?qs=fAHHVMwC%252BbijFYVgeEIusg%3D%3D&amp;gclid=Cj0KCQjwvIT5BRCqARIsAAwwD-QNYlkWxNM8pCuN66PljLKYQis72U-sCM82bPkkNtZIgRbKoTCLkaUaAk3UEALw_wcB</a> -&gt; slightly more expensive, but another option</p>
+</div>
 <div id="drone-dojos-raspberry-pi-drone---a-complete-drone-kit" class="section level3">
 <h3>Drone Dojo’s “Raspberry Pi Drone - a Complete Drone Kit”</h3>
 <p>Link: <a href="https://dojofordrones.com/raspberry-pi-drone/" class="uri">https://dojofordrones.com/raspberry-pi-drone/</a></p>
@@ -436,6 +483,7 @@ summary {
 <h3>Anti-Vibration Mounts on Amazon</h3>
 <p><a href="https://www.amazon.com/Anti-Vibration-Vibration-Absorber-Controller-Quadcopter/dp/B07FKG339P" class="uri">https://www.amazon.com/Anti-Vibration-Vibration-Absorber-Controller-Quadcopter/dp/B07FKG339P</a></p>
 <p><a href="https://www.amazon.com/Hobbypower-Anti-vibration-Phantom-Vision-Walkera/dp/B00MGIZSMY/ref=pd_lpo_21_t_0/132-8264944-1614032?_encoding=UTF8&amp;pd_rd_i=B00MGIZSMY&amp;pd_rd_r=798f92b6-be9c-4775-b069-356ed5d34254&amp;pd_rd_w=UDcjO&amp;pd_rd_wg=STqhH&amp;pf_rd_p=7b36d496-f366-4631-94d3-61b87b52511b&amp;pf_rd_r=ZTVC65P9FQHPZV2MMYQ3&amp;psc=1&amp;refRID=ZTVC65P9FQHPZV2MMYQ3" class="uri">https://www.amazon.com/Hobbypower-Anti-vibration-Phantom-Vision-Walkera/dp/B00MGIZSMY/ref=pd_lpo_21_t_0/132-8264944-1614032?_encoding=UTF8&amp;pd_rd_i=B00MGIZSMY&amp;pd_rd_r=798f92b6-be9c-4775-b069-356ed5d34254&amp;pd_rd_w=UDcjO&amp;pd_rd_wg=STqhH&amp;pf_rd_p=7b36d496-f366-4631-94d3-61b87b52511b&amp;pf_rd_r=ZTVC65P9FQHPZV2MMYQ3&amp;psc=1&amp;refRID=ZTVC65P9FQHPZV2MMYQ3</a></p>
+</div>
 </div>
 
 
