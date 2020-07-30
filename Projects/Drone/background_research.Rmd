@@ -9,6 +9,26 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Sources and Info
+
+### Adafruit Perma-Proto HAT for Mini Pi Kit - No EEPROM
+
+Link: https://www.adafruit.com/product/2310?PageSpeed=noscript&gclid=CjwKCAjwsO_4BRBBEiwAyagRTQlFrwAQD-yHQiCUn9EkWyqoN04rhlgcNxCR1CWLppUoJAZe5dbNixoCL4YQAvD_BwE 
+
+This is a hat we can solder units onto that then fits over the Pi.  Doesn't look like this particular one will work for the number of connections we need, but good to know that it's out there.
+
+### How to Make a 20V to 12V to 5V Convertor Using 7812 IC and 7085
+
+Link:  https://www.youtube.com/watch?v=NutYeB8H5WE
+
+Our drone puts out 20V, and has a UART socket that has a 7.7V output.  This means we need to reduce the voltage in order for our Pi to run off of our drone's power.  This video builds one, but **can we find one that is premade**?
+
+Premade options - 
+
+https://www.amazon.com/9V-20V-Step-down-Supply-Converter-Module/dp/B01H9702ZY -> this has USB input and output, will this work with the drone or do we need UART?  USB can be converted to work with the Pi (M-F USB adaptor to connect to Pi's power output).  This is super cheap.
+
+https://www.mouser.com/ProductDetail/CUI-Inc/PQDE6W-Q24-S5-T?qs=fAHHVMwC%252BbijFYVgeEIusg%3D%3D&gclid=Cj0KCQjwvIT5BRCqARIsAAwwD-QNYlkWxNM8pCuN66PljLKYQis72U-sCM82bPkkNtZIgRbKoTCLkaUaAk3UEALw_wcB -> slightly more expensive, but another option
+
 ### Drone Dojo's "Raspberry Pi Drone - a Complete Drone Kit"
 
 Link: https://dojofordrones.com/raspberry-pi-drone/
