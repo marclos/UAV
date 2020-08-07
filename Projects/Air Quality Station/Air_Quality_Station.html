@@ -539,7 +539,7 @@ import board # BME280
 import busio # BME280
 import adafruit_bme280 # BME280
 import csv # All
-import time # All
+from time import time, strftime, sleep # All - note that strftime will read the time from the Raspberry Pi, which will only work when the Pi is connected to Wifi (either via a network or dongle)
 
 # MiCS-2714 Code
 spi = spidev.SpiDev()
@@ -605,14 +605,14 @@ class Sensor():
 # BME280 Code
 i2c = busio.I2C(board.SCL, board.SDA)
 bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c)
-bme280.sea_level_pressure = 1013.25
+bme280.sea_level_pressure = 1013.25 # Change this to your local sea level air pressure
 
 # CSV Code
 def  write_to_csv():
         if __name__ == &quot;__main__&quot;:
                 with open(&#39;/home/pi/airquality_data.csv&#39;, mode=&#39;a&#39;) as csv_file: 
                         csv_writer = csv.writer(csv_file)
-                        csv_writer.writerow([NO2,O3,data,bme280.temperature, bme280.humidity, bme280.pressure, bme280.altitude])
+                        csv_writer.writerow([strftime(%Y-%m-%d %H:%M:%S),NO2,O3,data,bme280.temperature, bme280.humidity, bme280.pressure, bme280.altitude])
                 with open(&#39;/home/pi/airquality_data.csv&#39;, mode=&#39;r&#39;) as csv_file: 
                         csv_reader = csv.reader(csv_file)
                         for row in csv_reader:
@@ -636,7 +636,7 @@ if __name__ == &quot;__main__&quot;:
     sensor.close()
     # Write to csv, sleep for 10 seconds
     write_to_csv()
-    time.sleep(10)
+    sleep(10)
     </code></pre>
 </div>
 </div>
