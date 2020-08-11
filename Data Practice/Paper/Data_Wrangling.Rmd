@@ -7,14 +7,54 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+require(mosaic)
 ```
-
-NO2:
 
 ```{r}
-ggplot(data=Data)+geom_smooth(mapping=aes(x=Time, y=PM1))
+library(ggplot2)
+Data <- read_csv("~/Summer Research 2020/Paper/Data.csv")
+```
+
+#NO2:
+
+```{r}
+ggplot(data=Data, aes(x=Time,y=NO2)) + geom_line() + geom_smooth(se=FALSE) + labs(x= "Time", y= "NO2 ppm", title = "NO2 Data", subtitle = "Covington, WA 8/7/2020")
+```
+
+(alternate)
+
+```{r}
+plot(NO2_ppm~Time,data=Data,ty="l")
+```
+Calculate what the significant values are here -> need to round to nearest hundredth, ADC only allows certain bits to go through
+
+#PM1: 
+```{r}
+ggplot(data=Data, aes(x=Time,y=PM1)) + geom_line() + geom_smooth(se=FALSE) + labs(x= "Time", y= "PM1 in ug/m^3", title = "PM1 Data", subtitle = "Covington, WA 8/7/2020")
+```
+
+#PM2.5
+
+```{r}
+ggplot(data=Data, aes(x=Time,y=PM25)) + geom_line() + geom_smooth(se=FALSE) + labs(x= "Time", y= "PM2.5 in ug/m^3", title = "PM2.5 Data", subtitle = "Covington, WA 8/7/2020")
+```
+
+#PM10:
+
+```{r}
+ggplot(data=Data, aes(x=Time,y=PM10)) + geom_line() + geom_smooth(se=FALSE) + labs(x= "Time", y= "PM10 in ug/m^3", title = "PM10 Data", subtitle = "Covington, WA 8/7/2020")
+```
+
+#Temp
+
+```{r}
+ggplot(data=Data, aes(x=Time,y=Temp)) + geom_line() + geom_smooth(se=FALSE) + labs(x= "Time", y= "Temperature in deg C", title = "Temperature Data", subtitle = "Covington, WA 8/7/2020")
 ```
 
 
-NO2:
+#O3
+
+```{r}
+ggplot(data=Data, aes(x=Time,y=O3)) + geom_line() + geom_smooth(se=FALSE) + labs(x= "Time", y= "Ozone ppb", title = "Ozone Data", subtitle = "Covington, WA 8/7/2020")
+```
 

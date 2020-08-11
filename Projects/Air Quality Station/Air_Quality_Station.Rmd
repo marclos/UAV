@@ -198,7 +198,7 @@ These are all the packages we need to run our code, so now you can import the co
 
 ## Air Quality Station Code
 
-The following code will output values to a csv file entitled "airquality_data.csv", with readings for: NO2 levels in ppm; PM1, PM2.5, and PM10 levels in standard and environmental units; temperature, humidity, air pressure, and altitude. 
+The following code will output values to a csv file entitled "airquality_data.csv", with readings for: NO2 levels in ppm; PM1, PM2.5, and PM10 levels in standard and environmental units of ug/m^3; temperature in celsius, humidity, air pressure, and altitude. 
 
 To use this code, copy and paste it into a python shell within your Pi (either Nano, Thonny, or IDLE) and run the code per your chosen shell's commands.
 
