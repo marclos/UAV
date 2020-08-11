@@ -542,6 +542,15 @@ import csv # All
 from time import time, strftime, sleep # All - note that strftime will read the time from the Raspberry Pi, which will only work when the Pi is connected to Wifi (either via a network or dongle)
 
 # MiCS-2714 Code
+
+#********************************************************************************
+#*    Modified from:
+#*    Title: Analogue sensors on the Raspberry Pi using an MCP3008
+#*    Author: Matt
+#*    Date: 20 October, 2013
+#*    Availability: https://www.raspberrypi-spy.co.uk/2013/10/analogue-sensors-on-the-raspberry-pi-using-an-mcp3008/
+#********************************************************************************
+
 spi = spidev.SpiDev()
 spi.open(0,0)
 spi.max_speed_hz=1000000
@@ -573,6 +582,14 @@ def ConvertO3(data,places):
 O3_channel = 1
 
 # PMS5003 Code
+
+#********************************************************************************
+#*    Title: Raspberrypi AirSensor
+#*    Author: Chengyi Wu
+#*    Date: 11 January, 2019
+#*    Availability: https://www.youtube.com/watch?v=B0bzyEnjZY4 
+#********************************************************************************
+
 class Sensor():
   def __init__(self, tty = &#39;/dev/ttyS0&#39;): 
     self.tty = tty
@@ -603,6 +620,14 @@ class Sensor():
     return res
 
 # BME280 Code
+
+#********************************************************************************
+#*    Title: Adafruit_CircuitPython_BME280
+#*    Author: Adafruit
+#*    Date: 30 June, 2018
+#*    Availability: https://github.com/adafruit/Adafruit_CircuitPython_BME280/tree/master/examples
+#********************************************************************************
+
 i2c = busio.I2C(board.SCL, board.SDA)
 bme280 = adafruit_bme280.Adafruit_BME280_I2C(i2c)
 bme280.sea_level_pressure = 1013.25 # Change this to your local sea level air pressure
