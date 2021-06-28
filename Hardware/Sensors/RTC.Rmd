@@ -15,6 +15,8 @@ To save precious weight and power, the Raspberry Pi does not come equipped with 
 
 Note that it is important to buy the already assembled breakout board so that you don't need to get all the little accompanying parts!  If you have the breakout board, all you need to do is a quick solder, some simple wiring, and you're good to go.
 
+This information comes from the resource: https://learn.adafruit.com/adding-a-real-time-clock-to-raspberry-pi?view=all
+
 # Materials Needed
 
 * 1 DS1307 real time clock assembled breakout board (Adafruit recommended, but not necessary)
@@ -37,4 +39,73 @@ Note that it is important to buy the already assembled breakout board so that yo
 
 # Code
 
+1.  Enter the Pi terminal and ensure that I2C is enabled on your Pi with the line
+```{python, python.reticulate=FALSE, eval=FALSE}
+sudo raspi-config
+```
+And select option 5, "Interfacing Options."  From there, enter menu P5 for I2C, and select to turn I2C ON.  From there, you can exit the menu, and then restart the Pi with the command
+```{python, python.reticulate=FALSE, eval=FALSE}
+sudo reboot
+```
 
+2.  Install the software to see if the RTC is running over I2C with the line
+```{python, python.reticulate=FALSE, eval=FALSE}
+sudo apt-get install python-smbus i2c-tools
+```
+and then look to see if the RTC is communicating over Pi with the line
+```{python, python.reticulate=FALSE, eval=FALSE}
+sudo i2cdetect -y 1
+```
+This should show a channel communicating through route 68.  If the graphic does not show communication on this channel, make sure that the RTC is physically assembled properly, you have a good solder joint, and the battery is correctly inserted.
+
+3.  Now we need to prepare systemd for communication with the RTC (if you run on another system, see the source document for more information on how to set up that system).  Begin by entering your configuration document
+```{python, python.reticulate=FALSE, eval=FALSE}
+sudo nano /boot/config.txt
+```
+and adding the following line to the end of the document:
+```{python, python.reticulate=FALSE, eval=FALSE}
+dtoverlay=i2c-rtc,ds1307
+```
+Being very, very careful to type this correctly, because otherwise it could negatively impact your Pi's ability to boot.  Exit and save the document by hitting Ctrl-X and then following the commands.  Finally, reboot your Pi with
+```{python, python.reticulate=FALSE, eval=FALSE}
+sudo reboot
+```
+
+4.  Verify to see that step 3 worked by once again running
+```{python, python.reticulate=FALSE, eval=FALSE}
+sudo i2cdetect -y 1
+```
+Which should now show "UU" in Channel 68 (this means it worked!).
+
+5.  Now we need to remove the alternate time systems that were on the Pi so that we can use our RTC.  Do this by opening the terminal and typing the following lines:
+```{python, python.reticulate=FALSE, eval=FALSE}
+sudo apt-get -y remove fake-hwclock
+sudo update-rc.d -f fake-hwclock remove
+sudo systemctl disable fake-hwclock
+```
+
+
+6.  Now we can access the original clock script.  Do this by entering the line
+```{python, python.reticulate=FALSE, eval=FALSE}
+sudo nano /lib/udev/hwclock-set
+```
+And comment out the lines (by adding a pound/hashtag to the front of it):
+```{python, python.reticulate=FALSE, eval=FALSE}
+#if[-e /run/systemd/system ]; then
+  #exit 0
+#fi
+
+#/sbin/hwclock --rtc=$dev --systz --badyear
+
+#/sbin/hwclock --rtc=$dev --systz
+```
+
+7.  Finally, let's sync the RTC data to the Pi while we're on Wifi to correctly set the time:
+```{python, python.reticulate=FALSE, eval=FALSE}
+sudo hwclock -w
+```
+
+8.  Now you can access the time via your Pi's terminal at any time with the line:
+```{python, python.reticulate=FALSE, eval=FALSE}
+sudo hwclock -r
+```

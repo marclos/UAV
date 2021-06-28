@@ -373,6 +373,7 @@ summary {
 <h1>Our Sensor</h1>
 <p>To save precious weight and power, the Raspberry Pi does not come equipped with a clock in the same way that your computer likely does – instead, it gets time information over the internet. However, in settings where the Pi has no connection to power, it is important to still be able to have time stamps on data measurements. That is where a real time clock (RTC) comes in. We are using a middle-grade DTS1307, available through Amazon for 9.92 USD. Note that you will also likely need to purchase an accompanying CR1220 battery, which often come in packs of 4 and cost around 5.45 USD. This clock will be able to keep time for up to five years.</p>
 <p>Note that it is important to buy the already assembled breakout board so that you don’t need to get all the little accompanying parts! If you have the breakout board, all you need to do is a quick solder, some simple wiring, and you’re good to go.</p>
+<p>This information comes from the resource: <a href="https://learn.adafruit.com/adding-a-real-time-clock-to-raspberry-pi?view=all" class="uri">https://learn.adafruit.com/adding-a-real-time-clock-to-raspberry-pi?view=all</a></p>
 </div>
 <div id="materials-needed" class="section level1">
 <h1>Materials Needed</h1>
@@ -395,6 +396,58 @@ summary {
 </div>
 <div id="code" class="section level1">
 <h1>Code</h1>
+<ol style="list-style-type: decimal">
+<li>Enter the Pi terminal and ensure that I2C is enabled on your Pi with the line</li>
+</ol>
+<pre class="python"><code>sudo raspi-config</code></pre>
+<p>And select option 5, “Interfacing Options.” From there, enter menu P5 for I2C, and select to turn I2C ON. From there, you can exit the menu, and then restart the Pi with the command</p>
+<pre class="python"><code>sudo reboot</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Install the software to see if the RTC is running over I2C with the line</li>
+</ol>
+<pre class="python"><code>sudo apt-get install python-smbus i2c-tools</code></pre>
+<p>and then look to see if the RTC is communicating over Pi with the line</p>
+<pre class="python"><code>sudo i2cdetect -y 1</code></pre>
+<p>This should show a channel communicating through route 68. If the graphic does not show communication on this channel, make sure that the RTC is physically assembled properly, you have a good solder joint, and the battery is correctly inserted.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Now we need to prepare systemd for communication with the RTC (if you run on another system, see the source document for more information on how to set up that system). Begin by entering your configuration document</li>
+</ol>
+<pre class="python"><code>sudo nano /boot/config.txt</code></pre>
+<p>and adding the following line to the end of the document:</p>
+<pre class="python"><code>dtoverlay=i2c-rtc,ds1307</code></pre>
+<p>Being very, very careful to type this correctly, because otherwise it could negatively impact your Pi’s ability to boot. Exit and save the document by hitting Ctrl-X and then following the commands. Finally, reboot your Pi with</p>
+<pre class="python"><code>sudo reboot</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Verify to see that step 3 worked by once again running</li>
+</ol>
+<pre class="python"><code>sudo i2cdetect -y 1</code></pre>
+<p>Which should now show “UU” in Channel 68 (this means it worked!).</p>
+<ol start="5" style="list-style-type: decimal">
+<li>Now we need to remove the alternate time systems that were on the Pi so that we can use our RTC. Do this by opening the terminal and typing the following lines:</li>
+</ol>
+<pre class="python"><code>sudo apt-get -y remove fake-hwclock
+sudo update-rc.d -f fake-hwclock remove
+sudo systemctl disable fake-hwclock</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Now we can access the original clock script. Do this by entering the line</li>
+</ol>
+<pre class="python"><code>sudo nano /lib/udev/hwclock-set</code></pre>
+<p>And comment out the lines (by adding a pound/hashtag to the front of it):</p>
+<pre class="python"><code>#if[-e /run/systemd/system ]; then
+  #exit 0
+#fi
+
+#/sbin/hwclock --rtc=$dev --systz --badyear
+
+#/sbin/hwclock --rtc=$dev --systz</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>Finally, let’s sync the RTC data to the Pi while we’re on Wifi to correctly set the time:</li>
+</ol>
+<pre class="python"><code>sudo hwclock -w</code></pre>
+<ol start="8" style="list-style-type: decimal">
+<li>Now you can access the time via your Pi’s terminal at any time with the line:</li>
+</ol>
+<pre class="python"><code>sudo hwclock -r</code></pre>
 </div>
 
 
